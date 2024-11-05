@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/toDay"
+        android:icon="@drawable/home_icon"
+        android:iconTint="@color/white"
+        android:title="Home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/calender"
+        android:icon="@drawable/sale_icon"
+        android:iconTint="@color/white"
+        android:title="Sale"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/health"
+        android:icon="@drawable/cart_icon"
+        android:iconTint="@color/white"
+        android:title="CART"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/social"
+        android:icon="@drawable/account_icon"
+        android:iconTint="@color/white"
+        android:title="Account"
+        app:showAsAction="ifRoom"/>
+
+</menu>
