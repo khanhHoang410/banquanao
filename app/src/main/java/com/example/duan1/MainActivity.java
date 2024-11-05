@@ -7,15 +7,21 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment fragment;
+    NavigationView nav_view;
+    private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        drawer = findViewById(R.id.drawer_layout);
+        nav_view = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bnv);
         fragment = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
@@ -34,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                if (menuItem.getItemId() == R.id.toDay){
+                if (menuItem.getItemId() == R.id.toDay) {
                     fragment = new BlankFragment();
                 } else if (menuItem.getItemId() == R.id.calender) {
                     fragment = new BlankFragment2();
@@ -47,7 +55,28 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                // Đóng drawer
+                drawer.closeDrawer(GravityCompat.START);
 
+                // Chuyển đổi fragment dựa trên mục được chọn
+                if (menuItem.getItemId() == R.id.nav_tshirt) {
+                    fragment = new BlankFragment();
+                } else if (menuItem.getItemId() == R.id.nav_quan) {
+                    fragment = new BlankFragment2();
+                } else if (menuItem.getItemId() == R.id.nav_aokhoac) {
+                    fragment = new BlankFragment3();
+                } else if (menuItem.getItemId() == R.id.nav_ThongKe) {
+                    fragment = new BlankFragment4();
+                }
+
+                // Thực hiện giao dịch fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                return true;
+            }
+        });
         ///////////////////
     }
 }
