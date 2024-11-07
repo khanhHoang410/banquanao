@@ -6,9 +6,18 @@
     tools:context=".BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="frag1gggggg" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/slideshowImageView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+             />
+
+
+    </LinearLayout>
+
 
 </FrameLayout>
