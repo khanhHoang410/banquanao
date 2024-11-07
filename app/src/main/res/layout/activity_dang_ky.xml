@@ -11,7 +11,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/space_image" />
+         />
 
     <!-- Title Text -->
     <TextView
@@ -35,8 +35,8 @@
         android:layout_marginTop="32dp"
         android:hint="Email"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_email" />
+
+         />
 
     <!-- Password EditText -->
     <EditText
@@ -47,8 +47,8 @@
         android:layout_marginTop="16dp"
         android:hint="Password"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_password"
+
+
         android:inputType="textPassword" />
 
     <!-- Confirm Password EditText -->
@@ -60,8 +60,7 @@
         android:layout_marginTop="16dp"
         android:hint="Confirm Password"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_password"
+
         android:inputType="textPassword" />
 
     <!-- Sign Up Button -->
@@ -102,7 +101,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/round_button_background"
+
             android:src="@drawable/google_icon" />
 
         <!-- Facebook Button -->
@@ -111,7 +110,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/round_button_background"
+
             android:src="@drawable/facebook_ic" />
 
         <!-- Apple Button -->
@@ -119,7 +118,7 @@
             android:id="@+id/appleButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/round_button_background"
+
             android:src="@drawable/apple_icon" />
     </LinearLayout>
 
