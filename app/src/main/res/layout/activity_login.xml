@@ -86,7 +86,7 @@
         android:orientation="horizontal">
 
         <!-- Google Button -->
-        <ImageButton
+        <ImageView
             android:id="@+id/googleButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -95,7 +95,7 @@
             android:src="@drawable/google_icon" />
 
         <!-- Facebook Button -->
-        <ImageButton
+        <ImageView
             android:id="@+id/facebookButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
