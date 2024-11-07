@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class DDbHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
     private static final int DB_VERSION= 1;
 
