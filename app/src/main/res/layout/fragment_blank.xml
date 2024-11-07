@@ -25,7 +25,7 @@
                 android:background="@drawable/rounded_corners"
                 android:padding="12dp" />
 
-        </com.google.android.material.textfield.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:scaleType="fitXY"
