@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
     static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE Products (\n" +
             "    productId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    productName TEXT NOT NULL,\n" +
-            "    price REAL NOT NULL,\n" +
+            "    price INTEGER NOT NULL,\n" +
             "    description TEXT,\n" +
             "    categoryId INTEGER,\n" +
             "    FOREIGN KEY (categoryId) REFERENCES Categories(categoryId)\n" +
@@ -41,7 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "    orderId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    userId INTEGER NOT NULL,\n" +
             "    orderDate DATE NOT NULL,\n" +
-            "    totalAmount REAL NOT NULL,\n" +
+            "    totalAmount INTEGER NOT NULL,\n" +
             "    status TEXT NOT NULL,\n" +
             "    FOREIGN KEY (userId) REFERENCES Users(userId)\n" +
             ");";
@@ -52,7 +52,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "    orderId INTEGER NOT NULL,\n" +
             "    productId INTEGER NOT NULL,\n" +
             "    quantity INTEGER NOT NULL,\n" +
-            "    price REAL NOT NULL,\n" +
+            "    price INTEGER NOT NULL,\n" +
             "    FOREIGN KEY (orderId) REFERENCES Orders(orderId),\n" +
             "    FOREIGN KEY (productId) REFERENCES Products(productId)\n" +
             ");";
