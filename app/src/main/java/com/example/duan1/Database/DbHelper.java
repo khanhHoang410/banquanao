@@ -58,8 +58,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
             ");";
     static final String DanhGia = "CREATE TABLE DanhGia (\n" +
-            "    maDanhGia INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "  DanhGia TEXT " +
+            "    idDanhGia INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    maNguoiDung INTEGER ,\n" +
+            "    maSanPham INTEGER ,\n" +
+            "  BinhLuan TEXT " +
             ");";
 
     public DbHelper(@Nullable Context context){
