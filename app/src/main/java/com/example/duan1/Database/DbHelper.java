@@ -22,6 +22,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "    tenSanPham TEXT NOT NULL,\n" +
             "    gia INTEGER NOT NULL,\n" +
             "    moTa TEXT,\n" +
+            "    anh TEXT,\n" +  // Thêm thuộc tính ảnh
             "    maDanhMuc INTEGER,\n" +
             "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
             ");";
