@@ -11,50 +11,50 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION= 1;
 
     // Bảng danh mục
-    static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE Categories (\n" +
-            "    categoryId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    categoryName TEXT NOT NULL\n" +
+    static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE DanhMuc (\n" +
+            "    maDanhMuc INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    tenDanhMuc TEXT NOT NULL\n" +
             ");";
 
     // Bảng sản phẩm
-    static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE Products (\n" +
-            "    productId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    productName TEXT NOT NULL,\n" +
-            "    price INTEGER NOT NULL,\n" +
-            "    description TEXT,\n" +
-            "    categoryId INTEGER,\n" +
-            "    FOREIGN KEY (categoryId) REFERENCES Categories(categoryId)\n" +
+    static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE SanPham (\n" +
+            "    maSanPham INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    tenSanPham TEXT NOT NULL,\n" +
+            "    gia INTEGER NOT NULL,\n" +
+            "    moTa TEXT,\n" +
+            "    maDanhMuc INTEGER,\n" +
+            "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
             ");";
 
     // Bảng giỏ hàng
-    static final String CREATE_TABLE_CART = "CREATE TABLE Cart (\n" +
-            "    cartId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    userId INTEGER NOT NULL,\n" +
-            "    productId INTEGER NOT NULL,\n" +
-            "    quantity INTEGER NOT NULL,\n" +
-            "    FOREIGN KEY (userId) REFERENCES Users(userId),\n" +
-            "    FOREIGN KEY (productId) REFERENCES Products(productId)\n" +
+    static final String CREATE_TABLE_CART = "CREATE TABLE GioHang (\n" +
+            "    maGioHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    maNguoiDung INTEGER NOT NULL,\n" +
+            "    maSanPham INTEGER NOT NULL,\n" +
+            "    soLuong INTEGER NOT NULL,\n" +
+            "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
+            "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
             ");";
 
     // Bảng đơn hàng
-    static final String CREATE_TABLE_ORDERS = "CREATE TABLE Orders (\n" +
-            "    orderId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    userId INTEGER NOT NULL,\n" +
-            "    orderDate DATE NOT NULL,\n" +
-            "    totalAmount INTEGER NOT NULL,\n" +
-            "    status TEXT NOT NULL,\n" +
-            "    FOREIGN KEY (userId) REFERENCES Users(userId)\n" +
+    static final String CREATE_TABLE_ORDERS = "CREATE TABLE DonHang (\n" +
+            "    maDonHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    maNguoiDung INTEGER NOT NULL,\n" +
+            "    ngayDat DATE NOT NULL,\n" +
+            "    tongTien INTEGER NOT NULL,\n" +
+            "    trangThai TEXT NOT NULL,\n" +
+            "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
             ");";
 
     // Bảng chi tiết đơn hàng
-    static final String CREATE_TABLE_ORDER_ITEMS = "CREATE TABLE OrderItems (\n" +
-            "    orderItemId INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    orderId INTEGER NOT NULL,\n" +
-            "    productId INTEGER NOT NULL,\n" +
-            "    quantity INTEGER NOT NULL,\n" +
-            "    price INTEGER NOT NULL,\n" +
-            "    FOREIGN KEY (orderId) REFERENCES Orders(orderId),\n" +
-            "    FOREIGN KEY (productId) REFERENCES Products(productId)\n" +
+    static final String CREATE_TABLE_ORDER_ITEMS = "CREATE TABLE ChiTietDonHang (\n" +
+            "    maChiTietDonHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    maDonHang INTEGER NOT NULL,\n" +
+            "    maSanPham INTEGER NOT NULL,\n" +
+            "    soLuong INTEGER NOT NULL,\n" +
+            "    gia INTEGER NOT NULL,\n" +
+            "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
+            "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
             ");";
 
     public DbHelper(@Nullable Context context){
