@@ -57,6 +57,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
             "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
             ");";
+    static final String DanhGia = "CREATE TABLE DanhGia (\n" +
+            "    maChiTietDonHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "  DanhGia TEXT " +
+            ");";
 
     public DbHelper(@Nullable Context context){
         super(context, DB_Name,null,DB_VERSION);
@@ -70,6 +74,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_PRODUCTS);
         db.execSQL(CREATE_TABLE_ORDERS);
         db.execSQL(CREATE_TABLE_ORDER_ITEMS);
+        db.execSQL(DanhGia);
     }
 
     @Override
