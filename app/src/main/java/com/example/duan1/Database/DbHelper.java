@@ -49,11 +49,24 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maKichThuoc) REFERENCES KichThuoc(maKichThuoc)\n" +
                 ");";
+        // Bảng người dùng : role 1 la nguoi dung , 2 la nguoi quan tri( tự them   );
+        // public boolean dangKyTaiKhoan(NguoiDung nguoiDung) {
+        //        SQLiteDatabase sqLiteDatabase = dbhelper.getWritableDatabase();
+        //        ContentValues contentValues = new ContentValues();
+
+        //        contentValues.put("tendangnhap", nguoiDung.getTendangnhap());
+        //        contentValues.put("matkhau", nguoiDung.getMatkhau());
+        //        contentValues.put("role", 1); <--------------------------------  sau này viet ham dang ky thi cho role = 1;
+        //        long kq = sqLiteDatabase.insert("NGUOIDUNG", null, contentValues);
+        //        return kq != -1;
+        //    }
+
         String NguoiDung = "CREATE TABLE NguoiDung (\n" +
                 "    maNguoiDung INT PRIMARY KEY,\n" +
                 "    tenNguoiDung VARCHAR(255),\n" +
                 "    email VARCHAR(255),\n" +
-                "    matKhau VARCHAR(255)\n" +
+                "    matKhau VARCHAR(255),\n" +
+                "    role INT \n" +
                 ");";
         String DonHang = "CREATE TABLE DonHang (\n" +
                 "    maDonHang INT PRIMARY KEY,\n" +
@@ -80,6 +93,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
+        // tam thoi chua dung den
         String LichSuSanPhamDaXem = "CREATE TABLE LichSuSanPhamDaXem (\n" +
                 "    maLichSu INT PRIMARY KEY,\n" +
                 "    maNguoiDung INT,\n" +
