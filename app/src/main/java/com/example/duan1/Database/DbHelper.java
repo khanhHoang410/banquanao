@@ -11,58 +11,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION= 1;
 
     // Bảng danh mục
-    static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE DanhMuc (\n" +
-            "    maDanhMuc INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    tenDanhMuc TEXT NOT NULL\n" +
-            ");";
 
-    // Bảng sản phẩm
-    static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE SanPham (\n" +
-            "    maSanPham INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    tenSanPham TEXT NOT NULL,\n" +
-            "    gia INTEGER NOT NULL,\n" +
-            "    moTa TEXT,\n" +
-            "    anh TEXT,\n" +  // Thêm thuộc tính ảnh
-            "    maDanhMuc INTEGER,\n" +
-            "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
-            ");";
-
-    // Bảng giỏ hàng
-    static final String CREATE_TABLE_CART = "CREATE TABLE GioHang (\n" +
-            "    maGioHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    maNguoiDung INTEGER NOT NULL,\n" +
-            "    maSanPham INTEGER NOT NULL,\n" +
-            "    soLuong INTEGER NOT NULL,\n" +
-            "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
-            "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
-            ");";
-
-    // Bảng đơn hàng
-    static final String CREATE_TABLE_ORDERS = "CREATE TABLE DonHang (\n" +
-            "    maDonHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    maNguoiDung INTEGER NOT NULL,\n" +
-            "    ngayDat DATE NOT NULL,\n" +
-            "    tongTien INTEGER NOT NULL,\n" +
-            "    trangThai TEXT NOT NULL,\n" +
-            "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
-            ");";
-
-    // Bảng chi tiết đơn hàng
-    static final String CREATE_TABLE_ORDER_ITEMS = "CREATE TABLE ChiTietDonHang (\n" +
-            "    maChiTietDonHang INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    maDonHang INTEGER NOT NULL,\n" +
-            "    maSanPham INTEGER NOT NULL,\n" +
-            "    soLuong INTEGER NOT NULL,\n" +
-            "    gia INTEGER NOT NULL,\n" +
-            "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
-            "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
-            ");";
-    static final String DanhGia = "CREATE TABLE DanhGia (\n" +
-            "    idDanhGia INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    maNguoiDung INTEGER ,\n" +
-            "    maSanPham INTEGER ,\n" +
-            "  BinhLuan TEXT " +
-            ");";
 
     public DbHelper(@Nullable Context context){
         super(context, DB_Name,null,DB_VERSION);
@@ -71,12 +20,92 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_CART);
-        db.execSQL(CREATE_TABLE_CATEGORIES);
-        db.execSQL(CREATE_TABLE_PRODUCTS);
-        db.execSQL(CREATE_TABLE_ORDERS);
-        db.execSQL(CREATE_TABLE_ORDER_ITEMS);
+        String DanhMuc = "CREATE TABLE DanhMuc (\n" +
+                "    maDanhMuc INT PRIMARY KEY,\n" +
+                "    tenDanhMuc VARCHAR(255)\n" +
+                ");";
+        String SanPham = "CREATE TABLE SanPham (\n" +
+                "    maSanPham INT PRIMARY KEY,\n" +
+                "    tenSanPham VARCHAR(255),\n" +
+                "    gia DECIMAL(10, 2),\n" +
+                "    moTa TEXT,\n" +
+                "    maDanhMuc INT,\n" +
+                "    soLuong INT,\n" +
+                "    anh VARCHAR(255),\n" +
+                "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
+                ");";
+        String KichThuoc = "CREATE TABLE KichThuoc (\n" +
+                "    maKichThuoc INT PRIMARY KEY,\n" +
+                "    tenKichThuoc VARCHAR(50)\n" +
+                ");";
+        String ChiTietDonHang = "CREATE TABLE ChiTietDonHang (\n" +
+                "    maChiTietDonHang INT PRIMARY KEY,\n" +
+                "    maDonHang INT,\n" +
+                "    maSanPham INT,\n" +
+                "    soLuong INT,\n" +
+                "    gia DECIMAL(10, 2),\n" +
+                "    maKichThuoc INT,\n" +
+                "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
+                "    FOREIGN KEY (maKichThuoc) REFERENCES KichThuoc(maKichThuoc)\n" +
+                ");";
+        String NguoiDung = "CREATE TABLE NguoiDung (\n" +
+                "    maNguoiDung INT PRIMARY KEY,\n" +
+                "    tenNguoiDung VARCHAR(255),\n" +
+                "    email VARCHAR(255),\n" +
+                "    matKhau VARCHAR(255)\n" +
+                ");";
+        String DonHang = "CREATE TABLE DonHang (\n" +
+                "    maDonHang INT PRIMARY KEY,\n" +
+                "    maNguoiDung INT,\n" +
+                "    ngayDat DATE,\n" +
+                "    trangThai VARCHAR(50),\n" +
+                "    tongTien DECIMAL(10, 2),\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
+                ");";
+        String DanhGia = "CREATE TABLE DanhGia (\n" +
+                "    maDanhGia INT PRIMARY KEY,\n" +
+                "    maSanPham INT,\n" +
+                "    maNguoiDung INT,\n" +
+                "    danhGia INT,\n" +
+                "    diem DECIMAL(2, 1),\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
+                ");";
+        String YeuThich = "CREATE TABLE YeuThich (\n" +
+                "    maYeuThich INT PRIMARY KEY,\n" +
+                "    maNguoiDung INT,\n" +
+                "    maSanPham INT,\n" +
+                "    ngayYeuThich DATE,\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
+                ");";
+        String LichSuSanPhamDaXem = "CREATE TABLE LichSuSanPhamDaXem (\n" +
+                "    maLichSu INT PRIMARY KEY,\n" +
+                "    maNguoiDung INT,\n" +
+                "    maSanPham INT,\n" +
+                "    ngayXem DATE,\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
+                ");";
+        String GioHang = "CREATE TABLE GioHang (\n" +
+                "    maGioHang INT PRIMARY KEY,\n" +
+                "    maDonHang INT,\n" +
+                "    maSanPham INT,\n" +
+                "    tongTien DECIMAL(10, 2),\n" +
+                "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
+                ");";
+        db.execSQL(DanhMuc);
+        db.execSQL(SanPham);
+        db.execSQL(KichThuoc);
+        db.execSQL(ChiTietDonHang);
+        db.execSQL(NguoiDung);
+        db.execSQL(DonHang);
         db.execSQL(DanhGia);
+        db.execSQL(YeuThich);
+        db.execSQL(LichSuSanPhamDaXem);
+        db.execSQL(GioHang);
     }
 
     @Override
