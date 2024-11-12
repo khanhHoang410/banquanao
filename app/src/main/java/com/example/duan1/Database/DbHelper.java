@@ -110,11 +110,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS Categories");
-        db.execSQL("DROP TABLE IF EXISTS Products");
-        db.execSQL("DROP TABLE IF EXISTS Cart");
-        db.execSQL("DROP TABLE IF EXISTS Orders");
-        db.execSQL("DROP TABLE IF EXISTS OrderItems");
+        db.execSQL("DROP TABLE IF EXISTS DanhMuc");
+        db.execSQL("DROP TABLE IF EXISTS SanPham");
+        db.execSQL("DROP TABLE IF EXISTS KichThuoc");
+        db.execSQL("DROP TABLE IF EXISTS ChiTietDonHang");
+        db.execSQL("DROP TABLE IF EXISTS NguoiDung");
+        db.execSQL("DROP TABLE IF EXISTS DonHang");
+        db.execSQL("DROP TABLE IF EXISTS DanhGia");
+        db.execSQL("DROP TABLE IF EXISTS YeuThich");
+        db.execSQL("DROP TABLE IF EXISTS LichSuSanPhamDaXem");
+        db.execSQL("DROP TABLE IF EXISTS GioHang");
         onCreate(db);
     }
 }
