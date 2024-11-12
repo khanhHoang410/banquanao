@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
     android:orientation="vertical"
     android:padding="8dp"
     android:background="#FFFFFF"
@@ -35,16 +35,7 @@
         android:textStyle="bold"
         android:paddingTop="4dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_original_price"
-        android:text="$37.90"
-        android:textColor="#999999"
-        android:textSize="14sp"
-        android:paddingTop="4dp"
-        android:visibility="visible"
-        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
