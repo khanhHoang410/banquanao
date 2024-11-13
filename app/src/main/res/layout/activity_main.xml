@@ -12,7 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+<!-- header               -->
 
+
+            </LinearLayout>
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
