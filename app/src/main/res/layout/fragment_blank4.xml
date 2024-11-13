@@ -8,6 +8,7 @@
 
     <!-- Greeting Text -->
     <TextView
+        android:id="@+id/tvHienThiTenNguoiDung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hi, namvu3121"

@@ -49,7 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maKichThuoc) REFERENCES KichThuoc(maKichThuoc)\n" +
                 ");";
-        // Bảng người dùng : role 1 la nguoi dung , 2 la nguoi quan tri( tự them   );
+        // Bảng người dùng : role 1 la nguoi dung , 2 la nguoi quan tri( tự thêm  );
         // public boolean dangKyTaiKhoan(NguoiDung nguoiDung) {
         //        SQLiteDatabase sqLiteDatabase = dbhelper.getWritableDatabase();
         //        ContentValues contentValues = new ContentValues();
