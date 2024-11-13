@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/welcome2_activity.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:backgroundTint="@color/white"
+    android:id="@+id/main"
+    android:background="#F3F4F6">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_columnWeight="1"
+            android:scaleType="centerCrop"
+            android:layout_margin="10dp"
+            android:src="@drawable/img1" />
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_columnWeight="1"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/img2" />
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_columnWeight="1"
+            android:scaleType="centerCrop"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/img3" />
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_columnWeight="1"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="80dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/img4" />
+    </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shopping online"
+        android:textSize="33sp"
+        android:textColor="@color/black"
+        android:fontFamily="cursive"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RIGHT NOW !"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
