@@ -4,19 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="8dp"
     tools:context=".BlankFragment4">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
     <!-- Greeting Text -->
     <TextView
         android:id="@+id/tvHienThiTenNguoiDung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi, namvu3121"
+        android:text="Hi, tenNguoiDung"
         android:textSize="16sp"
         android:textStyle="bold"
         android:paddingBottom="8dp" />
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
 
     <!-- My Account Section -->
     <TextView
@@ -95,7 +102,10 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
     <!-- My Orders Section -->
     <TextView
         android:layout_width="wrap_content"
@@ -173,5 +183,9 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
 
 </LinearLayout>
