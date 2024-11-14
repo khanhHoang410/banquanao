@@ -24,6 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    maDanhMuc INT PRIMARY KEY,\n" +
                 "    tenDanhMuc VARCHAR(255)\n" +
                 ");";
+
         String SanPham = "CREATE TABLE SanPham (\n" +
                 "    maSanPham INT PRIMARY KEY,\n" +
                 "    tenSanPham VARCHAR(255),\n" +
@@ -38,6 +39,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    maKichThuoc INT PRIMARY KEY,\n" +
                 "    tenKichThuoc VARCHAR(50)\n" +
                 ");";
+
+        String SPSize = "CREATE TABLE SPSize (\n" +
+                "    maSanPham INT,\n" +
+                "    maDanhMuc INT,\n" +
+                "    PRIMARY KEY (maSanPham, maDanhMuc),\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
+                "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
+                ");";
+
+
+
         String ChiTietDonHang = "CREATE TABLE ChiTietDonHang (\n" +
                 "    maChiTietDonHang INT PRIMARY KEY,\n" +
                 "    maDonHang INT,\n" +
@@ -120,6 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(YeuThich);
         db.execSQL(LichSuSanPhamDaXem);
         db.execSQL(GioHang);
+        db.execSQL(SPSize);
     }
 
     @Override
@@ -134,6 +147,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS YeuThich");
         db.execSQL("DROP TABLE IF EXISTS LichSuSanPhamDaXem");
         db.execSQL("DROP TABLE IF EXISTS GioHang");
+        db.execSQL("DROP TABLE IF EXISTS SPSize");
         onCreate(db);
     }
 }
