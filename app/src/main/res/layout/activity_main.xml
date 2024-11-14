@@ -37,7 +37,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content">
                     <ImageView
-
+                        android:id="@+id/imgYeuThich"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="90dp"
@@ -52,6 +52,7 @@
                         android:layout_gravity="end"/>
 
                     <ImageView
+                        android:id="@+id/imgGioHang"
                         android:layout_width="32dp"
                         android:layout_height="25dp"
                         android:layout_gravity="end"
