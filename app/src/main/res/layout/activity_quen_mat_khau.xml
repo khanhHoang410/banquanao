@@ -1,10 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuenMatKhau">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:id="@+id/main"
+    android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Hình ảnh trên cùng -->
+    <ImageView
+        android:id="@+id/topImageForgot"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_forgotpassword"
+        android:layout_marginBottom="30dp"/>
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/titleTextForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Quên Mật Khẩu"
+        android:textSize="30sp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <!-- Hướng dẫn -->
+    <TextView
+        android:id="@+id/instructionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nhập email của bạn để đặt lại mật khẩu"
+        android:textSize="20sp"
+        android:textColor="#888888" />
+
+    <!-- Nhập Email -->
+    <EditText
+        android:id="@+id/edEmailForgot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Email"
+        android:textColor="@color/black"
+        android:padding="12dp" />
+
+    <!-- Nút Gửi -->
+    <Button
+        android:id="@+id/btnSubmitForgot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#000000"
+        android:text="GỬI"
+        android:textColor="#FFFFFF" />
+
+    <!-- Quay lại Đăng nhập -->
+    <TextView
+        android:id="@+id/backToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Quay lại Đăng Nhập"
+        android:textSize="18sp"
+        android:textColor="#007BFF" />
+</LinearLayout>
