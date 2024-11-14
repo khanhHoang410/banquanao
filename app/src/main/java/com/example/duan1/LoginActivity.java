@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp = findViewById(R.id.tv_sign_up);
         tvForgotPassword = findViewById(R.id.tv_forgot_password);
 
-
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
