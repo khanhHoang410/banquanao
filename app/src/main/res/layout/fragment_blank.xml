@@ -1,17 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BlankFragment">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".BlankFragment"
+    android:background="#FFFFFF">
 
 
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       >
+<!--       thanh công cụ trên cùng-->
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           >
+           <ImageView
+               android:layout_width="24dp"
+               android:layout_height="24dp"
+               android:id="@+id/menu_icon"
+               android:src="@mipmap/ic_launcher"
+               />
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:id="@+id/logo"
+               android:layout_weight="1"
+               android:text="FACIWAY"
+               android:textColor="#000000"
+               android:textStyle="bold"
+               android:textSize="18sp"
+               android:gravity="center"
+               />
+           <ImageView
+               android:layout_width="24dp"
+               android:layout_height="24dp"
+               android:id="@+id/cart_icon"
+               android:src="@mipmap/ic_launcher"
+               />
+       </LinearLayout>
+<!--       banner chính-->
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="200dp"
+           android:scaleType="centerCrop"
+           android:id="@+id/main_banner"
+           android:src="@mipmap/ic_launcher"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="TOP CATEGORY"
+           android:textColor="#000000"
+           android:textSize="18sp"
+           android:textStyle="bold"
+           android:padding="16dp"
+           android:layout_gravity="center"
+           />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           >
+<!--           banner-->
+           <GridLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:columnCount="2"
+               android:rowCount="2"
+               android:paddingTop="16dp"
+               android:paddingBottom="16dp"
+               android:layout_gravity="center"
+               >
+<!--               firt item-->
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_columnWeight="1"
+                   android:orientation="vertical"
+                   android:padding="8dp"
+                   android:gravity="center"
+                   >
+                   <ImageView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:id="@+id/image_item1"
+                       android:src="@mipmap/ic_launcher"
+                       android:scaleType="centerCrop"
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:id="@+id/tees"
+                       android:text="Tees"
+                       android:textColor="#000000"
+                       android:textSize="14sp"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       />
+               </LinearLayout>
 
+<!--               item 2-->
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_columnWeight="1"
+                   android:orientation="vertical"
+                   android:padding="8dp"
+                   android:gravity="center"
+                   >
+                   <ImageView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:id="@+id/image_item2"
+                       android:src="@mipmap/ic_launcher"
+                       android:scaleType="centerCrop"
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:id="@+id/Shorts"
+                       android:text="Shorts"
+                       android:textColor="#000000"
+                       android:textSize="14sp"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       />
+               </LinearLayout>
+               <!-- Third Item -->
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_columnWeight="1"
+                   android:orientation="vertical"
+                   android:padding="8dp"
+                   android:gravity="center">
 
-    </ScrollView>
+                   <ImageView
+                       android:id="@+id/image_item3"
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:src="@mipmap/ic_launcher"
+                       android:scaleType="centerCrop" />
 
-</FrameLayout>
+                   <TextView
+                       android:id="@+id/title_item3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Hoodies"
+                       android:textColor="#000000"
+                       android:textSize="14sp"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       />
+               </LinearLayout>
+
+               <!-- Fourth Item -->
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_columnWeight="1"
+                   android:orientation="vertical"
+                   android:padding="8dp"
+                   android:gravity="center">
+
+                   <ImageView
+                       android:id="@+id/image_item4"
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:src="@mipmap/ic_launcher"
+                       android:scaleType="centerCrop" />
+
+                   <TextView
+                       android:id="@+id/Accessories"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Accessories"
+                       android:textColor="#000000"
+                       android:textSize="14sp"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       />
+               </LinearLayout>
+
+           </GridLayout>
+
+       </LinearLayout>
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="T-SHIRTS"
+           android:textSize="18sp"
+           android:textStyle="bold"
+           android:layout_marginBottom="8dp"
+           android:gravity="center"
+           />
+
+       <!-- RecyclerView for T-Shirts -->
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/recycler_view_tshirts"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:scrollbars="vertical"
+           app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+           app:spanCount="2"
+           />
+   </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
