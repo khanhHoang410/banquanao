@@ -14,34 +14,7 @@
        android:orientation="vertical"
        >
 <!--       thanh công cụ trên cùng-->
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           >
-           <ImageView
-               android:layout_width="24dp"
-               android:layout_height="24dp"
-               android:id="@+id/menu_icon"
-               android:src="@mipmap/ic_launcher"
-               />
-           <TextView
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:id="@+id/logo"
-               android:layout_weight="1"
-               android:text="FACIWAY"
-               android:textColor="#000000"
-               android:textStyle="bold"
-               android:textSize="18sp"
-               android:gravity="center"
-               />
-           <ImageView
-               android:layout_width="24dp"
-               android:layout_height="24dp"
-               android:id="@+id/cart_icon"
-               android:src="@mipmap/ic_launcher"
-               />
-       </LinearLayout>
+
 <!--       banner chính-->
        <ImageView
            android:layout_width="match_parent"
