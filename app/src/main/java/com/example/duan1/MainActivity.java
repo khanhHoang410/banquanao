@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         imgYeuThich = findViewById(R.id.imgYeuThich);
+        imgGioHang = findViewById(R.id.imgGioHang);
         imgYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
