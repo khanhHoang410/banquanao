@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,YeuThichActivity.class));
             }
         });
+        imgGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CartActivity.class));
+            }
+        });
 
 
 
