@@ -21,7 +21,7 @@
            android:layout_height="200dp"
            android:scaleType="centerCrop"
            android:id="@+id/main_banner"
-           android:src="@mipmap/ic_launcher"
+           android:src="@drawable/banner_1"
            />
        <TextView
            android:layout_width="wrap_content"
@@ -58,10 +58,11 @@
 
                    <ImageView
                        android:id="@+id/image_item1"
-                       android:layout_width="100dp"
-                       android:layout_height="100dp"
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
                        android:scaleType="centerCrop"
-                       android:src="@mipmap/ic_launcher" />
+                       android:background="@drawable/rounded_corners"
+                       android:src="@drawable/banner_3" />
 
                    <TextView
                        android:id="@+id/tees"
@@ -86,10 +87,10 @@
 
                    <ImageView
                        android:id="@+id/image_item2"
-                       android:layout_width="100dp"
-                       android:layout_height="100dp"
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
                        android:scaleType="centerCrop"
-                       android:src="@mipmap/ic_launcher" />
+                       android:src="@drawable/banner_4" />
 
                    <TextView
                        android:id="@+id/Shorts"
@@ -113,10 +114,10 @@
 
                    <ImageView
                        android:id="@+id/image_item3"
-                       android:layout_width="100dp"
-                       android:layout_height="100dp"
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
                        android:scaleType="centerCrop"
-                       android:src="@mipmap/ic_launcher" />
+                       android:src="@drawable/banner_6" />
 
                    <TextView
                        android:id="@+id/title_item3"
@@ -141,10 +142,10 @@
 
                    <ImageView
                        android:id="@+id/image_item4"
-                       android:layout_width="100dp"
-                       android:layout_height="100dp"
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
                        android:scaleType="centerCrop"
-                       android:src="@mipmap/ic_launcher" />
+                       android:src="@drawable/banner_7" />
 
                    <TextView
                        android:id="@+id/Accessories"
