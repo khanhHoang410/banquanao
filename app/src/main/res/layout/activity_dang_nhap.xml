@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#FFFFFF"
-    android:padding="16dp">
+    android:id="@+id/main"
+    android:padding="20dp">
 
     <!-- Top Image -->
     <ImageView
@@ -13,7 +14,8 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-    />
+        android:src="@drawable/img_login"
+        />
 
     <!-- Title Text -->
     <TextView
@@ -22,42 +24,43 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/topImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:text="Login now to experience"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textColor="#000000"
         android:textStyle="bold" />
 
     <!-- Email EditText -->
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/edEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleText"
         android:layout_marginTop="32dp"
         android:hint="Email"
+        android:textColor="@color/black"
         android:padding="12dp"
 
-         />
+        />
 
     <!-- Password EditText -->
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/edPassWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/emailEditText"
+        android:layout_below="@id/edEmail"
         android:layout_marginTop="16dp"
         android:hint="Password"
+        android:textColor="@color/black"
         android:padding="12dp"
-
         android:inputType="textPassword" />
 
     <!-- Sign In Button -->
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/passwordEditText"
+        android:layout_below="@id/edPassWord"
         android:layout_marginTop="32dp"
         android:backgroundTint="#000000"
         android:text="SIGN IN"
@@ -68,12 +71,11 @@
         android:id="@+id/continueText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signInButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:text="or continue with"
         android:textColor="#888888"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
     <!-- Social Buttons Layout -->
     <LinearLayout
@@ -111,9 +113,33 @@
             android:src="@drawable/apple_icon" />
     </LinearLayout>
 
-    <!-- Bottom Links -->
+    <!-- Liên kết đăng ký và quên mật khẩu -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New user? Sign Up"
+            android:textSize="18sp"
+            android:textColor="#007BFF" />
+
+        <TextView
+            android:id="@+id/tv_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="Forgot Password"
+            android:textSize="18sp"
+            android:textColor="#007BFF" />
+    </LinearLayout>
 
 
-    
+
 
 </LinearLayout>

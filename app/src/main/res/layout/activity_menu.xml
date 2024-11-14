@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bgr_menu"
+    tools:context=".MenuActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đã có tài khoản ?"
+            android:layout_marginTop="50dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#565454"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_marginTop="30dp"
+            android:text="Tiếp tục đăng nhập thông tin của bạn."
+            />
+        <Button
+            android:id="@+id/btndn"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="ĐĂNG NHẬP"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:backgroundTint="#F44336"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_margin="60dp"
+            android:textColor="#737171"
+            android:textSize="33sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bạn mới tham gia  NDK ?"
+            android:layout_marginTop="10dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#565454"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_marginTop="30dp"
+            android:text="Bắt đầu trải nghiệm mua sắp trực tuyến."
+            />
+        <Button
+            android:id="@+id/btndk"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="BẮT ĐẦU NGAY"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#F44336"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

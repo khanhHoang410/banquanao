@@ -2,16 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:padding="16dp">
+    android:background="@color/white"
+    android:id="@+id/main"
+    android:padding="20dp">
 
     <!-- Top Image -->
     <ImageView
         android:id="@+id/topImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:src="@drawable/img_register"
         android:layout_centerHorizontal="true"
-         />
+        />
 
     <!-- Title Text -->
     <TextView
@@ -22,13 +24,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Create an account"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textColor="#000000"
         android:textStyle="bold" />
 
     <!-- Email EditText -->
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/edEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleText"
@@ -36,14 +38,14 @@
         android:hint="Email"
         android:padding="12dp"
 
-         />
+        />
 
     <!-- Password EditText -->
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/edPassWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/emailEditText"
+        android:layout_below="@id/edEmail"
         android:layout_marginTop="16dp"
         android:hint="Password"
         android:padding="12dp"
@@ -53,22 +55,21 @@
 
     <!-- Confirm Password EditText -->
     <EditText
-        android:id="@+id/confirmPasswordEditText"
+        android:id="@+id/edConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/passwordEditText"
+        android:layout_below="@id/edPassWord"
         android:layout_marginTop="16dp"
         android:hint="Confirm Password"
         android:padding="12dp"
-
         android:inputType="textPassword" />
 
     <!-- Sign Up Button -->
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/confirmPasswordEditText"
+        android:layout_below="@id/edConfirmPassword"
         android:layout_marginTop="32dp"
         android:backgroundTint="#000000"
         android:text="SIGN UP"
@@ -79,12 +80,12 @@
         android:id="@+id/continueText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signUpButton"
+        android:layout_below="@id/btnSignUp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:text="or continue with"
         android:textColor="#888888"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <!-- Social Buttons Layout -->
     <LinearLayout
