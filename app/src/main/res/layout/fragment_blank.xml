@@ -69,96 +69,92 @@
            <GridLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:layout_gravity="center"
                android:columnCount="2"
-               android:rowCount="2"
                android:paddingTop="16dp"
                android:paddingBottom="16dp"
-               android:layout_gravity="center"
-               >
-<!--               firt item-->
+               android:rowCount="2">
+               <!--               firt item-->
                <LinearLayout
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    android:layout_columnWeight="1"
-                   android:orientation="vertical"
-                   android:padding="8dp"
                    android:gravity="center"
-                   >
+                   android:orientation="vertical"
+                   android:padding="8dp">
+
                    <ImageView
+                       android:id="@+id/image_item1"
                        android:layout_width="100dp"
                        android:layout_height="100dp"
-                       android:id="@+id/image_item1"
-                       android:src="@mipmap/ic_launcher"
                        android:scaleType="centerCrop"
-                       />
+                       android:src="@mipmap/ic_launcher" />
+
                    <TextView
+                       android:id="@+id/tees"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:id="@+id/tees"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
                        android:text="Tees"
                        android:textColor="#000000"
                        android:textSize="14sp"
-                       android:layout_marginTop="8dp"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       />
+                       android:textStyle="bold" />
                </LinearLayout>
 
-<!--               item 2-->
+               <!--               item 2-->
                <LinearLayout
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    android:layout_columnWeight="1"
-                   android:orientation="vertical"
-                   android:padding="8dp"
                    android:gravity="center"
-                   >
+                   android:orientation="vertical"
+                   android:padding="8dp">
+
                    <ImageView
+                       android:id="@+id/image_item2"
                        android:layout_width="100dp"
                        android:layout_height="100dp"
-                       android:id="@+id/image_item2"
-                       android:src="@mipmap/ic_launcher"
                        android:scaleType="centerCrop"
-                       />
+                       android:src="@mipmap/ic_launcher" />
+
                    <TextView
+                       android:id="@+id/Shorts"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:id="@+id/Shorts"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
                        android:text="Shorts"
                        android:textColor="#000000"
                        android:textSize="14sp"
-                       android:layout_marginTop="8dp"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       />
+                       android:textStyle="bold" />
                </LinearLayout>
                <!-- Third Item -->
                <LinearLayout
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    android:layout_columnWeight="1"
+                   android:gravity="center"
                    android:orientation="vertical"
-                   android:padding="8dp"
-                   android:gravity="center">
+                   android:padding="8dp">
 
                    <ImageView
                        android:id="@+id/image_item3"
                        android:layout_width="100dp"
                        android:layout_height="100dp"
-                       android:src="@mipmap/ic_launcher"
-                       android:scaleType="centerCrop" />
+                       android:scaleType="centerCrop"
+                       android:src="@mipmap/ic_launcher" />
 
                    <TextView
                        android:id="@+id/title_item3"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
                        android:text="Hoodies"
                        android:textColor="#000000"
                        android:textSize="14sp"
-                       android:layout_marginTop="8dp"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       />
+                       android:textStyle="bold" />
                </LinearLayout>
 
                <!-- Fourth Item -->
@@ -166,28 +162,27 @@
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    android:layout_columnWeight="1"
+                   android:gravity="center"
                    android:orientation="vertical"
-                   android:padding="8dp"
-                   android:gravity="center">
+                   android:padding="8dp">
 
                    <ImageView
                        android:id="@+id/image_item4"
                        android:layout_width="100dp"
                        android:layout_height="100dp"
-                       android:src="@mipmap/ic_launcher"
-                       android:scaleType="centerCrop" />
+                       android:scaleType="centerCrop"
+                       android:src="@mipmap/ic_launcher" />
 
                    <TextView
                        android:id="@+id/Accessories"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:gravity="center"
                        android:text="Accessories"
                        android:textColor="#000000"
                        android:textSize="14sp"
-                       android:layout_marginTop="8dp"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       />
+                       android:textStyle="bold" />
                </LinearLayout>
 
            </GridLayout>
