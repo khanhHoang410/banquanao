@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#FFFFFF"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/discount_tag"
+        android:background="#FF0000"
+        android:padding="4dp"
+        android:text="40% OFF"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/product_iamge"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_price"
+        android:text="$22.90"
+        android:textColor="#FF5733"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="4dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_name"
+        android:text="Men's BELIEVER Crew T-Shirt"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+</LinearLayout>
