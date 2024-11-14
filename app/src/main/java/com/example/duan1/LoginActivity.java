@@ -39,6 +39,12 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tv_forgot_password);
 
 
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
         // Xử lý sự kiện nhấn "Sign Up"
         tvSignUp.setOnClickListener(view -> {
             Intent signUpIntent = new Intent(LoginActivity.this, RegisterActivity.class);
