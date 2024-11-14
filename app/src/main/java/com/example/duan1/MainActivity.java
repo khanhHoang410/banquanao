@@ -1,7 +1,10 @@
 package com.example.duan1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     NavigationView nav_view;
     private DrawerLayout drawer;
-
+    ImageView imgYeuThich, imgGioHang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,45 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        imgYeuThich = findViewById(R.id.imgYeuThich);
+        imgGioHang = findViewById(R.id.imgGioHang);
+        imgYeuThich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,YeuThichActivity.class));
+            }
+        });
+        imgGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CartActivity.class));
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ////// phần chuyển màn hình
         drawer = findViewById(R.id.drawer_layout);
         nav_view = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bnv);
