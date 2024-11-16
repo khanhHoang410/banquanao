@@ -1,6 +1,7 @@
 package com.example.duan1;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class CartActivity extends AppCompatActivity {
 
-
+        ImageView img_return;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,5 +22,7 @@ public class CartActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        img_return = findViewById(R.id.img_return);
+        img_return.setOnClickListener(v -> finish());
     }
 }

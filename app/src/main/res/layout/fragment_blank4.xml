@@ -179,7 +179,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shipped"
+                android:text="SignOut"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
