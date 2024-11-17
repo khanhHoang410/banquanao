@@ -15,7 +15,7 @@
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/health"
-        android:icon="@drawable/cart_icon"
+        android:icon="@drawable/ic_lichsudonhang"
         android:iconTint="@color/white"
         android:title="CART"
         app:showAsAction="ifRoom"/>
