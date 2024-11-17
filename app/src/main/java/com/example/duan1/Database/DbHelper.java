@@ -78,6 +78,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    tenNguoiDung VARCHAR(255),\n" +
                 "    email VARCHAR(255),\n" +
                 "    matKhau VARCHAR(255),\n" +
+                "    diaChi VARCHAR(255),\n" +
                 "    role INT \n" +
                 ");";
         String DonHang = "CREATE TABLE DonHang (\n" +
