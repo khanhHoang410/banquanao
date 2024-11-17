@@ -28,7 +28,7 @@ public class Welcome2Activity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Welcome2Activity.this, MenuActivity.class);
+                Intent intent = new Intent(Welcome2Activity.this, MainActivity.class);
                 startActivity(intent);
                 finish(); // Đóng màn hình hiện tại
             }
