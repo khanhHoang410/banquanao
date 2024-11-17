@@ -106,12 +106,11 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
-        // tam thoi chua dung den
-        String LichSuSanPhamDaXem = "CREATE TABLE LichSuSanPhamDaXem (\n" +
+        String LichSuSanPhamDaMua = "CREATE TABLE LichSuSanPhamDaMua (\n" +
                 "    maLichSu INT PRIMARY KEY,\n" +
                 "    maNguoiDung INT,\n" +
                 "    maSanPham INT,\n" +
-                "    ngayXem DATE,\n" +
+                "    tenSanPhamDaMua VARCHAR(255) ,\n" +
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
@@ -131,7 +130,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DonHang);
         db.execSQL(DanhGia);
         db.execSQL(YeuThich);
-        db.execSQL(LichSuSanPhamDaXem);
+        db.execSQL(LichSuSanPhamDaMua);
         db.execSQL(GioHang);
         db.execSQL(SPSize);
     }
@@ -146,7 +145,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS DonHang");
         db.execSQL("DROP TABLE IF EXISTS DanhGia");
         db.execSQL("DROP TABLE IF EXISTS YeuThich");
-        db.execSQL("DROP TABLE IF EXISTS LichSuSanPhamDaXem");
+        db.execSQL("DROP TABLE IF EXISTS LichSuSanPhamDaMua");
         db.execSQL("DROP TABLE IF EXISTS GioHang");
         db.execSQL("DROP TABLE IF EXISTS SPSize");
         onCreate(db);
