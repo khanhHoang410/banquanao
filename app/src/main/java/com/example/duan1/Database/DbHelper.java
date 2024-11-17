@@ -111,6 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    maNguoiDung INT,\n" +
                 "    maSanPham INT,\n" +
                 "    tenSanPhamDaMua VARCHAR(255) ,\n" +
+                "    ngayMua DATE ,\n" +
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
