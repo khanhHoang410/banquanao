@@ -32,7 +32,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    moTa TEXT,\n" +
                 "    maDanhMuc INT,\n" +
                 "    soLuong INT,\n" +
-                "    anh VARCHAR(255),\n" +
+                "    anh BLOB,\n" +
                 "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
                 ");";
         String KichThuoc = "CREATE TABLE KichThuoc (\n" +

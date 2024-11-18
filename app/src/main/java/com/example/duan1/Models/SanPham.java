@@ -1,5 +1,7 @@
 package com.example.duan1.Models;
 
+import android.graphics.Bitmap;
+
 public class SanPham {
     private int maSanPham; // PRIMARY KEY
     private String tenSanPham; // VARCHAR(255)
@@ -7,5 +9,5 @@ public class SanPham {
     private String moTa; // TEXT
     private int maDanhMuc; // INT
     private int soLuong; // INT
-    private String anh; // VARCHAR(255)
+    private Bitmap anh; //BLOB
 }
