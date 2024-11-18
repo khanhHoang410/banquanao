@@ -134,6 +134,22 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(LichSuSanPhamDaMua);
         db.execSQL(GioHang);
         db.execSQL(SPSize);
+        // phần thêm sản phẩm
+        // danh mục
+        db.execSQL("INSERT INTO DanhMuc (maDanhMuc, tenDanhMuc) VALUES (1, 'T-Shirt');");
+        db.execSQL("INSERT INTO DanhMuc (maDanhMuc, tenDanhMuc) VALUES (2, 'Jacket');");
+        db.execSQL("INSERT INTO DanhMuc (maDanhMuc, tenDanhMuc) VALUES (3, 'Pants');");
+        // sản phẩm
+        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (1, 'Áo thun thêu chữ ', 699.99, 'Mô tả sản phẩm 1', 1, 50);");
+        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (2, 'Áo khoác', 19.99, 'Mô tả sản phẩm 2 ', 2, 200);");
+        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (3, 'Quần jean rách', 29.99, 'Mô tả sản phẩm 3', 3, 30);");
+        // người dùng
+        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (1, 'John Doe', 'john@example.com', '123', '123 Main St', 1);");
+        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (2, 'admin', 'jane@example.com', 'admin', '456 Elm St', 2);");
+        // kích thước (Không thêm)
+        db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (1, 'M');");
+        db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (2, 'L');");
+        db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (3, 'XL');");
     }
 
     @Override
