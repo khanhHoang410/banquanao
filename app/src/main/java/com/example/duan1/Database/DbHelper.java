@@ -13,7 +13,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // Bảng danh mục
 
 
-    public DbHelper(@Nullable Context context){
+    public DbHelper( Context context){
         super(context, DB_Name,null,DB_VERSION);
     }
 
