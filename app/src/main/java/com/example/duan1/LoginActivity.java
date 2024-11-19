@@ -9,57 +9,94 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.duan1.Dao.NguoiDungDAO;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText edEmail, edPassWord;
-    Button btnSignIn;
-    TextView tvSignUp;
-    TextView tvForgotPassword;
+    private EditText edEmail, edPassword;
+    private Button btnSignIn;
+    private TextView tvSignUp, tvForgotPassword;
+    private NguoiDungDAO nguoiDungDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dang_nhap);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        // Ánh xạ view
         edEmail = findViewById(R.id.edEmail);
-        edPassWord = findViewById(R.id.edPassWord);
+        edPassword = findViewById(R.id.edPassWord);
         btnSignIn = findViewById(R.id.btnSignIn);
         tvSignUp = findViewById(R.id.tv_sign_up);
         tvForgotPassword = findViewById(R.id.tv_forgot_password);
 
+        // Khởi tạo DAO
+        nguoiDungDAO = new NguoiDungDAO(this);
+
+        // Xử lý sự kiện đăng nhập
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                String email = edEmail.getText().toString().trim();
+                String password = edPassword.getText().toString().trim();
+                // validate
+                if (!validateInput(email, password)) {
+                    return;
+                }
+
+
+                if (nguoiDungDAO.KiemTraDangNhap(email, password)) {
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Email hoặc mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        // Xử lý sự kiện nhấn "Sign Up"
+
+        // Xử lý sự kiện chuyển đến màn hình đăng ký
         tvSignUp.setOnClickListener(view -> {
-            Intent signUpIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(signUpIntent);
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
-        // Xử lý sự kiện nhấn "Forgot Password"
+        // Xử lý sự kiện chuyển đến màn hình quên mật khẩu
         tvForgotPassword.setOnClickListener(view -> {
-            Intent forgotPasswordIntent = new Intent(LoginActivity.this, QuenMatKhau.class);
-            startActivity(forgotPasswordIntent);
+            Intent intent = new Intent(LoginActivity.this, QuenMatKhau.class);
+            startActivity(intent);
         });
     }
-    private boolean checkLoginCredentials(String email, String password) {
-        // Thực hiện kiểm tra thông tin đăng nhập
-        // Gửi yêu cầu lên server và kiểm tra ở đây
-        // Trả về true nếu thành công, false nếu thất bại
+
+    // Hàm kiểm tra đầu vào
+    private boolean validateInput(String email, String password) {
+        if (email.isEmpty()) {
+            edEmail.setError("Vui lòng nhập email.");
+            edEmail.requestFocus();
+            return false;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            edEmail.setError("Email không hợp lệ.");
+            edEmail.requestFocus();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            edPassword.setError("Vui lòng nhập mật khẩu.");
+            edPassword.requestFocus();
+            return false;
+        }
+
+        if (password.length() < 6) {
+            edPassword.setError("Mật khẩu phải có ít nhất 6 ký tự.");
+            edPassword.requestFocus();
+            return false;
+        }
+
         return true;
     }
 }
