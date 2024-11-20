@@ -49,7 +49,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 ");";
 
 
-
         String ChiTietDonHang = "CREATE TABLE ChiTietDonHang (\n" +
                 "    maChiTietDonHang INT PRIMARY KEY autoincrement,\n" +
                 "    maDonHang INT,\n" +
