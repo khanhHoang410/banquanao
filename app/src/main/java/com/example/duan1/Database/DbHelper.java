@@ -21,12 +21,12 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String DanhMuc = "CREATE TABLE DanhMuc (\n" +
-                "    maDanhMuc INT PRIMARY KEY,\n" +
+                "    maDanhMuc INT PRIMARY KEY autoincrement,\n" +
                 "    tenDanhMuc VARCHAR(255)\n" +
                 ");";
 
         String SanPham = "CREATE TABLE SanPham (\n" +
-                "    maSanPham INT PRIMARY KEY,\n" +
+                "    maSanPham INT PRIMARY KEY autoincrement,\n" +
                 "    tenSanPham VARCHAR(255),\n" +
                 "    gia DECIMAL(10, 2),\n" +
                 "    moTa TEXT,\n" +
@@ -36,7 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
                 ");";
         String KichThuoc = "CREATE TABLE KichThuoc (\n" +
-                "    maKichThuoc INT PRIMARY KEY,\n" +
+                "    maKichThuoc INT PRIMARY KEY autoincrement,\n" +
                 "    tenKichThuoc VARCHAR(50)\n" +
                 ");";
 
@@ -49,9 +49,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 ");";
 
 
-
         String ChiTietDonHang = "CREATE TABLE ChiTietDonHang (\n" +
-                "    maChiTietDonHang INT PRIMARY KEY,\n" +
+                "    maChiTietDonHang INT PRIMARY KEY autoincrement,\n" +
                 "    maDonHang INT,\n" +
                 "    maSanPham INT,\n" +
                 "    soLuong INT,\n" +
@@ -74,7 +73,7 @@ public class DbHelper extends SQLiteOpenHelper {
         //    }
 
         String NguoiDung = "CREATE TABLE NguoiDung (\n" +
-                "    maNguoiDung INT PRIMARY KEY,\n" +
+                "    maNguoiDung INT PRIMARY KEY autoincrement,\n" +
                 "    tenNguoiDung VARCHAR(255),\n" +
                 "    email VARCHAR(255),\n" +
                 "    matKhau VARCHAR(255),\n" +
@@ -82,7 +81,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    role INT \n" +
                 ");";
         String DonHang = "CREATE TABLE DonHang (\n" +
-                "    maDonHang INT PRIMARY KEY,\n" +
+                "    maDonHang INT PRIMARY KEY autoincrement,\n" +
                 "    maNguoiDung INT,\n" +
                 "    ngayDat DATE,\n" +
                 "    trangThai VARCHAR(50),\n" +
@@ -90,7 +89,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
                 ");";
         String DanhGia = "CREATE TABLE DanhGia (\n" +
-                "    maDanhGia INT PRIMARY KEY,\n" +
+                "    maDanhGia INT PRIMARY KEY autoincrement,\n" +
                 "    maSanPham INT,\n" +
                 "    maNguoiDung INT,\n" +
                 "    danhGia INT,\n" +
@@ -99,7 +98,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
                 ");";
         String YeuThich = "CREATE TABLE YeuThich (\n" +
-                "    maYeuThich INT PRIMARY KEY,\n" +
+                "    maYeuThich INT PRIMARY KEY autoincrement,\n" +
                 "    maNguoiDung INT,\n" +
                 "    maSanPham INT,\n" +
                 "    ngayYeuThich DATE,\n" +
@@ -107,7 +106,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
         String LichSuSanPhamDaMua = "CREATE TABLE LichSuSanPhamDaMua (\n" +
-                "    maLichSu INT PRIMARY KEY,\n" +
+                "    maLichSu INT PRIMARY KEY autoincrement,\n" +
                 "    maNguoiDung INT,\n" +
                 "    maSanPham INT,\n" +
                 "    tenSanPhamDaMua VARCHAR(255) ,\n" +
@@ -116,7 +115,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
         String GioHang = "CREATE TABLE GioHang (\n" +
-                "    maGioHang INT PRIMARY KEY,\n" +
+                "    maGioHang INT PRIMARY KEY autoincrement,\n" +
                 "    maDonHang INT,\n" +
                 "    maSanPham INT,\n" +
                 "    tongTien DECIMAL(10, 2),\n" +
