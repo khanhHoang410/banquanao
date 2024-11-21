@@ -41,15 +41,14 @@ public class SanPhamSpinerAdapter extends ArrayAdapter<SanPham> {
          anhYeuThich = v.findViewById(R.id.icon_favorite);
          tvName.setText(item.getTenSanPham());
          tvGia.setText(item.getGia()+"");
-         anhSanPham.setImageResource(item.getAnh());
-
+            anhSanPham.setImageBitmap(item.getAnh());
         }
         return  v;
 
     }
 
     @Override
-    public View getDropDowView(int position, @Nullable View convertView, @NonNull android.view.ViewGroup parent){
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull android.view.ViewGroup parent){
         View v = convertView;
         if (v==null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -61,6 +60,10 @@ public class SanPhamSpinerAdapter extends ArrayAdapter<SanPham> {
             tvGia = v.findViewById(R.id.product_price);
             anhSanPham = v.findViewById(R.id.product_iamge);
             anhYeuThich  =v.findViewById(R.id.icon_favorite);
+
+            tvName.setText(item.getTenSanPham());
+            tvGia.setText(item.getGia() + "");
+            anhSanPham.setImageBitmap(item.getAnh());
         }
         return  v;
     }
