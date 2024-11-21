@@ -1,7 +1,12 @@
 package com.example.duan1;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +21,7 @@ import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
 import com.example.duan1.Dao.SanPhamDAO;
 import com.example.duan1.Models.SanPham;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class BlankFragment extends Fragment {
@@ -58,9 +64,20 @@ public class BlankFragment extends Fragment {
 
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable); // Dừng slideshow khi Fragment bị hủy
+    }
+    private byte[] bitmapToBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream(); // Tạo luồng byte
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream); // Nén ảnh dưới dạng PNG
+        return stream.toByteArray(); // Trả về mảng byte
+    }
+
+    // Hàm chuyển mảng byte thành ảnh Bitmap (để hiển thị từ SQLite)
+    private Bitmap bytesToBitmap(byte[] byteArray) {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length); // Giải mã mảng byte thành Bitmap
     }
 }

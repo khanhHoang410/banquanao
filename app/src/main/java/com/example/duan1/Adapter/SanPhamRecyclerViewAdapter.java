@@ -38,7 +38,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         holder.tvNameSanPham.setText(sanPham.getTenSanPham());
         holder.tvGiaSanPham.setText(String.valueOf(sanPham.getGia()));
         holder.anhSanPham.setImageBitmap(sanPham.getAnh());
-        // Cập nhật ảnh yêu thích nếu cần
+        // Cập nhật ảnh yêu thích nếu cần// đéo cần đâu
     }
 
     @Override
