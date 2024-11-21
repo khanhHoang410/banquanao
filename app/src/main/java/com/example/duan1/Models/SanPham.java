@@ -72,9 +72,9 @@ public class SanPham {
         this.soLuong = soLuong;
     }
 
-//    public int getAnh() {
-//        return anh;
-//    }
+    public Bitmap getAnh() {
+        return anh;
+    }
 
     public void setAnh(Bitmap anh) {
         this.anh = anh;
