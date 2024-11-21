@@ -50,6 +50,12 @@ public class SanPhamAdapter extends ArrayAdapter<SanPham> {
             tvNameSanPham = v.findViewById(R.id.product_name);
             anhSanpham = v.findViewById(R.id.product_iamge);
             anhyeuthich = v.findViewById(R.id.icon_favorite);
+
+            tvgiaSanPham.setText(item.getGia() + "");
+            tvNameSanPham.setText(item.getTenSanPham());
+            anhSanpham.setImageBitmap(item.getAnh());
+//            anhyeuthich.setImageResource(item.isYeuThich() ? R.drawable.yeuthich_active : R.drawable.yeuthich_inactive);
+
         }
         return v;
     }
