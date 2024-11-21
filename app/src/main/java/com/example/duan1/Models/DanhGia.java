@@ -6,4 +6,6 @@ public class DanhGia {
     private int maNguoiDung;
     private int danhGia;
     private float diem; // Thay DECIMAL bằng float
+
+
 }
