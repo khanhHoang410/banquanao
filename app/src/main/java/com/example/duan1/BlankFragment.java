@@ -35,6 +35,7 @@ public class BlankFragment extends Fragment {
         }
     };
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,8 +50,7 @@ public class BlankFragment extends Fragment {
         list = sanPhamDAO.getAll();
         sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list); // Dùng RecyclerView.Adapter
         recycler_view_tshirts.setAdapter(sanphamAdapter);
-
-
+        sanphamAdapter.updateData(list);
         return view;
 
     }

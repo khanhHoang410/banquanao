@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 6;
+    private static final int DB_VERSION= 8;
 
     // Bảng danh mục
 
@@ -138,9 +138,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(Data_SqlLite.INSERT_SAN_PHAM);
         // phần thêm sản phẩm
         // danh mục
-        db.execSQL("INSERT INTO DanhMuc (maDanhMuc, tenDanhMuc) VALUES (1, 'T-Shirt');");
-        db.execSQL("INSERT INTO DanhMuc (maDanhMuc, tenDanhMuc) VALUES (2, 'Jacket');");
-        db.execSQL("INSERT INTO DanhMuc (maDanhMuc, tenDanhMuc) VALUES (3, 'Pants');");
         // sản phẩm
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (1, 'Áo thun thêu chữ ', 699.99, 'Mô tả sản phẩm 1', 1, 50);");
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (2, 'Áo khoác', 19.99, 'Mô tả sản phẩm 2 ', 2, 200);");
@@ -149,9 +146,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (1, 'John Doe', 'namvu@gmail.com', '123456', '123 Main St', 1);");
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (2, 'admin', 'admin@gmail.com', '123456', '456 Elm St', 2);");
         // kích thước (Không thêm)
-        db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (1, 'M');");
-        db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (2, 'L');");
-        db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (3, 'XL');");
+
     }
 
     @Override

@@ -56,6 +56,11 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             tvGiaSanPham = itemView.findViewById(R.id.product_price);
             anhSanPham = itemView.findViewById(R.id.product_iamge);
             anhYeuThich = itemView.findViewById(R.id.icon_favorite);
+
         }
+    }
+    public void updateData(List<SanPham> newList) {
+        this.list = newList;  // Cập nhật lại danh sách dữ liệu
+        notifyDataSetChanged();  // Thông báo cập nhật dữ liệu
     }
 }

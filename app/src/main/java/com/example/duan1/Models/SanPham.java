@@ -1,6 +1,9 @@
 package com.example.duan1.Models;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.ByteArrayOutputStream;
 
 public class SanPham {
     private int maSanPham; // PRIMARY KEY
@@ -73,10 +76,19 @@ public class SanPham {
     }
 
     public Bitmap getAnh() {
-        return anh;
+        byte[] imageByteArray = getAnhByteArray();
+        return BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
     }
 
     public void setAnh(Bitmap anh) {
         this.anh = anh;
+    }
+    public byte[] getAnhByteArray(){
+        if (anh!=null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            anh.compress(Bitmap.CompressFormat.PNG,100,stream);// Nén ảnh thành định dạng PNG hoặc JPG
+            return stream.toByteArray();// Trả về mảng byte
+        }
+        return new byte[0]; // Trả về mảng byte rỗng nếu không có ảnh
     }
 }
