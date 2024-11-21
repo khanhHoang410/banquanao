@@ -11,16 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.duan1.Adapter.SanPhamAdapter;
-import com.example.duan1.Adapter.SanPhamSpinerAdapter;
+import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
 import com.example.duan1.Dao.SanPhamDAO;
 import com.example.duan1.Models.SanPham;
 
 import java.util.List;
 
 public class BlankFragment extends Fragment {
-    SanPhamAdapter sanphamAdapter;
-    SanPhamSpinerAdapter sanphamSpinerAdapter;
+    SanPhamRecyclerViewAdapter sanphamAdapter;
     List<SanPham> list;
     SanPhamDAO sanPhamDAO;
     private ImageView mainBanner;
@@ -49,8 +47,9 @@ public class BlankFragment extends Fragment {
         recycler_view_tshirts.setLayoutManager(new LinearLayoutManager(getContext()));
         sanPhamDAO = new SanPhamDAO(getContext());
         list = sanPhamDAO.getAll();
-        sanphamAdapter = new SanPhamAdapter(getContext(), this, list);
+        sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list); // Dùng RecyclerView.Adapter
 //        recycler_view_tshirts.setAdapter(sanphamAdapter);
+
 
         return view;
 
