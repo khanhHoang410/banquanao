@@ -48,7 +48,7 @@ public class SanPhamSpinerAdapter extends ArrayAdapter<SanPham> {
 
     }
 
-    @Override
+
     public View getDropDowView(int position, @Nullable View convertView, @NonNull android.view.ViewGroup parent){
         View v = convertView;
         if (v==null){

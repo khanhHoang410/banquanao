@@ -18,8 +18,8 @@
 
         <ImageButton
             android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_back"
             android:background="?android:selectableItemBackground"
             android:contentDescription="Nút quay lại"/>
@@ -65,11 +65,11 @@
 
         <ImageButton
             android:id="@+id/buttonSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_send"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="?android:selectableItemBackground"
-            android:contentDescription="Gửi tin nhắn"/>
+            android:contentDescription="Gửi tin nhắn"
+            android:src="@drawable/ic_send" />
     </LinearLayout>
 
 </LinearLayout>
