@@ -29,6 +29,11 @@ public class SanPhamDAO {
         values.put("moTa", obj.getMoTa());
         values.put("maDanhMuc", obj.getMaDanhMuc());
         values.put("soLuong", obj.getSoLuong());
+        values.put("anh",obj.getAnh());
+        // Chuyển Bitmap sang byte[] và lưu vào ContentValues
+//        if (obj.getAnh() != null) {
+//            values.put("anh", obj.getAnhByteArray());
+//        }
         return db.insert("SanPham",null,values);
     }
     public int update(SanPham obj){
@@ -38,6 +43,11 @@ public class SanPhamDAO {
         values.put("moTa", obj.getMoTa());
         values.put("maDanhMuc", obj.getMaDanhMuc());
         values.put("soLuong", obj.getSoLuong());
+        values.put("anh",obj.getAnh());
+        // Chuyển Bitmap sang byte[] và lưu vào ContentValues
+//        if (obj.getAnh() != null) {
+//            values.put("anh", obj.getAnhByteArray());
+//        }
         return db.update("SanPham",values,"maSanPham=?",new String[]{String.valueOf(obj.getMaSanPham())});
     }
 
@@ -56,8 +66,16 @@ public class SanPhamDAO {
             obj.setGia(c.getFloat(c.getColumnIndex("gia")));
             obj.setMoTa(c.getString(c.getColumnIndex("moTa")));
             obj.setMaDanhMuc(c.getInt(c.getColumnIndex("maDanhMuc")));
+            obj.setAnh(c.getString(c.getColumnIndex("anh")));
+
+//            byte[] anhByteArray = c.getBlob(c.getColumnIndex("anh"));
+//            if (anhByteArray!=null){
+//                obj.setAnhFromByteArray(anhByteArray);
+//
+//            }
             list.add(obj);
         }
+        c.close();
         return list;
     }
 
