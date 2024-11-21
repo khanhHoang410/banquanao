@@ -1,6 +1,8 @@
 package com.example.duan1.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,12 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         SanPham sanPham = list.get(position);
         holder.tvNameSanPham.setText(sanPham.getTenSanPham());
         holder.tvGiaSanPham.setText(String.valueOf(sanPham.getGia()));
-        holder.anhSanPham.setImageBitmap(sanPham.getAnh());
+//        holder.anhSanPham.setImageBitmap(sanPham.getAnh());
+        // Lấy ảnh từ drawable dựa trên tên ảnh
+        Bitmap bitmap = getBitmapFromDrawable(sanPham.getAnh(), context);
+        if (bitmap != null) {
+            holder.anhSanPham.setImageBitmap(bitmap);
+        }
         // Cập nhật ảnh yêu thích nếu cần
     }
 
@@ -62,5 +69,15 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     public void updateData(List<SanPham> newList) {
         this.list = newList;  // Cập nhật lại danh sách dữ liệu
         notifyDataSetChanged();  // Thông báo cập nhật dữ liệu
+    }
+    // Hàm lấy Bitmap từ drawable
+    private Bitmap getBitmapFromDrawable(String fileName, Context context) {
+        // Lấy resource ID từ tên file
+        int resourceId = context.getResources().getIdentifier(fileName.replace(".webp", ""), "drawable", context.getPackageName());
+        if (resourceId != 0) {
+            // Chuyển đổi resource ID thành Bitmap
+            return BitmapFactory.decodeResource(context.getResources(), resourceId);
+        }
+        return null; // Trả về null nếu không tìm thấy ảnh
     }
 }
