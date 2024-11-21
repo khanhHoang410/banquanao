@@ -11,10 +11,7 @@ public class Data_SqlLite {
             "(2, 'M'),\n" +
             "(3, 'L'),\n" +
             "(4, 'XL');";
-    public static final String INSERT_NGUOI_DUNG = "INSERT INTO NguoiDung(maNguoiDung, tenNguoiDung, email, matKhau, role) VALUES\n" +
-            "(1, 'Nguyen Van A', 'a@gmail.com', '123456', 1),\n" +
-            "(2, 'Tran Thi B', 'b@gmail.com', '123456', 1),\n" +
-            "(3, 'Admin', 'admin@gmail.com', 'admin', 2);";
+
     public static final String INSERT_SAN_PHAM = "INSERT INTO SanPham(maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong, anh) VALUES\n" +
             "(1, 'Áo thun trắng', 150000, 'Áo thun chất liệu cotton', 1, 50, 'aotrang.webp'),\n" +
             "(2, 'Quần shorts đen', 200000, 'Quần shorts chất liệu vải dù', 2, 30, 'quansortden.webp'),\n" +

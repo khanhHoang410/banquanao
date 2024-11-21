@@ -50,7 +50,7 @@ public class BlankFragment extends Fragment {
         sanPhamDAO = new SanPhamDAO(getContext());
         list = sanPhamDAO.getAll();
         sanphamAdapter = new SanPhamAdapter(getContext(), this, list);
-        recycler_view_tshirts.setAdapter(sanphamAdapter);
+//        recycler_view_tshirts.setAdapter(sanphamAdapter);
 
         return view;
 

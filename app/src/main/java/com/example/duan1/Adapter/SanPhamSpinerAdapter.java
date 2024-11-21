@@ -41,7 +41,7 @@ public class SanPhamSpinerAdapter extends ArrayAdapter<SanPham> {
          anhYeuThich = v.findViewById(R.id.icon_favorite);
          tvName.setText(item.getTenSanPham());
          tvGia.setText(item.getGia()+"");
-            anhSanPham.setImageBitmap(item.getAnh());
+//            anhSanPham.setImageBitmap(item.getAnh());
         }
         return  v;
 
@@ -63,7 +63,7 @@ public class SanPhamSpinerAdapter extends ArrayAdapter<SanPham> {
 
             tvName.setText(item.getTenSanPham());
             tvGia.setText(item.getGia() + "");
-            anhSanPham.setImageBitmap(item.getAnh());
+//            anhSanPham.setImageBitmap(item.getAnh());
         }
         return  v;
     }

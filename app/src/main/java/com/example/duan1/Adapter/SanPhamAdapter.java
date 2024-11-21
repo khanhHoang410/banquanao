@@ -53,7 +53,7 @@ public class SanPhamAdapter extends ArrayAdapter<SanPham> {
 
             tvgiaSanPham.setText(item.getGia() + "");
             tvNameSanPham.setText(item.getTenSanPham());
-            anhSanpham.setImageBitmap(item.getAnh());
+//            anhSanpham.setImageBitmap(item.getAnh());
 //            anhyeuthich.setImageResource(item.isYeuThich() ? R.drawable.yeuthich_active : R.drawable.yeuthich_inactive);
 
         }

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 4;
+    private static final int DB_VERSION= 6;
 
     // Bảng danh mục
 
@@ -30,8 +30,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    tenSanPham VARCHAR(255),\n" +
                 "    gia DECIMAL(10, 2),\n" +
                 "    moTa TEXT,\n" +
-                "    maDanhMuc INT,\n" +
-                "    soLuong INT,\n" +
+                "    maDanhMuc INTEGER,\n" +
+                "    soLuong INTEGER,\n" +
                 "    anh BLOB,\n" +
                 "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
                 ");";
@@ -144,7 +144,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (3, 'Quần jean rách', 29.99, 'Mô tả sản phẩm 3', 3, 30);");
         // người dùng
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (1, 'John Doe', 'namvu@gmail.com', '123456', '123 Main St', 1);");
-        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (2, 'admin', 'daichimbe@example.com', 'admin', '456 Elm St', 2);");
+        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (2, 'admin', 'admin@gmail.com', '123456', '456 Elm St', 2);");
         // kích thước (Không thêm)
         db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (1, 'M');");
         db.execSQL("INSERT INTO KichThuoc (maKichThuoc, tenKichThuoc) VALUES (2, 'L');");
