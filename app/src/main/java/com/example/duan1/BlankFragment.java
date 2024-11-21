@@ -3,6 +3,7 @@ package com.example.duan1;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,8 +49,10 @@ public class BlankFragment extends Fragment {
         recycler_view_tshirts.setLayoutManager(new LinearLayoutManager(getContext()));
         sanPhamDAO = new SanPhamDAO(getContext());
         list = sanPhamDAO.getAll();
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list); // Dùng RecyclerView.Adapter
         recycler_view_tshirts.setAdapter(sanphamAdapter);
+        recycler_view_tshirts.setLayoutManager(layoutManager);
         sanphamAdapter.updateData(list);
         return view;
 
