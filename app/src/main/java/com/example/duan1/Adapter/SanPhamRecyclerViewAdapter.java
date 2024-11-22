@@ -1,8 +1,10 @@
 package com.example.duan1.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan1.ChitietSanPham;
 import com.example.duan1.Models.SanPham;
 import com.example.duan1.R;
 
@@ -41,11 +44,24 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         holder.tvGiaSanPham.setText(String.valueOf(sanPham.getGia()));
 //        holder.anhSanPham.setImageBitmap(sanPham.getAnh());
         // Lấy ảnh từ drawable dựa trên tên ảnh
+
         Bitmap bitmap = getBitmapFromDrawable(sanPham.getAnh(), context);
         if (bitmap != null) {
             holder.anhSanPham.setImageBitmap(bitmap);
         }
+        // xử lý sự kiện click vào item
+        holder.itemView.setOnClickListener(v->{
+            Intent intent = new Intent(context, ChitietSanPham.class);
+            Log.d("ChitietSanPham", "Tên sản phẩm: " + sanPham.getTenSanPham());
+            Log.d("ChitietSanPham", "Mô tả sản phẩm: " + sanPham.getMoTa());
+            intent.putExtra("tenSanPham", sanPham.getTenSanPham());
+            intent.putExtra("gia", String.valueOf(sanPham.getGia()));
+            intent.putExtra("anh", sanPham.getAnh());
+            intent.putExtra("moTa", sanPham.getMoTa());
+            context.startActivity(intent);
+        });
         // Cập nhật ảnh yêu thích nếu cần
+
     }
 
     @Override
@@ -59,10 +75,12 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             tvNameSanPham = itemView.findViewById(R.id.product_name);
             tvGiaSanPham = itemView.findViewById(R.id.product_price);
             anhSanPham = itemView.findViewById(R.id.product_iamge);
             anhYeuThich = itemView.findViewById(R.id.icon_favorite);
+
 
         }
     }

@@ -40,6 +40,9 @@
             android:name=".QuenMatKhau"
             android:exported="false" />
         <activity
+            android:name=".ChitietSanPham"
+            android:exported="true"/>
+        <activity
             android:name=".Welcome1Activity"
             android:exported="true">
             <intent-filter>
