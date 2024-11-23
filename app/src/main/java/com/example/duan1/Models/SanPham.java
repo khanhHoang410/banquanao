@@ -76,28 +76,11 @@ public class SanPham {
     }
 
     public String getAnh() {
-//        byte[] imageByteArray = getAnhByteArray();
-//        return BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
         return  anh;
     }
 
     public void setAnh(String anh) {
         this.anh = anh;
     }
-//    public byte[] getAnhByteArray(){
-//        if (anh!=null){
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            anh.compress(Bitmap.CompressFormat.PNG,100,stream);// Nén ảnh thành định dạng PNG hoặc JPG
-//            return stream.toByteArray();// Trả về mảng byte
-//        }
-//        return new byte[0]; // Trả về mảng byte rỗng nếu không có ảnh
-//    }
-//    public void setAnhFromByteArray(byte[] anhByteArray) {
-//        if (anhByteArray != null && anhByteArray.length > 0) {
-//            this.anh = BitmapFactory.decodeByteArray(anhByteArray, 0, anhByteArray.length);
-//        } else {
-//            this.anh = null; // Không có dữ liệu thì đặt null
-//        }
-//
-//    }
+
 }

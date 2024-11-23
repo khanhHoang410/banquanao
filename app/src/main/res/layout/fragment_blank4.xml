@@ -43,6 +43,7 @@
         android:padding="16dp">
 
         <LinearLayout
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -222,11 +223,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:id="@+id/QuanLyNguoiDung"
             android:gravity="center_horizontal">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+
                 android:src="@drawable/ic_quanlynguoidung"
                 android:contentDescription="Paid" />
 

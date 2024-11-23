@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp"/> <!-- Bo góc với bán kính 16dp -->
+    <gradient
+        android:startColor="#FAFCFD"
+        android:endColor="#3491DD"
+        android:centerColor="#A0CEF3"
+        android:angle="45"/>
+</shape>

@@ -1,5 +1,6 @@
 package com.example.duan1;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,10 +15,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.duan1.Dao.NguoiDungDAO;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText edEmail, edPassWord, edConfirmPassword;
+    EditText edEmail, edPassWord, edConfirmPassword,edTenNguoiDung,edSdthoai,edDiaChi;
     Button btnSignUp;
+    NguoiDungDAO nguoiDungDAO ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +36,24 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
         // Khởi tạo các view từ layout
+        nguoiDungDAO = new NguoiDungDAO(this);
         edEmail = findViewById(R.id.edEmail);
+        edTenNguoiDung = findViewById(R.id.edTenNguoiDung);
         edPassWord = findViewById(R.id.edPassWord);
         edConfirmPassword = findViewById(R.id.edConfirmPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
-
+        edSdthoai = findViewById(R.id.edSdt);
+        edDiaChi = findViewById(R.id.edDiaChi);
         // Nút đăng ký
         btnSignUp.setOnClickListener(v -> {
             String email = edEmail.getText().toString().trim();
             String password = edPassWord.getText().toString().trim();
+            String tennguoidung = edTenNguoiDung.getText().toString().trim();
             String confirmPassword = edConfirmPassword.getText().toString().trim();
-
+            int sdt = Integer.parseInt(edSdthoai.getText().toString().trim());
+            String diachi = edDiaChi.getText().toString().trim();
             if (validateInput(email, password, confirmPassword)) {
+                nguoiDungDAO.register(tennguoidung,email, password,sdt,diachi);
                 // Xử lý logic đăng ký tại đây (gửi dữ liệu lên server)
                 Toast.makeText(RegisterActivity.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                 // Chuyển đến màn hình chính sau khi đăng ký

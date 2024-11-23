@@ -1,11 +1,15 @@
 package com.example.duan1.Dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.duan1.Database.DbHelper;
+import com.example.duan1.Models.NguoiDung;
+
+import java.util.ArrayList;
 
 public class NguoiDungDAO {
     private DbHelper dbHelper;
@@ -33,4 +37,36 @@ public class NguoiDungDAO {
 
         return isLoggedIn; // Trả về true hoặc false
     }
+    public boolean register(String tennguoidung,String email, String password , int sdt,String diachi) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenNguoiDung", tennguoidung);
+        values.put("email", email);
+        values.put("matKhau", password);
+        values.put("sdt", sdt);
+        values.put("diaChi", diachi);
+        values.put("role", 1);
+        long result = sqLiteDatabase.insert("NguoiDung", null, values);
+        sqLiteDatabase.close();
+        return result != -1;
+    }
+    public ArrayList<NguoiDung> getAll() {
+        ArrayList<NguoiDung> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT tenNguoiDung,email,diaChi,sdt  FROM NguoiDung", null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                list.add(new NguoiDung(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getInt(3)
+                ));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
 }

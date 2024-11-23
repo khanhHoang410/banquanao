@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 8;
+    private static final int DB_VERSION= 10;
 
     // Bảng danh mục
 
@@ -60,25 +60,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maKichThuoc) REFERENCES KichThuoc(maKichThuoc)\n" +
                 ");";
-        // Bảng người dùng : role 1 la nguoi dung , 2 la nguoi quan tri( tự thêm  );
-        // public boolean dangKyTaiKhoan(NguoiDung nguoiDung) {
-        //        SQLiteDatabase sqLiteDatabase = dbhelper.getWritableDatabase();
-        //        ContentValues contentValues = new ContentValues();
-
-        //        contentValues.put("tendangnhap", nguoiDung.getTendangnhap());
-        //        contentValues.put("matkhau", nguoiDung.getMatkhau());
-        //        contentValues.put("role", 1); <--------------------------------  sau này viet ham dang ky thi cho role = 1;
-        //        long kq = sqLiteDatabase.insert("NGUOIDUNG", null, contentValues);
-        //        return kq != -1;
-        //    }
-
         String NguoiDung = "CREATE TABLE NguoiDung (\n" +
                 "    maNguoiDung INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    tenNguoiDung VARCHAR(255),\n" +
                 "    email VARCHAR(255),\n" +
                 "    matKhau VARCHAR(255),\n" +
                 "    diaChi VARCHAR(255),\n" +
-                "    role INT \n" +
+                "    sdt INTEGER ,\n" +
+                "    role INTEGER \n" +
                 ");";
         String DonHang = "CREATE TABLE DonHang (\n" +
                 "    maDonHang INTEGER  PRIMARY KEY autoincrement,\n" +
@@ -143,8 +132,8 @@ public class DbHelper extends SQLiteOpenHelper {
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (2, 'Áo khoác', 19.99, 'Mô tả sản phẩm 2 ', 2, 200);");
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (3, 'Quần jean rách', 29.99, 'Mô tả sản phẩm 3', 3, 30);");
         // người dùng
-        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (1, 'John Doe', 'namvu@gmail.com', '123456', '123 Main St', 1);");
-        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi, role) VALUES (2, 'admin', 'admin@gmail.com', '123456', '456 Elm St', 2);");
+        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi,sdt, role) VALUES (1, 'John Doe', 'namvu@gmail.com', '123456', '123 Main St',099999999, 1);");
+        db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi,sdt, role) VALUES (2, 'admin', 'admin@gmail.com', '123456', '456 Elm St',099999999, 2);");
         // kích thước (Không thêm)
 
     }
@@ -152,17 +141,19 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS DanhMuc");
-        db.execSQL("DROP TABLE IF EXISTS SanPham");
-        db.execSQL("DROP TABLE IF EXISTS KichThuoc");
-        db.execSQL("DROP TABLE IF EXISTS ChiTietDonHang");
-        db.execSQL("DROP TABLE IF EXISTS NguoiDung");
-        db.execSQL("DROP TABLE IF EXISTS DonHang");
-        db.execSQL("DROP TABLE IF EXISTS DanhGia");
-        db.execSQL("DROP TABLE IF EXISTS YeuThich");
-        db.execSQL("DROP TABLE IF EXISTS LichSuSanPhamDaMua");
-        db.execSQL("DROP TABLE IF EXISTS GioHang");
-        db.execSQL("DROP TABLE IF EXISTS SPSize");
-        onCreate(db);
+        if (newVersion != oldVersion){
+            db.execSQL("DROP TABLE IF EXISTS DanhMuc");
+            db.execSQL("DROP TABLE IF EXISTS SanPham");
+            db.execSQL("DROP TABLE IF EXISTS KichThuoc");
+            db.execSQL("DROP TABLE IF EXISTS ChiTietDonHang");
+            db.execSQL("DROP TABLE IF EXISTS NguoiDung");
+            db.execSQL("DROP TABLE IF EXISTS DonHang");
+            db.execSQL("DROP TABLE IF EXISTS DanhGia");
+            db.execSQL("DROP TABLE IF EXISTS YeuThich");
+            db.execSQL("DROP TABLE IF EXISTS LichSuSanPhamDaMua");
+            db.execSQL("DROP TABLE IF EXISTS GioHang");
+            db.execSQL("DROP TABLE IF EXISTS SPSize");
+            onCreate(db);
+        }
     }
 }
