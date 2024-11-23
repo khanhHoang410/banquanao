@@ -13,6 +13,7 @@ public class SanPham {
     private int maDanhMuc; // INT
     private int soLuong; // INT
     private String anh; //BLOB
+    private Boolean isYeuThich;
 
     public SanPham() {
     }
@@ -83,4 +84,11 @@ public class SanPham {
         this.anh = anh;
     }
 
+    public Boolean getYeuThich() {
+        return isYeuThich;
+    }
+
+    public void setYeuThich(Boolean yeuThich) {
+        isYeuThich = yeuThich;
+    }
 }
