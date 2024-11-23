@@ -54,11 +54,12 @@
 
     </LinearLayout>
     <ImageView
-    android:id="@+id/icon_favorite"
-    android:layout_width="24dp"
-    android:layout_height="16dp"
-    android:layout_gravity="center_vertical"
-    android:contentDescription="Favorite Icon"
-    android:src="@mipmap/ic_launcher" />
+        android:id="@+id/icon_favorite"
+        android:layout_width="24dp"
+        android:layout_height="16dp"
+        android:layout_gravity="end"
+        android:contentDescription="Favorite Icon"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/love_icon" />
 
 </LinearLayout>
