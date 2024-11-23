@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 
 public class BlankFragment4 extends Fragment {
 
-    LinearLayout layoutofadmin;
+    LinearLayout layoutofadmin,quanlysanpham;
     ImageView ic_support;
 
     @Override
@@ -34,6 +34,7 @@ public class BlankFragment4 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // vùng phân quyền , cấm đụng
         layoutofadmin = view.findViewById(R.id.layoutofadmin);
+        quanlysanpham = view.findViewById(R.id.quanlysanpham);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String email = sharedPreferences.getString("email", null); // null là giá trị mặc định nếu không tìm thấy
         if ("admin@gmail.com".equals(email)) {
@@ -52,6 +53,12 @@ public class BlankFragment4 extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), UserManagementAcivity.class));
+            }
+        });
+        quanlysanpham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),QuanLySanPhamActivity.class));
             }
         });
 

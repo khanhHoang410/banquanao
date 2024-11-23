@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DuAn1"
         tools:targetApi="31">
         <activity
+            android:name=".QuanLySanPhamActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserManagementAcivity"
             android:exported="false" />
         <activity
@@ -41,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".ChitietSanPham"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".Welcome1Activity"
             android:exported="true">

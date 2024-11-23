@@ -68,5 +68,14 @@ public class NguoiDungDAO {
         cursor.close();
         return list;
     }
+    public boolean changePassword(int maNguoiDung, String newPassword) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("matKhau", newPassword);
 
+        // Cập nhật mật khẩu
+        int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "maNguoiDung = ?", new String[]{String.valueOf(maNguoiDung)});
+        sqLiteDatabase.close();
+        return rowsAffected > 0; // Trả về true nếu cập nhật thành công
+    }
 }
