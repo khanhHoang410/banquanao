@@ -21,7 +21,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_back"
-            android:background="?android:selectableItemBackground"
             android:contentDescription="Nút quay lại"/>
 
         <TextView
@@ -67,7 +66,6 @@
             android:id="@+id/buttonSend"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="?android:selectableItemBackground"
             android:contentDescription="Gửi tin nhắn"
             android:src="@drawable/ic_send" />
     </LinearLayout>
