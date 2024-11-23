@@ -67,7 +67,7 @@
             android:id="@+id/buttonSend"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="?android:selectableItemBackground"
+            android:layout_gravity="center_vertical"
             android:contentDescription="Gửi tin nhắn"
             android:src="@drawable/ic_send" />
     </LinearLayout>

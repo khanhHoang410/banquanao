@@ -1,5 +1,6 @@
 package com.example.duan1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ public class ChatActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewChat;
     EditText editTextMessage;
-    ImageButton buttonSend;
+    ImageButton buttonSend,backbutton;
     MessageAdapter messageAdapter;
     List<Message> messageList;
 
@@ -55,6 +56,12 @@ public class ChatActivity extends AppCompatActivity {
                     messageAdapter.notifyItemInserted(messageList.size() - 1);
                     recyclerViewChat.scrollToPosition(messageList.size() - 1);
                 }
+            }
+        });
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChatActivity.this, MainActivity.class));
             }
         });
     }

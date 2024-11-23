@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 
 public class BlankFragment4 extends Fragment {
 
-    LinearLayout layoutofadmin,quanlysanpham;
+    LinearLayout layoutofadmin,quanlysanpham ,layoutChangePassword;
     ImageView ic_support;
 
     @Override
@@ -43,12 +43,12 @@ public class BlankFragment4 extends Fragment {
             layoutofadmin.setVisibility(View.INVISIBLE); // Ẩn layout cho người dùng
         }
         ////// vùng phân quyền , cấm đụng
-//        view.findViewById(R.id.ic_support).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getContext(),ChatActivity.class));
-//            }
-//        });
+        view.findViewById(R.id.ic_support).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),ChatActivity.class));
+            }
+        });
         view.findViewById(R.id.QuanLyNguoiDung).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +61,11 @@ public class BlankFragment4 extends Fragment {
                 startActivity(new Intent(getContext(),QuanLySanPhamActivity.class));
             }
         });
-
+        view.findViewById(R.id.layoutChangePassword).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ChangePasswordActivity.class));
+            }
+        });
     }
 }

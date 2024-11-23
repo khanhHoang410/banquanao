@@ -2,6 +2,7 @@ package com.example.duan1.Dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,7 +25,6 @@ public class NguoiDungDAO {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = null;
         boolean isLoggedIn = false;
-
         try {
             cursor = sqLiteDatabase.rawQuery("SELECT * FROM NguoiDung WHERE email = ? AND matKhau = ?", new String[]{email, password});
             isLoggedIn = cursor.getCount() > 0; // Nếu có bản ghi thì đăng nhập thành công
@@ -68,14 +68,15 @@ public class NguoiDungDAO {
         cursor.close();
         return list;
     }
-    public boolean changePassword(int maNguoiDung, String newPassword) {
+    public boolean changePassword(String email, String oldPassword, String newPassword) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("matKhau", newPassword);
 
-        // Cập nhật mật khẩu
-        int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "maNguoiDung = ?", new String[]{String.valueOf(maNguoiDung)});
+        // Cập nhật mật khẩu nếu mật khẩu cũ khớp
+        int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "email = ? AND matKhau = ?", new String[]{email, oldPassword});
         sqLiteDatabase.close();
         return rowsAffected > 0; // Trả về true nếu cập nhật thành công
     }
+
 }
