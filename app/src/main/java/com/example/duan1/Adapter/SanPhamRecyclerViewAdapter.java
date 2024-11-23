@@ -14,7 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan1.BlankFragment;
 import com.example.duan1.ChitietSanPham;
+import com.example.duan1.MainActivity;
 import com.example.duan1.Models.SanPham;
 import com.example.duan1.R;
 
@@ -24,10 +26,14 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 
     private Context context;
     private List<SanPham> list;
-
-    public SanPhamRecyclerViewAdapter(Context context, List<SanPham> list) {
+    public OnYeuThichChangeListener listener;
+    public interface OnYeuThichChangeListener {
+        void onYeuThichChange(SanPham sanPham);
+    }
+    public SanPhamRecyclerViewAdapter(Context context, List<SanPham> list,OnYeuThichChangeListener listener) {
         this.context = context;
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -60,8 +66,19 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             intent.putExtra("moTa", sanPham.getMoTa());
             context.startActivity(intent);
         });
-        // Cập nhật ảnh yêu thích nếu cần
-
+        // Hiển thị trạng thái yêu thích
+        holder.anhYeuThich.setImageResource(sanPham.getYeuThich() ? R.drawable.love_icon : R.drawable.ic_launcher_background);
+        // Xử lý click vào icon yêu thích
+        holder.anhYeuThich.setOnClickListener(v->{
+            boolean newStatus = !sanPham.getYeuThich(); // đảo trạng thái yêu thích
+            sanPham.setYeuThich(newStatus);
+            // thay đổi màu icon trái tim
+            holder.anhYeuThich.setImageResource(newStatus ? R.drawable.love_icon: R.drawable.ic_launcher_background);
+            // lưu danh sách yêu thích
+           if (listener!=null){
+               listener.onYeuThichChange(sanPham);
+           }
+        });
     }
 
     @Override
