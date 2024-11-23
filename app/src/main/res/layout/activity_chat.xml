@@ -69,7 +69,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:contentDescription="Gửi tin nhắn"
-            android:src="@drawable/ic_send" />
+             />
     </LinearLayout>
 
 </LinearLayout>
