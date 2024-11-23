@@ -67,13 +67,13 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             context.startActivity(intent);
         });
         // Hiển thị trạng thái yêu thích
-        holder.anhYeuThich.setImageResource(sanPham.getYeuThich() ? R.drawable.love_icon : R.drawable.ic_launcher_background);
+        holder.anhYeuThich.setImageResource(sanPham.getYeuThich() ? R.drawable.ic_launcher_background : R.drawable.love_icon);
         // Xử lý click vào icon yêu thích
         holder.anhYeuThich.setOnClickListener(v->{
             boolean newStatus = !sanPham.getYeuThich(); // đảo trạng thái yêu thích
             sanPham.setYeuThich(newStatus);
             // thay đổi màu icon trái tim
-            holder.anhYeuThich.setImageResource(newStatus ? R.drawable.love_icon: R.drawable.ic_launcher_background);
+            holder.anhYeuThich.setImageResource(newStatus ? R.drawable.ic_launcher_background: R.drawable.love_icon);
             // lưu danh sách yêu thích
            if (listener!=null){
                listener.onYeuThichChange(sanPham);
