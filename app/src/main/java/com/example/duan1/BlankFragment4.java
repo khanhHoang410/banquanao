@@ -43,12 +43,12 @@ public class BlankFragment4 extends Fragment {
             layoutofadmin.setVisibility(View.INVISIBLE); // Ẩn layout cho người dùng
         }
         ////// vùng phân quyền , cấm đụng
-//        view.findViewById(R.id.ic_support).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getContext(),ChatActivity.class));
-//            }
-//        });
+        view.findViewById(R.id.ic_support).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),ChatActivity.class));
+            }
+        });
         view.findViewById(R.id.QuanLyNguoiDung).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
