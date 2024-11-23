@@ -2,6 +2,7 @@ package com.example.duan1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -52,9 +53,12 @@ public class ChatActivity extends AppCompatActivity {
                     editTextMessage.setText("");
 
                     // Giả lập phản hồi từ admin
-                    messageList.add(new Message("Trợ lý sẽ trả lời sớm.", true));
-                    messageAdapter.notifyItemInserted(messageList.size() - 1);
-                    recyclerViewChat.scrollToPosition(messageList.size() - 1);
+                    new Handler().postDelayed(() -> {
+                        messageList.add(new Message("Trợ lý sẽ trả lời sớm.", true));
+                        messageAdapter.notifyItemInserted(messageList.size() - 1);
+                        recyclerViewChat.scrollToPosition(messageList.size() - 1);
+                    }, 2000); // delay in milliseconds (độ trễ tính bằng milliseconds)
+
                 }
             }
         });
@@ -65,4 +69,10 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+    private void addMessage(String messageText, boolean isAdmin) {
+        messageList.add(new Message(messageText, isAdmin));
+        messageAdapter.notifyItemInserted(messageList.size() - 1);
+        recyclerViewChat.scrollToPosition(messageList.size() - 1);
+    }
+
 }

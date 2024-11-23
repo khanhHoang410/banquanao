@@ -16,10 +16,12 @@ import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
 import com.example.duan1.Dao.SanPhamDAO;
 import com.example.duan1.Models.SanPham;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlankFragment extends Fragment {
     SanPhamRecyclerViewAdapter sanphamAdapter;
+    List<SanPham> yeuthichList = new ArrayList<>();
     List<SanPham> list;
     SanPhamDAO sanPhamDAO;
     private ImageView mainBanner;
@@ -50,7 +52,7 @@ public class BlankFragment extends Fragment {
         sanPhamDAO = new SanPhamDAO(getContext());
         list = sanPhamDAO.getAll();
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list); // Dùng RecyclerView.Adapter
+        sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list,this::updateYeuThichList); // Dùng RecyclerView.Adapter
         recycler_view_tshirts.setAdapter(sanphamAdapter);
         recycler_view_tshirts.setLayoutManager(layoutManager);
         sanphamAdapter.updateData(list);
@@ -62,5 +64,14 @@ public class BlankFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable); // Dừng slideshow khi Fragment bị hủy
+    }
+    public void updateYeuThichList(SanPham sanPham){
+        if (sanPham.getYeuThich()){
+            if (!yeuthichList.contains(sanPham)){
+                yeuthichList.add(sanPham);
+            }
+        }else {
+            yeuthichList.remove(sanPham);
+        }
     }
 }

@@ -20,27 +20,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         this.messageList = messageList;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return messageList.get(position).isAdmin() ? 1 : 0;
+    }
+
     @NonNull
     @Override
-    public MessageAdapter.MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_message, parent, false);
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        if (viewType == 1) { // Tin nhắn từ admin
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_admin_message, parent, false);
+        } else { // Tin nhắn từ người dùng
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_message, parent, false);
+        }
         return new MessageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageAdapter.MessageViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Message message = messageList.get(position);
-        if (message.isAdmin()) {
-            holder.userMessage.setVisibility(View.GONE);
-            holder.adminMessage.setVisibility(View.VISIBLE);
-            holder.adminMessage.setText(message.getContent());
-        } else {
-            holder.adminMessage.setVisibility(View.GONE);
-            holder.userMessage.setVisibility(View.VISIBLE);
-            holder.userMessage.setText(message.getContent());
-        }
+        holder.bind(message);
     }
 
     @Override
@@ -48,13 +48,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         return messageList.size();
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView adminMessage, userMessage;
+    class MessageViewHolder extends RecyclerView.ViewHolder {
+        TextView messageText;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
-            adminMessage = itemView.findViewById(R.id.adminMessage);
-            userMessage = itemView.findViewById(R.id.userMessage);
+            messageText = itemView.findViewById(R.id.messageText);
+        }
+
+        public void bind(Message message) {
+            messageText.setText(message.getContent());
         }
     }
 }
