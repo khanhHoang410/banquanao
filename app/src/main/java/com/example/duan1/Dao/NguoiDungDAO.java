@@ -78,5 +78,43 @@ public class NguoiDungDAO {
         sqLiteDatabase.close();
         return rowsAffected > 0; // Trả về true nếu cập nhật thành công
     }
+    public NguoiDung getUserByEmail(String email){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        NguoiDung nguoiDung = null;
+        Cursor cursor = null;
+
+        try {
+            cursor = sqLiteDatabase.rawQuery("SELECT tenNguoiDung, email, diaChi, sdt FROM NguoiDung WHERE email = ?", new String[]{email});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                // Lấy thông tin người dùng từ cursor
+                String tenNguoiDung = cursor.getString(0);
+                String email1 = cursor.getString(1);
+                String diaChi = cursor.getString(2);
+                int sdt = cursor.getInt(3);
+
+                nguoiDung = new NguoiDung(tenNguoiDung, email1, diaChi, sdt);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close(); // Đảm bảo đóng con trỏ
+            }
+            sqLiteDatabase.close(); // Đóng cơ sở dữ liệu
+        }
+
+        return nguoiDung;
+    }
+    public boolean updateUser(String tenNguoiDung, String sdt, String diaChi, String email) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenNguoiDung", tenNguoiDung);
+        values.put("sdt", sdt);
+        values.put("diaChi", diaChi);
+
+        // Cập nhật thông tin người dùng theo email
+        int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "email = ?", new String[]{email});
+        sqLiteDatabase.close();
+        return rowsAffected > 0; // Trả về true nếu cập nhật thành công
+    }
 
 }
