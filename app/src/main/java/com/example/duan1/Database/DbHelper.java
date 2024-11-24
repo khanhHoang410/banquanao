@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String DanhMuc = "CREATE TABLE DanhMuc (\n" +
-                "    maDanhMuc INTEGER PRIMARY KEY autoincrement,\n" +
+                "    maDanhMuc INTEGER PRIMARY KEY autoincrement,\n" + 
                 "    tenDanhMuc VARCHAR(255)\n" +
                 ");";
 
@@ -112,6 +112,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
+
+
         db.execSQL(DanhMuc);
         db.execSQL(SanPham);
         db.execSQL(KichThuoc);
