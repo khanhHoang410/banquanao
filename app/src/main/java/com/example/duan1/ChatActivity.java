@@ -1,5 +1,6 @@
 package com.example.duan1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -20,7 +21,7 @@ public class ChatActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewChat;
     EditText editTextMessage;
-    ImageButton buttonSend;
+    ImageButton buttonSend,backbutton;
     MessageAdapter messageAdapter;
     List<Message> messageList;
 
@@ -28,7 +29,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        backbutton = findViewById(R.id.back_button);
         recyclerViewChat = findViewById(R.id.recyclerViewChat);
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
@@ -59,6 +60,12 @@ public class ChatActivity extends AppCompatActivity {
                     }, 2000); // delay in milliseconds (độ trễ tính bằng milliseconds)
 
                 }
+            }
+        });
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChatActivity.this, MainActivity.class));
             }
         });
     }
