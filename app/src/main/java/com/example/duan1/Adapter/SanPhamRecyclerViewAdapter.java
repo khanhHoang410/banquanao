@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,10 @@ import java.util.List;
 public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
+
     private List<SanPham> list;
     public OnYeuThichChangeListener listener;
+    private static View.OnLongClickListener onItemLongClickListener;
     public interface OnYeuThichChangeListener {
         void onYeuThichChange(SanPham sanPham);
     }
@@ -40,6 +43,11 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         this.list = list;
         this.listener = listener;
     }
+    public SanPhamRecyclerViewAdapter(Context context, List<SanPham> list) {
+        this.context = context;
+        this.list = list;
+    }
+
 
     @NonNull
     @Override
@@ -110,6 +118,15 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             anhSanPham = itemView.findViewById(R.id.product_iamge);
             anhYeuThich = itemView.findViewById(R.id.icon_favorite);
 
+            itemView.setOnLongClickListener(v -> {
+                if (onItemLongClickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        return onItemLongClickListener.onLongClick(v); // Gọi onLongClick()
+                    }
+                }
+                return false;
+            });
 
         }
     }
@@ -127,4 +144,8 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         }
         return null; // Trả về null nếu không tìm thấy ảnh
     }
+    public void setOnItemLongClickListener(View.OnLongClickListener listener) {
+        this.onItemLongClickListener = listener;
+    }
+
 }

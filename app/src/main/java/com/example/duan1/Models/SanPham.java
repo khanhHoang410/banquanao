@@ -29,6 +29,15 @@ public class SanPham implements Parcelable{
         this.soLuong = soLuong;
         this.anh = anh;
     }
+    public SanPham(String tenSanPham, float gia, String moTa, int maDanhMuc, int soLuong, String anh, boolean isYeuThich) {
+        this.tenSanPham = tenSanPham;
+        this.gia = gia;
+        this.moTa = moTa;
+        this.maDanhMuc = maDanhMuc;
+        this.soLuong = soLuong;
+        this.anh = anh;
+        this.isYeuThich = isYeuThich;
+    }
 
     public int getMaSanPham() {
         return maSanPham;
