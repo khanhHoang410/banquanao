@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <!-- User Image -->
+        <ImageView
+            android:id="@+id/userAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person"
+
+            android:layout_marginBottom="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin người dùng"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Name Input -->
+        <EditText
+            android:id="@+id/upnameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên"
+            android:backgroundTint="#000000"
+            android:layout_marginBottom="16dp"
+            android:inputType="text" />
+
+        <!-- Email Input -->
+        <EditText
+            android:id="@+id/upemailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:backgroundTint="#000000"
+            android:layout_marginBottom="16dp"
+            android:inputType="textEmailAddress" />
+
+        <!-- Address Input -->
+        <EditText
+            android:id="@+id/upaddressInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="địa chỉ"
+            android:backgroundTint="#000000"
+            android:layout_marginBottom="16dp"
+            android:inputType="textPostalAddress" />
+
+        <!-- Phone Number Input -->
+        <EditText
+            android:id="@+id/upphoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="SDT"
+            android:backgroundTint="#000000"
+            android:layout_marginBottom="24dp"
+            android:inputType="phone" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/SubmitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:background="#000000"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="10dp"
+            android:padding="12dp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/BackButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:background="#000000"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

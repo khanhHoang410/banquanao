@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 
 public class BlankFragment4 extends Fragment {
 
-    LinearLayout layoutofadmin,quanlysanpham ,layoutChangePassword;
+    LinearLayout layoutofadmin,quanlysanpham ;
     ImageView ic_support;
 
     @Override
@@ -65,6 +65,24 @@ public class BlankFragment4 extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ChangePasswordActivity.class));
+            }
+        });
+        view.findViewById(R.id.layoutDiaChi).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), AddressActivity.class));
+            }
+        });
+        view.findViewById(R.id.layoutmyprofile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), MyProfileActivity.class));
+            }
+        });
+        view.findViewById(R.id.layoutSignOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), LoginActivity.class));
             }
         });
     }

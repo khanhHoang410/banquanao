@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyProfileActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <!-- User Image -->
+        <ImageView
+            android:id="@+id/userAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person"
+
+            android:layout_marginBottom="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin người dùng"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Name Input -->
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên"
+            android:enabled="false"
+            android:backgroundTint="#000000"
+            android:layout_marginBottom="16dp"
+            android:inputType="text" />
+
+        <!-- Email Input -->
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:backgroundTint="#000000"
+            android:layout_marginBottom="16dp"
+            android:enabled="false"
+            android:inputType="textEmailAddress" />
+
+        <!-- Address Input -->
+        <EditText
+            android:id="@+id/addressInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="địa chỉ"
+            android:backgroundTint="#000000"
+            android:enabled="false"
+            android:layout_marginBottom="16dp"
+            android:inputType="textPostalAddress" />
+
+        <!-- Phone Number Input -->
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="SDT"
+            android:backgroundTint="#000000"
+            android:enabled="false"
+            android:layout_marginBottom="24dp"
+            android:inputType="phone" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chỉnh Sửa"
+            android:background="#000000"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>
