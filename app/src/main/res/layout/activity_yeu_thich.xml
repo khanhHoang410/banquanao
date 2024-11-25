@@ -27,6 +27,7 @@
             android:text="Sản phẩm yêu thích"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rclYeuthich"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

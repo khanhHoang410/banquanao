@@ -2,6 +2,8 @@ package com.example.duan1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,15 +18,23 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
+import com.example.duan1.Models.SanPham;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity  implements BlankFragment.OnYeuThichChangeListener{
     BottomNavigationView bottomNavigationView;
     Fragment fragment;
     NavigationView nav_view;
     private DrawerLayout drawer;
     ImageView imgYeuThich, imgGioHang;
+    List<SanPham> yeuthichList = new ArrayList<>();
+    SanPhamRecyclerViewAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +48,24 @@ public class MainActivity extends AppCompatActivity {
 
         imgYeuThich = findViewById(R.id.imgYeuThich);
         imgGioHang = findViewById(R.id.imgGioHang);
+        adapter = new SanPhamRecyclerViewAdapter(this, yeuthichList, sanPham -> {
+            // Xử lý sự kiện yêu thích trong adapter (nếu cần)
+            // Ví dụ: cập nhật danh sách yêu thích trong MainActivity
+            if (sanPham.getYeuThich()) {
+                if (!yeuthichList.contains(sanPham)) {
+                    yeuthichList.add(sanPham);
+                }
+            } else {
+                yeuthichList.remove(sanPham);
+            }
+        });
         imgYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,YeuThichActivity.class));
+                Log.d("MainActivity", "Kích thước danh sách yêuthích: " + yeuthichList.size());
+                Intent intent = new Intent(MainActivity.this, YeuThichActivity.class);
+                intent.putParcelableArrayListExtra("yeuthichList", (ArrayList<? extends Parcelable>) yeuthichList);
+                startActivityForResult(intent, 1);
             }
         });
         imgGioHang.setOnClickListener(new View.OnClickListener() {
@@ -50,28 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,CartActivity.class));
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         ////// phần chuyển màn hình
         drawer = findViewById(R.id.drawer_layout);
@@ -120,5 +122,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         ///////////////////
+    }
+    @Override
+    public void onYeuThichChange(List<SanPham> yeuthichList) {
+        this.yeuthichList = yeuthichList;
+        adapter.notifyDataSetChanged(); // Thông báo cho adapter về sự thay đổi
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1&& resultCode == RESULT_OK && data != null) {
+            yeuthichList = data.getParcelableArrayListExtra("yeuthichList");
+            if (yeuthichList == null) {
+                yeuthichList = new ArrayList<>();
+            }
+            // Cập nhật adapter của RecyclerView
+            adapter.updateData(yeuthichList); // Cập nhật adapter với danh sách mới
+        }
     }
 }

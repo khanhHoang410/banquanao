@@ -2,10 +2,12 @@ package com.example.duan1.Models;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.io.ByteArrayOutputStream;
 
-public class SanPham {
+public class SanPham implements Parcelable{
     private int maSanPham; // PRIMARY KEY
     private String tenSanPham; // VARCHAR(255)
     private float gia; // DECIMAL(10, 2)
@@ -91,4 +93,48 @@ public class SanPham {
     public void setYeuThich(Boolean yeuThich) {
         isYeuThich = yeuThich;
     }
+    // Constructor đọc từ Parcel
+    protected SanPham(Parcel in) {
+        maSanPham = in.readInt();
+        tenSanPham = in.readString();
+        gia = in.readFloat();
+        moTa = in.readString();
+        maDanhMuc = in.readInt();
+        soLuong = in.readInt();
+        anh = in.readString();
+        byte isYeuThichByte = in.readByte();
+        isYeuThich = (isYeuThichByte == 1);
+    }
+
+    // Ghi dữ liệu vào Parcel
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(maSanPham);
+        dest.writeString(tenSanPham);
+        dest.writeFloat(gia);
+        dest.writeString(moTa);
+        dest.writeInt(maDanhMuc);
+        dest.writeInt(soLuong);
+        dest.writeString(anh);
+        dest.writeByte((byte) (isYeuThich != null && isYeuThich ? 1 : 0)); // Kiểm tra null
+    }
+
+    // Phương thức mô tả nội dung (thường không dùng, trả về 0)
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // Creator để phục hồi đối tượng từ Parcel
+    public static final Parcelable.Creator<SanPham> CREATOR = new Parcelable.Creator<SanPham>() {
+        @Override
+        public SanPham createFromParcel(Parcel in) {
+            return new SanPham(in);
+        }
+
+        @Override
+        public SanPham[] newArray(int size) {
+            return new SanPham[size];
+        }
+    };
 }

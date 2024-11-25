@@ -1,12 +1,17 @@
 package com.example.duan1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +26,8 @@ import java.util.List;
 
 public class BlankFragment extends Fragment {
     SanPhamRecyclerViewAdapter sanphamAdapter;
+    private OnYeuThichChangeListener listener;
+    SanPham sanPham;
     List<SanPham> yeuthichList = new ArrayList<>();
     List<SanPham> list;
     SanPhamDAO sanPhamDAO;
@@ -68,10 +75,41 @@ public class BlankFragment extends Fragment {
     public void updateYeuThichList(SanPham sanPham){
         if (sanPham.getYeuThich()){
             if (!yeuthichList.contains(sanPham)){
+                Log.d("updateYeuThichList", "Thêm sản phẩm vào danh sách yêu thích: " + sanPham.getTenSanPham());
                 yeuthichList.add(sanPham);
             }
         }else {
+            Log.d("updateYeuThichList", "Xóa sản phẩm khỏi danh sách yêu thích: " + sanPham.getTenSanPham());
             yeuthichList.remove(sanPham);
         }
+        if (listener != null) {
+            listener.onYeuThichChange(yeuthichList); // Truyền yeuthichList đã cập nhật
+        }
     }
+
+    public interface OnYeuThichChangeListener {
+        void onYeuThichChange(List<SanPham> yeuthichList);
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnYeuThichChangeListener) {
+            listener = (OnYeuThichChangeListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnYeuThichChangeListener");
+        }
+    }
+
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        if (context instanceof SanPhamRecyclerViewAdapter.OnYeuThichChangeListener) {
+//            listener = (SanPhamRecyclerViewAdapter.OnYeuThichChangeListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnYeuThichChangeListener");
+//        }
+//    }
+
 }

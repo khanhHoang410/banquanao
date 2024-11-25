@@ -1,5 +1,8 @@
 package com.example.duan1.Adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +24,7 @@ import com.example.duan1.MainActivity;
 import com.example.duan1.Models.SanPham;
 import com.example.duan1.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecyclerViewAdapter.ViewHolder> {
@@ -67,13 +72,20 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             context.startActivity(intent);
         });
         // Hiển thị trạng thái yêu thích
-        holder.anhYeuThich.setImageResource(sanPham.getYeuThich() ? R.drawable.ic_launcher_background : R.drawable.love_icon);
+        holder.anhYeuThich.setImageResource(sanPham.getYeuThich() ? R.drawable.ic_redlove : R.drawable.love_icon);
         // Xử lý click vào icon yêu thích
         holder.anhYeuThich.setOnClickListener(v->{
             boolean newStatus = !sanPham.getYeuThich(); // đảo trạng thái yêu thích
             sanPham.setYeuThich(newStatus);
             // thay đổi màu icon trái tim
-            holder.anhYeuThich.setImageResource(newStatus ? R.drawable.ic_launcher_background: R.drawable.love_icon);
+            holder.anhYeuThich.setImageResource(newStatus ? R.drawable.ic_redlove: R.drawable.love_icon);
+            // Hiển thị Toast message
+            if (newStatus) {
+                Toast.makeText(context, "Bạn vừa thêm 1 sản phẩm yêu thích", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Bạn vừa xóa 1 sản phẩm yêu thích", Toast.LENGTH_SHORT).show();
+            }
+
             // lưu danh sách yêu thích
            if (listener!=null){
                listener.onYeuThichChange(sanPham);
