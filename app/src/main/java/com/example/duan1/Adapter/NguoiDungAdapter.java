@@ -48,7 +48,7 @@ public class NguoiDungAdapter extends BaseAdapter {
         tv_tenNguoiDung.setText("Tên người dùng : " + list.get(position).getTenNguoiDung());
         tv_email.setText("Email : " + list.get(position).getEmail());
         tv_diaChi.setText("Địa chỉ : " + list.get(position).getDiaChi());
-        tv_sdt.setText("Số điện thoại : " + list.get(position).getSdt());
+        tv_sdt.setText("Số điện thoại : " + "+84" + list.get(position).getSdt());
         return convertView;
     }
 }

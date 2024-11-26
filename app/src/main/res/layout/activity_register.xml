@@ -55,6 +55,7 @@
         android:inputType="number"
         android:layout_below="@id/titleText"
         android:hint="Số điện thoại"
+        android:text="+84"
         android:padding="12dp" />
     <EditText
         android:id="@+id/edDiaChi"

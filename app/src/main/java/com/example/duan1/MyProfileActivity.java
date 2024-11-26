@@ -43,7 +43,7 @@ public class MyProfileActivity extends AppCompatActivity {
         if (user != null) {
             nameInput.setText(user.getTenNguoiDung());
             emailInput.setText(user.getEmail());
-            phoneInput.setText(String.valueOf(user.getSdt()));
+            phoneInput.setText("+84"+String.valueOf(user.getSdt()));
             addressInput.setText(user.getDiaChi());
         } else {
             // Log hoặc thông báo người dùng không tìm thấy

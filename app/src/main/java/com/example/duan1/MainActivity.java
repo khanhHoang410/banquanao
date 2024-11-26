@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
 
         ////// phần chuyển màn hình
         drawer = findViewById(R.id.drawer_layout);
-        nav_view = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bnv);
         fragment = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
@@ -95,28 +94,6 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
                 } else if (menuItem.getItemId() == R.id.social) {
                     fragment = new BlankFragment4();
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
-                return true;
-            }
-        });
-        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                // Đóng drawer
-                drawer.closeDrawer(GravityCompat.START);
-
-                // Chuyển đổi fragment dựa trên mục được chọn
-                if (menuItem.getItemId() == R.id.nav_tshirt) {
-                    fragment = new BlankFragment();
-                } else if (menuItem.getItemId() == R.id.nav_quan) {
-                    fragment = new BlankFragment2();
-                } else if (menuItem.getItemId() == R.id.nav_aokhoac) {
-                    fragment = new BlankFragment3();
-                } else if (menuItem.getItemId() == R.id.nav_ThongKe) {
-                    fragment = new BlankFragment4();
-                }
-
-                // Thực hiện giao dịch fragment
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
                 return true;
             }

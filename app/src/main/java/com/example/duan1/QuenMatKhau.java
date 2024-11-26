@@ -1,6 +1,8 @@
 package com.example.duan1;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,11 +27,13 @@ public class QuenMatKhau extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_quen_mat_khau);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         emailInput = findViewById(R.id.edEmailForgot);
         submitButton = findViewById(R.id.btnSubmitForgot);
         backToLogin = findViewById(R.id.backToLogin);
@@ -38,11 +42,25 @@ public class QuenMatKhau extends AppCompatActivity {
         submitButton.setOnClickListener(view -> {
             String email = emailInput.getText().toString();
             // Kiểm tra email hợp lệ và gửi yêu cầu đặt lại mật khẩu
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs2", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("email", email);
+            editor.apply();
             if (email.isEmpty()) {
                 emailInput.setError("Vui lòng nhập email");
             } else {
-                // Gửi yêu cầu đặt lại mật khẩu ở đây
-                Toast.makeText(this, "Đã gửi yêu cầu đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+                // Tạo mã xác nhận ngẫu nhiên
+                String verificationCode = generateVerificationCode();
+                String subject = "Mã xác nhận quên mật khẩu";
+                String message = "Mã xác nhận của bạn là: " + verificationCode;
+
+                // Gửi email chứa mã xác nhận
+                new SendMailTask(email, subject, message).execute();
+
+                // Chuyển đến màn hình nhập mã xác nhận
+                Intent intent = new Intent(QuenMatKhau.this, ResetPasswordActivity.class);
+                intent.putExtra("VERIFICATION_CODE", verificationCode);
+                startActivity(intent);
             }
         });
 
@@ -50,5 +68,11 @@ public class QuenMatKhau extends AppCompatActivity {
         backToLogin.setOnClickListener(view -> {
             finish(); // Quay lại màn hình đăng nhập
         });
+    }
+
+    // Phương thức tạo mã xác nhận ngẫu nhiên
+    private String generateVerificationCode() {
+        int code = (int) (Math.random() * 900000) + 100000; // Tạo mã 6 chữ số
+        return String.valueOf(code);
     }
 }
