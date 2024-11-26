@@ -1,23 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:background="#FFD1D1"
-    android:layout_gravity="start"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="10dp"
-    android:layout_margin="4dp"
-    android:layout_marginStart="16dp"
-    android:backgroundTint="#FFE6E6">
+    android:gravity="start"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tin nhắn admin"
-        android:textSize="16sp"
-        android:textColor="#000"
-        />
+        android:background="@drawable/message_admin_background"
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:textColor="@android:color/black" />
+
 </LinearLayout>
