@@ -113,6 +113,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
                listener.onYeuThichChange(sanPham);
            }
         });
+
     }
 
     @Override
@@ -161,5 +162,10 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     public void setOnItemLongClickListener(View.OnLongClickListener listener) {
         this.onItemLongClickListener = listener;
     }
+
+
+
+
+
 
 }
