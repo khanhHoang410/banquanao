@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,8 @@ import com.example.duan1.MainActivity;
 import com.example.duan1.Models.SanPham;
 import com.example.duan1.R;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,10 +68,20 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 //        holder.anhSanPham.setImageBitmap(sanPham.getAnh());
         // Lấy ảnh từ drawable dựa trên tên ảnh
 
+        File imageFile = new File(sanPham.getAnh());
+        if (imageFile.exists()){
+            holder.anhSanPham.setImageURI(Uri.fromFile(imageFile));
+        }else {
+            // xử lý lỗi nếu không tìm thấy ảnh trong bọ nhớ cache
+            holder.anhSanPham.setImageResource(R.drawable.hoodieden2);
+        }
+
         Bitmap bitmap = getBitmapFromDrawable(sanPham.getAnh(), context);
         if (bitmap != null) {
+
             holder.anhSanPham.setImageBitmap(bitmap);
         }
+
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
             Intent intent = new Intent(context, ChitietSanPham.class);

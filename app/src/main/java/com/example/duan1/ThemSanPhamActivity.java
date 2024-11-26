@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,12 +26,18 @@ import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
 import com.example.duan1.Dao.SanPhamDAO;
 import com.example.duan1.Models.SanPham;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class ThemSanPhamActivity extends AppCompatActivity {
     SanPhamDAO sanPhamDAO;
     Button btnLuu,btnChonAnh;
     EditText etTenSanPham,etGiaSanPham,etMoTaSanPham;
     ImageView imgSanPham;
     private static final int REQUEST_CODE_CHON_ANH = 1;
+    private File cacheDir;
     private Uri imageUri;
     private int maDanhMuc = 1;
     @Override
@@ -51,8 +58,9 @@ public class ThemSanPhamActivity extends AppCompatActivity {
         imgSanPham = findViewById(R.id.imgSanPham);
         sanPhamDAO = new SanPhamDAO(this);
         btnChonAnh.setOnClickListener(v->{
-            Intent intent = new Intent(Intent.ACTION_PICK);
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             startActivityForResult(intent,REQUEST_CODE_CHON_ANH);
         });
         btnLuu.setOnClickListener(v->{
@@ -67,12 +75,28 @@ public class ThemSanPhamActivity extends AppCompatActivity {
             try {
                 // Gán giá trị cho imageUri
                 imageUri = data.getData();
-
+                // sao chép hình ảnh vào bộ nhớ cache
+                File caCheFile= new File(getCacheDir(),getFileNameFromUri(imageUri));
+                try (InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                FileOutputStream outputStream = new FileOutputStream(caCheFile)
+                ){
+                    if (inputStream !=null){
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length= inputStream.read(buffer))>0){
+                            outputStream.write(buffer,0,length);
+                        }
+                    }
+                }catch (IOException e){
+                    Log.e("ThemSanPhamActivity", "Lỗi khi sao chép hình ảnh vào bộ nhớ cache", e);
+                    Toast.makeText(this, "Lỗi khi sao chép hình ảnh", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // Lấy Bitmap từ Uri
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
 
                 // Hiển thị ảnh lên ImageView
-                imgSanPham.setImageBitmap(bitmap);
+                imgSanPham.setImageURI(Uri.fromFile(caCheFile));
 
                 // Lấy các thông tin khác của sản phẩm
                 String tenSanPham = etTenSanPham.getText().toString();
@@ -87,7 +111,7 @@ public class ThemSanPhamActivity extends AppCompatActivity {
                 // ... (Code để lưu ảnh vào thư mục drawable)
 
                 // Tạo đối tượng SanPham với tên file ảnh
-                SanPham sanphamMoi = new SanPham(tenSanPham, giaSanPham, moTaSanPham, maDanhMuc, 0, fileName, false);
+                SanPham sanphamMoi = new SanPham(tenSanPham, giaSanPham, moTaSanPham, maDanhMuc, 0, caCheFile.getAbsolutePath(), false);
 
                 //Thêm sản phẩm vào database
                 long result = sanPhamDAO.insert(sanphamMoi);
