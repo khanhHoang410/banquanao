@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "994164000755",
+    "project_id": "duan1-e727f",
+    "storage_bucket": "duan1-e727f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994164000755:android:308607a6a1f122e349f486",
+        "android_client_info": {
+          "package_name": "com.example.duan1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn-2C2gi8FB87MR8Ev-atG5mcOSFulu8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,15 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duan1.Adapter.MessageAdapter;
+import com.example.duan1.Adapter.ChatAdapter;
 import com.example.duan1.Models.Message;  // Đảm bảo rằng bạn import đúng class Message trong project của bạn
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.Timestamp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +30,16 @@ public class ChatActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewChat;
     EditText editTextMessage;
-    ImageButton buttonSend,backbutton;
-    MessageAdapter messageAdapter;
-    List<Message> messageList;
+    ImageButton buttonSend, backbutton;
+    ChatAdapter chatAdapter;
+    private DatabaseReference chatRef;
+    private List<Message> messages = new ArrayList<>();
+    private String userEmail = "user@gmail.com";
+    private String adminEmail = "admin@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         backbutton = findViewById(R.id.back_button);
@@ -34,31 +47,28 @@ public class ChatActivity extends AppCompatActivity {
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
 
-        // Khởi tạo danh sách tin nhắn và adapter
-        messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(messageList);
+        // Thay thế dấu chấm (".") trong email để phù hợp với yêu cầu đường dẫn của Firebase
+        String sanitizedUserEmail = userEmail.replace(".", "_");
+        String sanitizedAdminEmail = adminEmail.replace(".", "_");
 
+        // Khởi tạo DatabaseReference trỏ tới đúng vị trí trong Firebase
+        chatRef = FirebaseDatabase.getInstance().getReference("chats")
+                .child(sanitizedUserEmail + "_" + sanitizedAdminEmail)
+                .child("messages");
+
+        // Thiết lập RecyclerView
         recyclerViewChat.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewChat.setAdapter(messageAdapter);
+        chatAdapter = new ChatAdapter(messages, userEmail);
+        recyclerViewChat.setAdapter(chatAdapter);
 
+        recyclerViewChat.setAdapter(chatAdapter);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String messageText = editTextMessage.getText().toString().trim();
+                String messageText = editTextMessage.getText().toString();
                 if (!messageText.isEmpty()) {
-                    // Thêm tin nhắn của người dùng
-                    messageList.add(new Message(messageText, false));
-                    messageAdapter.notifyItemInserted(messageList.size() - 1);
-                    recyclerViewChat.scrollToPosition(messageList.size() - 1);
+                    sendMessage(messageText, userEmail);
                     editTextMessage.setText("");
-
-                    // Giả lập phản hồi từ admin
-                    new Handler().postDelayed(() -> {
-                        messageList.add(new Message("Trợ lý sẽ trả lời sớm.", true));
-                        messageAdapter.notifyItemInserted(messageList.size() - 1);
-                        recyclerViewChat.scrollToPosition(messageList.size() - 1);
-                    }, 2000); // delay in milliseconds (độ trễ tính bằng milliseconds)
-
                 }
             }
         });
@@ -68,11 +78,39 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(new Intent(ChatActivity.this, MainActivity.class));
             }
         });
+
+        chatRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messages.clear();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Message message = data.getValue(Message.class);
+                    messages.add(message);
+                }
+                chatAdapter.notifyDataSetChanged();
+                recyclerViewChat.scrollToPosition(messages.size() - 1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
-    private void addMessage(String messageText, boolean isAdmin) {
-        messageList.add(new Message(messageText, isAdmin));
-        messageAdapter.notifyItemInserted(messageList.size() - 1);
-        recyclerViewChat.scrollToPosition(messageList.size() - 1);
+
+    private void sendMessage(String messageText, String senderEmail) {
+
+        // Tạo một ID duy nhất cho mỗi tin nhắn
+        String messageId = chatRef.push().getKey();
+
+        // Tạo một đối tượng Message để lưu trữ thông tin của tin nhắn
+        Message message = new Message(senderEmail, messageText, System.currentTimeMillis());
+
+        // Lưu trữ tin nhắn vào Database dưới messageId duy nhất này
+        if (messageId != null) {
+            chatRef.child(messageId).setValue(message);
+        }
     }
+
 
 }

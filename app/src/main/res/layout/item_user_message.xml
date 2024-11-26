@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#E1FFC7"
+    android:layout_gravity="end"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="10dp"
+    android:layout_margin="4dp"
+    android:layout_marginEnd="16dp"
+    android:backgroundTint="#E0FFE6">
 
     <TextView
-        android:id="@+id/messageText"
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:textColor="#000" />
-
+        android:text="Tin nhắn người dùng"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:layout_marginEnd="16dp"
+        android:gravity="start" />
 </LinearLayout>
