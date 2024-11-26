@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/main"
+    >
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Sản Phẩm"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Tên sản phẩm -->
+    <EditText
+        android:id="@+id/etTenSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên sản phẩm"
+        android:inputType="text"
+        android:padding="12dp" />
+
+    <!-- Giá sản phẩm -->
+    <EditText
+        android:id="@+id/etGiaSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá sản phẩm"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Mô tả sản phẩm -->
+    <EditText
+        android:id="@+id/etMoTaSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả sản phẩm"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:minHeight="100dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/imgSanPham"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="Ảnh sản phẩm"
+        android:layout_gravity="center" />
+
+    <!-- Nút chọn ảnh -->
+    <Button
+        android:id="@+id/btnChonAnh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn ảnh"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center" />
+
+    <!-- Nút lưu -->
+    <Button
+        android:id="@+id/btnLuuSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu sản phẩm"
+        android:layout_marginTop="24dp" />
+
+</LinearLayout>

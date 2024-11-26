@@ -52,6 +52,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 boolean isChanged = nguoiDungDAO.changePassword(email, oldPassword, newPassword);
                 if (isChanged) {
                     Toast.makeText(ChangePasswordActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(ChangePasswordActivity.this, "Mật khẩu cũ không chính xác.", Toast.LENGTH_SHORT).show();
                 }

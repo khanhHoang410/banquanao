@@ -128,16 +128,13 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(Data_SqlLite.INSERT_DANH_MUC);
         db.execSQL(Data_SqlLite.INSERT_KICH_THUOC);
         db.execSQL(Data_SqlLite.INSERT_SAN_PHAM);
-        // phần thêm sản phẩm
-        // danh mục
-        // sản phẩm
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (1, 'Áo thun thêu chữ ', 699.99, 'Mô tả sản phẩm 1', 1, 50);");
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (2, 'Áo khoác', 19.99, 'Mô tả sản phẩm 2 ', 2, 200);");
 //        db.execSQL("INSERT INTO SanPham (maSanPham, tenSanPham, gia, moTa, maDanhMuc, soLuong) VALUES (3, 'Quần jean rách', 29.99, 'Mô tả sản phẩm 3', 3, 30);");
         // người dùng
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi,sdt, role) VALUES (1, 'John Doe', 'namvu@gmail.com', '123456', '123 Main St',099999999, 1);");
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi,sdt, role) VALUES (2, 'admin', 'admin@gmail.com', '123456', '456 Elm St',099999999, 2);");
-        // kích thước (Không thêm)
+
 
     }
 

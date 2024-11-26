@@ -3,7 +3,9 @@ package com.example.duan1;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     // Hàm kiểm tra dữ liệu đầu vào

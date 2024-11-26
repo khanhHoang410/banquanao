@@ -72,8 +72,8 @@ public class NguoiDungDAO {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("matKhau", newPassword);
-
         // Cập nhật mật khẩu nếu mật khẩu cũ khớp
+        // thêm validate
         int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "email = ? AND matKhau = ?", new String[]{email, oldPassword});
         sqLiteDatabase.close();
         return rowsAffected > 0; // Trả về true nếu cập nhật thành công
@@ -115,6 +115,14 @@ public class NguoiDungDAO {
         int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "email = ?", new String[]{email});
         sqLiteDatabase.close();
         return rowsAffected > 0; // Trả về true nếu cập nhật thành công
+    }
+    public boolean updatePass(String email, String matKhauMoi) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("matKhau", matKhauMoi);
+        int rowsAffected = sqLiteDatabase.update("NguoiDung", values, "email = ?", new String[]{email});
+        sqLiteDatabase.close();
+        return rowsAffected > 0;
     }
 
 }
