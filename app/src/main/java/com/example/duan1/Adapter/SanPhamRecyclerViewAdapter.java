@@ -5,6 +5,7 @@ import static java.security.AccessController.getContext;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -85,6 +86,11 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
+            int maSanPham = sanPham.getMaSanPham();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("layMaSanPham",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("maSanPham",maSanPham);
+            editor.apply();
             Intent intent = new Intent(context, ChitietSanPham.class);
             Log.d("ChitietSanPham", "Tên sản phẩm: " + sanPham.getTenSanPham());
             Log.d("ChitietSanPham", "Mô tả sản phẩm: " + sanPham.getMoTa());

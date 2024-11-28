@@ -54,14 +54,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = edEmail.getText().toString().trim();
                 String password = edPassword.getText().toString().trim();
-                // validate
+
+                // Validate
                 if (!validateInput(email, password)) {
                     return;
                 }
 
-                if (nguoiDungDAO.KiemTraDangNhap(email, password)) {
+                int maNguoiDung = nguoiDungDAO.KiemTraDangNhap(email, password);
+                if (maNguoiDung != -1) {
                     SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("maNguoiDung", maNguoiDung); // Lưu mã người dùng
                     editor.putString("email", email);
                     editor.apply();
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
