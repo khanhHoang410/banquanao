@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 12;
+    private static final int DB_VERSION= 13;
 
     // Bảng danh mục
 
@@ -136,8 +136,23 @@ public class DbHelper extends SQLiteOpenHelper {
         // người dùng
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi,sdt, role) VALUES (1, 'John Doe', 'namvu@gmail.com', '123456', '123 Main St',099999999, 1);");
         db.execSQL("INSERT INTO NguoiDung (maNguoiDung, tenNguoiDung, email, matKhau, diaChi,sdt, role) VALUES (2, 'admin', 'admin@gmail.com', '123456', '456 Elm St',099999999, 2);");
-
-
+        db.execSQL("INSERT INTO DanhGia (maSanPham, maNguoiDung, danhGia, diem) VALUES\n" +
+                "(1, 1, 5, 5.0),\n" +
+                "(1, 2, 4, 4.0),\n" +
+                "(2, 1, 3, 3.5),\n" +
+                "(3, 2, 5, 5.0),\n" +
+                "(4, 1, 4, 4.5),\n" +
+                "(5, 2, 5, 5.0);");
+        db.execSQL("INSERT INTO ChiTietDonHang (maDonHang, maSanPham, soLuong, gia, maKichThuoc) VALUES\n" +
+                "(1, 1, 5, 699.99, 1),\n" +
+                "(1, 2, 2, 19.99, NULL),\n" +
+                "(2, 3, 1, 29.99, NULL),\n" +
+                "(2, 4, 3, 49.99, NULL),\n" +
+                "(3, 5, 4, 29.99, NULL);");
+    db.execSQL("INSERT INTO DonHang (maNguoiDung, ngayDat, trangThai, tongTien) VALUES\n" +
+            "(1, '2024-11-01', 'Hoàn tất', 3599.93),\n" +
+            "(2, '2024-11-02', 'Đang xử lý', 149.97),\n" +
+            "(1, '2024-11-03', 'Đã giao', 119.96);");
     }
 
 

@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn = findViewById(R.id.btnSignIn);
         tvSignUp = findViewById(R.id.tv_sign_up);
         tvForgotPassword = findViewById(R.id.tv_forgot_password);
-
+        ImageView topImage = findViewById(R.id.topImage);
+        Animation bounceAnim = AnimationUtils.loadAnimation(this, R.anim.bounce_from_top);
+        topImage.startAnimation(bounceAnim);
         // Khởi tạo DAO
         nguoiDungDAO = new NguoiDungDAO(this);
 
@@ -49,14 +54,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = edEmail.getText().toString().trim();
                 String password = edPassword.getText().toString().trim();
-                // validate
+
+                // Validate
                 if (!validateInput(email, password)) {
                     return;
                 }
 
-                if (nguoiDungDAO.KiemTraDangNhap(email, password)) {
+                int maNguoiDung = nguoiDungDAO.KiemTraDangNhap(email, password);
+                if (maNguoiDung != -1) {
                     SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("maNguoiDung", maNguoiDung); // Lưu mã người dùng
                     editor.putString("email", email);
                     editor.apply();
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();

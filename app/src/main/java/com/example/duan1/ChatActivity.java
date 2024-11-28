@@ -33,8 +33,8 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton buttonSend, backbutton;
     ChatAdapter chatAdapter;
     private DatabaseReference chatRef;
-    private List<Message> messages = new ArrayList<>();
-    private String userEmail = "user@gmail.com";
+    private List<Message> messages ;
+    private String userEmail = "namvu@gmail.com";
     private String adminEmail = "admin@gmail.com";
 
     @Override
@@ -46,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerViewChat = findViewById(R.id.recyclerViewChat);
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
+        messages = new ArrayList<>();
 
         // Thay thế dấu chấm (".") trong email để phù hợp với yêu cầu đường dẫn của Firebase
         String sanitizedUserEmail = userEmail.replace(".", "_");
@@ -58,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // Thiết lập RecyclerView
         recyclerViewChat.setLayoutManager(new LinearLayoutManager(this));
-        chatAdapter = new ChatAdapter(messages, userEmail);
+        chatAdapter = new ChatAdapter(messages, userEmail,ChatActivity.this);
         recyclerViewChat.setAdapter(chatAdapter);
 
         recyclerViewChat.setAdapter(chatAdapter);

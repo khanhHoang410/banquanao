@@ -11,18 +11,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quản Lý Sản Phẩm"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textColor="@color/cardview_dark_background" />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_product"/>
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản Lý Sản Phẩm"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="16dp"
+                android:textColor="@color/cardview_dark_background" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_product"/>
+        </LinearLayout>
+
     <!-- RecyclerView chiếm toàn bộ không gian -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rclqlsanpham"
@@ -41,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_gravity="bottom"
+        android:src="@drawable/ic_add"
+        android:layout_gravity="bottom|right"
              />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

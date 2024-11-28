@@ -44,7 +44,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="8dp"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:background="#F0F0F0" />
 
     <!-- Khu vực nhập tin nhắn -->
     <LinearLayout
@@ -52,7 +53,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#FFFFFF"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:elevation="4dp">
 
         <!-- Hộp nhập tin nhắn -->
         <EditText

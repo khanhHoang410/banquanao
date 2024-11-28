@@ -1,5 +1,6 @@
 package com.example.duan1;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
     ImageView imgYeuThich, imgGioHang;
     List<SanPham> yeuthichList = new ArrayList<>();
     SanPhamRecyclerViewAdapter adapter;
+    ImageView searchIcon;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,18 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
             return insets;
         });
 
+        // Khởi tạo searchIcon
+        searchIcon = findViewById(R.id.icon_search);
+
+        // Thiết lập sự kiện click cho searchIcon
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Mở SearchActivity khi nhấn vào search_icon
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
         imgYeuThich = findViewById(R.id.imgYeuThich);
         imgGioHang = findViewById(R.id.imgGioHang);
         adapter = new SanPhamRecyclerViewAdapter(this, yeuthichList, sanPham -> {

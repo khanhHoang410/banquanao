@@ -102,7 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address Book"
+                android:text=" Shop  Address"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
