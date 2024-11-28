@@ -50,7 +50,7 @@ public class ThemSanPhamActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btnLuu = findViewById(R.id.btnLuuSanPham);
+//        btnLuu = findViewById(R.id.btnLuuSanPham);
         btnChonAnh = findViewById(R.id.btnChonAnh);
         etTenSanPham = findViewById(R.id.etTenSanPham);
         etGiaSanPham = findViewById(R.id.etGiaSanPham);
@@ -64,9 +64,9 @@ public class ThemSanPhamActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             startActivityForResult(intent,REQUEST_CODE_CHON_ANH);
         });
-        btnLuu.setOnClickListener(v->{
-
-        });
+//        btnLuu.setOnClickListener(v->{
+//
+//        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
