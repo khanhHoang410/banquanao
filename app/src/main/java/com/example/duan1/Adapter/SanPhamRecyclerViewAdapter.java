@@ -10,19 +10,25 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1.BlankFragment;
 import com.example.duan1.ChitietSanPham;
+import com.example.duan1.Dao.SanPhamDAO;
 import com.example.duan1.MainActivity;
 import com.example.duan1.Models.SanPham;
 import com.example.duan1.R;
@@ -35,7 +41,7 @@ import java.util.List;
 public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
-
+    SanPhamDAO sanPhamDAO;
     private List<SanPham> list;
     public OnYeuThichChangeListener listener;
     private static View.OnLongClickListener onItemLongClickListener;
@@ -65,8 +71,10 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         SanPham sanPham = list.get(position);
         holder.tvNameSanPham.setText(sanPham.getTenSanPham());
         holder.tvGiaSanPham.setText(String.valueOf(sanPham.getGia()));
+
 //        holder.anhSanPham.setImageBitmap(sanPham.getAnh());
         // Lấy ảnh từ drawable dựa trên tên ảnh
+
 
         File imageFile = new File(sanPham.getAnh());
         if (imageFile.exists()){
@@ -81,7 +89,20 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 
             holder.anhSanPham.setImageBitmap(bitmap);
         }
+//        holder.itemView.setOnTouchListener(((v, event) -> {
+//            switch (event.getActionMasked()){
+//                case MotionEvent.ACTION_HOVER_ENTER:
+//                    holder.btnAddtoCart.setVisibility(View.VISIBLE);
+//                    return true;
+//                case MotionEvent.ACTION_HOVER_EXIT:
+//                    holder.btnAddtoCart.setVisibility(View.GONE);
+//                    return true;
+//            }
+//            return false;
+//
+//        }));
 
+      
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
             Intent intent = new Intent(context, ChitietSanPham.class);
@@ -93,6 +114,10 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             intent.putExtra("moTa", sanPham.getMoTa());
             context.startActivity(intent);
         });
+
+//        holder.btnAddtoCart.setOnClickListener(v->{
+//
+//        });
         // Hiển thị trạng thái yêu thích
         holder.anhYeuThich.setImageResource(sanPham.getYeuThich() ? R.drawable.ic_redlove : R.drawable.love_icon);
         // Xử lý click vào icon yêu thích
@@ -107,6 +132,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             } else {
                 Toast.makeText(context, "Bạn vừa xóa 1 sản phẩm yêu thích", Toast.LENGTH_SHORT).show();
             }
+
 
             // lưu danh sách yêu thích
            if (listener!=null){
@@ -123,6 +149,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNameSanPham, tvGiaSanPham;
         ImageView anhSanPham, anhYeuThich;
+        Button btnAddtoCart;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -131,6 +158,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             tvGiaSanPham = itemView.findViewById(R.id.product_price);
             anhSanPham = itemView.findViewById(R.id.product_iamge);
             anhYeuThich = itemView.findViewById(R.id.icon_favorite);
+//            btnAddtoCart = itemView.findViewById(R.id.btnAddtoCart);
 
             itemView.setOnLongClickListener(v -> {
                 if (onItemLongClickListener != null) {
@@ -160,6 +188,46 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     }
     public void setOnItemLongClickListener(View.OnLongClickListener listener) {
         this.onItemLongClickListener = listener;
+    }
+    private void showDialogSuaSanPham(SanPham sanPham){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Sửa sản phẩm");
+
+        // tạo layout cho dialog
+        View view = LayoutInflater.from(context).inflate(R.layout.suasanpham,null);
+        builder.setView(view);
+        // lấy các view từ layout
+        EditText etTenSanPham = view.findViewById(R.id.etTenSanPham);
+        EditText etGiaSanPham = view.findViewById(R.id.etGiaSanPham);
+        EditText etMoTaSanPham = view.findViewById(R.id.etMoTaSanPham);
+        ImageView imgSanPham = view.findViewById(R.id.imgSanPham);
+
+        // hiển thị thông tin của sản phẩm hiện tại
+        etTenSanPham.setText(sanPham.getTenSanPham());
+        etGiaSanPham.setText(String.valueOf(sanPham.getGia()));
+        etMoTaSanPham.setText(sanPham.getMoTa());
+
+        // load ảnh sản phẩm vào imgsanpham
+
+        // xử lý sự kiện click vào nút sửa
+        builder.setPositiveButton("Sửa",((dialog, which) -> {
+            // lấy thông tin sản phẩm đã sửa
+            String tenSanPhamMoi = etTenSanPham.getText().toString();
+            Float giaSanPhamMoi = Float.parseFloat(etGiaSanPham.getText().toString());
+            String moTaSanPhamMoi = etMoTaSanPham.getText().toString();
+
+            // lấy đường dẫn ảnh mới
+            // cập nhật thông tin sản phẩm
+            sanPham.setTenSanPham(tenSanPhamMoi);
+            sanPham.setGia(giaSanPhamMoi);
+            sanPham.setMoTa(moTaSanPhamMoi);
+            // câp nhật đường dẫn ảnh mới
+
+            sanPhamDAO.update(sanPham);
+            notifyDataSetChanged();
+
+        }));
+
     }
 
 }

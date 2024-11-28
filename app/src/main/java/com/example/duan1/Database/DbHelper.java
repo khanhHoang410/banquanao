@@ -114,6 +114,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 ");";
 
 
+
+
         db.execSQL(DanhMuc);
         db.execSQL(SanPham);
         db.execSQL(KichThuoc);

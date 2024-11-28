@@ -6,8 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +17,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.duan1.Dao.GioHangDAO;
+import com.example.duan1.Models.GioHang;
+
 public class ChitietSanPham extends AppCompatActivity {
     ImageView imgChitietSanpham;
     TextView tvGia,tvMota, tvTenSanPham;
+    Button btnAddtocart;
+    GioHangDAO gioHangDAO;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -46,6 +54,37 @@ public class ChitietSanPham extends AppCompatActivity {
         if (bitmap != null) {
             imgChitietSanpham.setImageBitmap(bitmap);
         }
+
+
+        btnAddtocart = findViewById(R.id.btnaddto);
+        btnAddtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // lấy thông tin sản phẩm
+                String tensp = tvTenSanPham.getText().toString();
+                float giasp = Float.parseFloat(tvGia.getText().toString().replace("$",""));
+                String anh = imgChitietSanpham.getDrawable().toString();
+//                int maSanPham = getIntent().getIntExtra('maSanPham',-1);
+                GioHang gioHang= new GioHang();
+                gioHang.setMaDonHang(1);
+                // maDonhang là 1
+//                gioHang.setMaSanPham(maSanPham);
+
+                gioHang.setTongTien(giasp);
+
+                // thêm vào giỏ hàng
+                long result = gioHangDAO.insert(gioHang);
+                if (result>0){
+                    Toast.makeText(ChitietSanPham.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(ChitietSanPham.this, "Thêm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
 
         }
     private Bitmap getBitmapFromDrawable(String fileName, Context context) {
