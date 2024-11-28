@@ -1,6 +1,8 @@
 package com.example.duan1.Models;
 
-public class GioHang {
+import java.io.Serializable;
+
+public class GioHang implements Serializable {
     private int maGioHang; // PRIMARY KEY
     private int maDonHang;
     private int maSanPham;

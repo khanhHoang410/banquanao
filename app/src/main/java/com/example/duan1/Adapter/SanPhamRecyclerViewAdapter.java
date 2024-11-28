@@ -5,6 +5,7 @@ import static java.security.AccessController.getContext;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -105,9 +106,13 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
       
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
+             // maSanPham là biến int chứa mã sản phẩm
+
             Intent intent = new Intent(context, ChitietSanPham.class);
+            intent.putExtra("maSanPham", sanPham.getMaSanPham());
             Log.d("ChitietSanPham", "Tên sản phẩm: " + sanPham.getTenSanPham());
             Log.d("ChitietSanPham", "Mô tả sản phẩm: " + sanPham.getMoTa());
+
             intent.putExtra("tenSanPham", sanPham.getTenSanPham());
             intent.putExtra("gia", String.valueOf(sanPham.getGia()));
             intent.putExtra("anh", sanPham.getAnh());
@@ -132,7 +137,6 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             } else {
                 Toast.makeText(context, "Bạn vừa xóa 1 sản phẩm yêu thích", Toast.LENGTH_SHORT).show();
             }
-
 
             // lưu danh sách yêu thích
            if (listener!=null){

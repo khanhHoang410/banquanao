@@ -18,7 +18,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duan1.Dao.GioHangDAO;
+import com.example.duan1.Database.CartData;
 import com.example.duan1.Models.GioHang;
+import com.example.duan1.Models.SanPham;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChitietSanPham extends AppCompatActivity {
     ImageView imgChitietSanpham;
@@ -39,9 +44,9 @@ public class ChitietSanPham extends AppCompatActivity {
         tvGia=findViewById(R.id.tvGia);
         tvMota = findViewById(R.id.tvMota);
         tvTenSanPham =findViewById(R.id.tvTenSanpHam);
-
+        gioHangDAO = new GioHangDAO(this);
         // Nhận dữ liệu từ intent
-
+        int masanpham = getIntent().getIntExtra("maSanPham",-1);
         String tenSanpham = getIntent().getStringExtra("tenSanPham");
         String gia = getIntent().getStringExtra("gia");
         String mota = getIntent().getStringExtra("moTa");
@@ -64,23 +69,35 @@ public class ChitietSanPham extends AppCompatActivity {
                 String tensp = tvTenSanPham.getText().toString();
                 float giasp = Float.parseFloat(tvGia.getText().toString().replace("$",""));
                 String anh = imgChitietSanpham.getDrawable().toString();
-//                int maSanPham = getIntent().getIntExtra('maSanPham',-1);
-                GioHang gioHang= new GioHang();
-                gioHang.setMaDonHang(1);
-                // maDonhang là 1
-//                gioHang.setMaSanPham(maSanPham);
+                int masanpham = getIntent().getIntExtra("maSanPham",-1);
 
+                // tạo một sản phẩm mới
+                SanPham sanPham = new SanPham();
+                sanPham.setTenSanPham(tensp);
+                sanPham.setGia(giasp);
+                sanPham.setAnh(anh);
+                sanPham.setMaSanPham(masanpham);
+
+                // tạo một giỏ hàng mới
+                GioHang gioHang = new GioHang();
+                gioHang.setMaSanPham(masanpham);
                 gioHang.setTongTien(giasp);
 
+
+                // thêm sản phẩm  vào array
+                List<SanPham> sanPhamList = new ArrayList<>();
+                sanPhamList.add(sanPham);
+                CartData.cartItems.add(sanPham);
                 // thêm vào giỏ hàng
                 long result = gioHangDAO.insert(gioHang);
                 if (result>0){
-                    Toast.makeText(ChitietSanPham.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChitietSanPham.this, "đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(ChitietSanPham.this, "Thêm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
                 }
-
-
+                // truyền array sang cart actitity
+                Intent intent = new Intent(ChitietSanPham.this, CartActivity.class);
+                intent.putExtra("sanPhamList", (ArrayList<SanPham>) sanPhamList); // Ép kiểu sang ArrayList
             }
         });
 

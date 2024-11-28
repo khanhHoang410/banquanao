@@ -21,21 +21,22 @@ public class NguoiDungDAO {
 
 
     // Kiểm tra đăng nhập
-    public boolean KiemTraDangNhap(String email, String password) {
+    public int KiemTraDangNhap(String email, String password) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = null;
-        boolean isLoggedIn = false;
+        int maNguoiDung = -1; // Mặc định không tìm thấy người dùng
         try {
-            cursor = sqLiteDatabase.rawQuery("SELECT * FROM NguoiDung WHERE email = ? AND matKhau = ?", new String[]{email, password});
-            isLoggedIn = cursor.getCount() > 0; // Nếu có bản ghi thì đăng nhập thành công
+            cursor = sqLiteDatabase.rawQuery("SELECT maNguoiDung FROM NguoiDung WHERE email = ? AND matKhau = ?", new String[]{email, password});
+            if (cursor != null && cursor.moveToFirst()) {
+                maNguoiDung = cursor.getInt(0); // Lấy mã người dùng
+            }
         } finally {
             if (cursor != null) {
                 cursor.close(); // Đảm bảo đóng con trỏ
             }
             sqLiteDatabase.close(); // Đóng cơ sở dữ liệu
         }
-
-        return isLoggedIn; // Trả về true hoặc false
+        return maNguoiDung; // Trả về mã người dùng hoặc -1 nếu không tìm thấy
     }
     public boolean register(String tennguoidung,String email, String password , int sdt,String diachi) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
