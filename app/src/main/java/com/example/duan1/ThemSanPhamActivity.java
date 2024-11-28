@@ -34,7 +34,7 @@ import java.io.InputStream;
 public class ThemSanPhamActivity extends AppCompatActivity {
     SanPhamDAO sanPhamDAO;
     Button btnLuu,btnChonAnh;
-    EditText etTenSanPham,etGiaSanPham,etMoTaSanPham;
+    EditText etTenSanPham,etGiaSanPham,etMoTaSanPham,etSoLuongSanPham;
     ImageView imgSanPham;
     private static final int REQUEST_CODE_CHON_ANH = 1;
     private File cacheDir;
@@ -55,6 +55,7 @@ public class ThemSanPhamActivity extends AppCompatActivity {
         etTenSanPham = findViewById(R.id.etTenSanPham);
         etGiaSanPham = findViewById(R.id.etGiaSanPham);
         etMoTaSanPham = findViewById(R.id.etMoTaSanPham);
+        etSoLuongSanPham = findViewById(R.id.etSoLuongSanPham);
         imgSanPham = findViewById(R.id.imgSanPham);
         sanPhamDAO = new SanPhamDAO(this);
         btnChonAnh.setOnClickListener(v->{
@@ -102,16 +103,15 @@ public class ThemSanPhamActivity extends AppCompatActivity {
                 String tenSanPham = etTenSanPham.getText().toString();
                 float giaSanPham = Float.parseFloat(etGiaSanPham.getText().toString());
                 String moTaSanPham = etMoTaSanPham.getText().toString();
+                int soLuongSanPham = Integer.parseInt(etSoLuongSanPham.getText().toString());
 
                 // Lấy tên file từ Uri
                 String fileName = getFileNameFromUri(imageUri);
 
-                // Lưu ảnh vào thư mục drawable (hoặc thư mục bạn muốn)
 
-                // ... (Code để lưu ảnh vào thư mục drawable)
 
                 // Tạo đối tượng SanPham với tên file ảnh
-                SanPham sanphamMoi = new SanPham(tenSanPham, giaSanPham, moTaSanPham, maDanhMuc, 0, caCheFile.getAbsolutePath(), false);
+                SanPham sanphamMoi = new SanPham(tenSanPham, giaSanPham, moTaSanPham, maDanhMuc, soLuongSanPham, caCheFile.getAbsolutePath(), false);
 
                 //Thêm sản phẩm vào database
                 long result = sanPhamDAO.insert(sanphamMoi);

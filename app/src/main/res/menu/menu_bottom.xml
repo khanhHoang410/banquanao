@@ -17,7 +17,7 @@
         android:id="@+id/health"
         android:icon="@drawable/ic_lichsudonhang"
         android:iconTint="@color/white"
-        android:title="CART"
+        android:title="History"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/social"

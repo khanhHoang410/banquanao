@@ -74,6 +74,7 @@ public class SanPhamDAO {
             obj.setGia(c.getFloat(c.getColumnIndex("gia")));
             obj.setMoTa(c.getString(c.getColumnIndex("moTa")));
             obj.setMaDanhMuc(c.getInt(c.getColumnIndex("maDanhMuc")));
+            obj.setSoLuong(c.getInt(c.getColumnIndex("soLuong")));
             obj.setAnh(c.getString(c.getColumnIndex("anh")));
             obj.setYeuThich(c.getInt(c.getColumnIndex("isYeuThich"))==0?false:true);
 
@@ -113,7 +114,5 @@ public class SanPhamDAO {
         String sql = "SELECT * FROM SanPham WHERE maDanhMuc = ?";
         return getData(sql, String.valueOf(maDanhMuc));
     }
-
-
 
 }

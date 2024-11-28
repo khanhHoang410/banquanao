@@ -43,6 +43,19 @@ public class BlankFragment4 extends Fragment {
             layoutofadmin.setVisibility(View.INVISIBLE); // Ẩn layout cho người dùng
         }
         ////// vùng phân quyền , cấm đụng
+
+
+
+
+
+
+
+
+
+
+
+
+
         view.findViewById(R.id.ic_support).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +95,16 @@ public class BlankFragment4 extends Fragment {
         view.findViewById(R.id.layoutSignOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                // Xóa thông tin đăng nhập trong SharedPreferences
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear(); // Xóa tất cả dữ liệu
+                editor.apply(); // Lưu thay đổi
+
+                // Khởi động lại LoginActivity và xóa các Activity trước đó
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Dọn sạch stack
+                startActivity(intent);
             }
         });
     }

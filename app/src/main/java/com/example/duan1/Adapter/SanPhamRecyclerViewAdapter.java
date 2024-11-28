@@ -67,7 +67,8 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         holder.tvGiaSanPham.setText(String.valueOf(sanPham.getGia()));
 //        holder.anhSanPham.setImageBitmap(sanPham.getAnh());
         // Lấy ảnh từ drawable dựa trên tên ảnh
-
+        holder.soluong.setText("Số lượng: " + sanPham.getSoLuong());
+        Log.d("SanPham", "Số lượng: " + sanPham.getSoLuong());
         File imageFile = new File(sanPham.getAnh());
         if (imageFile.exists()){
             holder.anhSanPham.setImageURI(Uri.fromFile(imageFile));
@@ -122,12 +123,12 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNameSanPham, tvGiaSanPham;
+        TextView tvNameSanPham, tvGiaSanPham , soluong;
         ImageView anhSanPham, anhYeuThich;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            soluong = itemView.findViewById(R.id.soluong);
             tvNameSanPham = itemView.findViewById(R.id.product_name);
             tvGiaSanPham = itemView.findViewById(R.id.product_price);
             anhSanPham = itemView.findViewById(R.id.product_iamge);
