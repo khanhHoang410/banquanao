@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 13;
+    private static final int DB_VERSION= 14;
 
     // Bảng danh mục
 
@@ -82,7 +82,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    maDanhGia INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    maSanPham INTEGER ,\n" +
                 "    maNguoiDung INTEGER ,\n" +
-                "    danhGia INTEGER ,\n" +
+                "    danhGia VARCHAR(250) ,\n" +
                 "    diem DECIMAL(2, 1),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +

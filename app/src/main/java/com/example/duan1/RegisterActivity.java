@@ -55,7 +55,15 @@ public class RegisterActivity extends AppCompatActivity {
             int sdt = Integer.parseInt(edSdthoai.getText().toString().trim());
             String diachi = edDiaChi.getText().toString().trim();
             if (validateInput(email, password, confirmPassword)) {
-                nguoiDungDAO.register(tennguoidung,email, password,sdt,diachi);
+                boolean isRegistered = nguoiDungDAO.register(tennguoidung, email, password, sdt, diachi);
+                if (isRegistered) {
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thất bại, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+                }
                 // Xử lý logic đăng ký tại đây (gửi dữ liệu lên server)
                 Toast.makeText(RegisterActivity.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                 // Chuyển đến màn hình chính sau khi đăng ký

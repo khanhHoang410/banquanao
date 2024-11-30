@@ -78,8 +78,6 @@ public class HotSaleAdapter extends BaseAdapter {
         // xử lý sự kiện click vào item
         convertView.setOnClickListener(v->{
             Intent intent = new Intent(context, ChitietSanPham.class);
-            Log.d("ChitietSanPham", "Tên sản phẩm: " + sanPham.getTenSanPham());
-            Log.d("ChitietSanPham", "Mô tả sản phẩm: " + sanPham.getMoTa());
             intent.putExtra("tenSanPham", sanPham.getTenSanPham());
             intent.putExtra("gia", String.valueOf(sanPham.getGia()));
             intent.putExtra("anh", sanPham.getAnh());

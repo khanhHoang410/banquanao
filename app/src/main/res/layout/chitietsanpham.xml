@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ChitietSanPham"
     android:orientation="vertical">
 
     <LinearLayout
@@ -149,10 +151,32 @@
         <!--    xếp hạng và đánh giá-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:orientation="vertical"
-            android:padding="16dp"
-            />
+            android:padding="16dp">
+            <ListView
+                android:id="@+id/listDanhGia"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edDanhGia"
+                    android:layout_width="300dp"
+                    android:hint="Viết đánh giá"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/btnDanhGia"
+                    android:text="Cmt"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_send"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
