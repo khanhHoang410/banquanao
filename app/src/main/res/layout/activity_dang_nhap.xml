@@ -16,6 +16,7 @@
         android:id="@+id/topImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/img_login"
         />
@@ -69,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edPassWord"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
         android:backgroundTint="#000000"
         android:text="SIGN IN"
         android:textColor="#FFFFFF" />
@@ -80,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="or continue with"
         android:textColor="#888888"
         android:textSize="20sp" />

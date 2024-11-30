@@ -1,62 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".CartActivity"
+    android:padding="16dp"
     android:id="@+id/main"
-    android:padding="16dp">
+    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/img_return"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="90dp"
-            android:src="@drawable/return_icon"/>
-        <TextView
-            android:id="@+id/cart_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cart Page"
-            android:layout_gravity="center"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1" />
-
+    <!-- Thanh tiêu đề -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end"
+        android:gravity="center_vertical"
+
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/img_return"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/return_icon"
+            android:contentDescription="Return"
+            />
+
+        <TextView
+            android:id="@+id/cart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Cart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <!-- Danh sách sản phẩm -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:padding="8dp"
+
+        />
+
+    <!-- Tổng giá tiền -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="16dp"
+        android:elevation="4dp"
         android:layout_marginTop="16dp">
 
         <TextView
             android:id="@+id/total_price"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Price: $0.00"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:text="Total: $0.00"
+            android:textSize="18sp"
+            android:textColor="@color/design_default_color_error"
+            android:textStyle="bold"
 
+            android:gravity="end" />
     </LinearLayout>
 
+    <!-- Nút thanh toán -->
     <Button
         android:id="@+id/checkout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CHECK OUT"
+        android:textAllCaps="true"
+        android:backgroundTint="@color/black"
         android:textColor="@android:color/white"
-        android:layout_marginTop="16dp" />
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="12dp"
+        android:elevation="4dp" />
 
 </LinearLayout>

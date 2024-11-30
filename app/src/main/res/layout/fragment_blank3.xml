@@ -15,8 +15,8 @@
             android:id="@+id/cart_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
             android:text="Lịch sử đơn hàng"
-            android:layout_gravity="center"
             android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>

@@ -2,16 +2,31 @@ package com.example.duan1;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.duan1.Adapter.CartAdapter;
+import com.example.duan1.Database.CartData;
+import com.example.duan1.Models.GioHang;
+import com.example.duan1.Models.SanPham;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
         ImageView img_return;
+        RecyclerView rclcart;
+        CartAdapter adapter;
+        TextView totalPriceTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +38,34 @@ public class CartActivity extends AppCompatActivity {
             return insets;
         });
         img_return = findViewById(R.id.img_return);
+        rclcart = findViewById(R.id.recycler_view);
+        totalPriceTextView = findViewById(R.id.total_price);
+        rclcart.setLayoutManager(new LinearLayoutManager(this));
+        // nhận dữ liệu từ intent
+
+        ArrayList<SanPham> sanPhamList = (ArrayList<SanPham>) CartData.cartItems;
+        List<GioHang> gioHangList= new ArrayList<>();
+        // tạo danh sách giỏ hàng từ danhsachSanPhamd
+        if (sanPhamList!=null){
+            for (SanPham sanPham : sanPhamList){
+                GioHang gioHang = new GioHang();
+                gioHang.setMaDonHang(1);
+                gioHang.setMaSanPham(sanPham.getMaSanPham());
+                gioHang.setTongTien(sanPham.getGia());
+                gioHangList.add(gioHang);
+            }
+        } else {
+        Toast.makeText(this, "Không có sản phẩm nào trong giỏ hàng", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+
+        adapter  = new CartAdapter(this,gioHangList,totalPriceTextView);
+        adapter.updateTotalPrice();
+        rclcart.setAdapter(adapter);
+
+
         img_return.setOnClickListener(v -> finish());
     }
+
 }

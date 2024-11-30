@@ -86,11 +86,14 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
-
+            int maSanPham = sanPham.getMaSanPham();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("layMaSanPham",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("maSanPham",maSanPham);
+            editor.apply();
             Intent intent = new Intent(context, ChitietSanPham.class);
             Log.d("ChitietSanPham", "Tên sản phẩm: " + sanPham.getTenSanPham());
             Log.d("ChitietSanPham", "Mô tả sản phẩm: " + sanPham.getMoTa());
-            intent.putExtra("maSanPham", sanPham.getMaSanPham()); // Truyền mã sản phẩm
             intent.putExtra("tenSanPham", sanPham.getTenSanPham());
             intent.putExtra("gia", String.valueOf(sanPham.getGia()));
             intent.putExtra("anh", sanPham.getAnh());

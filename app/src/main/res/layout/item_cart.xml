@@ -1,83 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="#BDD1D3">
-
-    <ImageView
-        android:id="@+id/product_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/img_product1"
-        android:contentDescription="Product Image"
-        />
+    android:layout_margin="8dp"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="12dp"
+    android:background="@color/white">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="16dp">
+        android:orientation="horizontal"
+        android:padding="12dp">
 
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Men's Vintage Print Oversized T-Shirt"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/color_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Black | Size: M"
-            android:layout_marginTop="4dp" />
-
-        <LinearLayout
+        <!-- Hình ảnh sản phẩm -->
+        <ImageView
+            android:id="@+id/product_image"
             android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_height="120dp"
+            android:src="@drawable/img_product1"
+            android:scaleType="centerCrop"
+            android:contentDescription="Product Image"
+         />
 
-            <ImageView
-                android:id="@+id/decrease_button"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_tru"
-                android:paddingTop="10dp"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/quantity"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:inputType="number"
-                android:text="1"
-                android:gravity="center" />
-
-            <ImageView
-                android:id="@+id/increase_button"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:paddingTop="10dp"
-                android:src="@drawable/ic_plus"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
+        <!-- Thông tin sản phẩm -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="$600.00"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+
+            <!-- Tên sản phẩm -->
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Men's Vintage Print Oversized T-Shirt"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <!-- Màu sắc và kích cỡ -->
+<!--            <TextView-->
+<!--                android:id="@+id/color_size"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Black | Size: M"-->
+
+<!--                android:textSize="14sp"-->
+<!--                android:layout_marginTop="4dp" />-->
+
+            <!-- Tăng giảm số lượng -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/decrease_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_tru"
+                    android:padding="5dp" />
+
+                <EditText
+                    android:id="@+id/quantity"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:inputType="number"
+                    android:text="1"
+                    android:gravity="center"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/increase_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_plus"
+
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="80dp"
+                    android:src="@drawable/ic_delete"
+                    />
+            </LinearLayout>
+
+            <!-- Giá sản phẩm -->
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$600.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
-
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

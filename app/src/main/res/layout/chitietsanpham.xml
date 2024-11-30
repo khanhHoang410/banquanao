@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add to cart"
+                android:id="@+id/btnaddto"
                 android:backgroundTint="#000000"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="16dp"

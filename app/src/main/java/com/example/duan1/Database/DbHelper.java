@@ -41,6 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    tenKichThuoc VARCHAR(50)\n" +
                 ");";
 
+
         String SPSize = "CREATE TABLE SPSize (\n" +
                 "    maSanPham INTEGER ,\n" +
                 "    maDanhMuc INTEGER ,\n" +
@@ -48,7 +49,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
                 ");";
-
 
         String ChiTietDonHang = "CREATE TABLE ChiTietDonHang (\n" +
                 "    maChiTietDonHang INTEGER  PRIMARY KEY autoincrement,\n" +
@@ -112,6 +112,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
+
+
 
 
         db.execSQL(DanhMuc);

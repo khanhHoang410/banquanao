@@ -7,10 +7,9 @@
     android:layout_marginBottom="50dp"
     android:layout_height="wrap_content">
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/ic_person" />
     <LinearLayout
         android:layout_gravity="center"
@@ -24,7 +23,8 @@
             android:layout_height="wrap_content"
             android:text="Tên : Nguyễn Văn A"
             android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:layout_gravity="start"
+            android:textSize="25dp"/>
         <TextView
             android:id="@+id/tv_email"
             android:gravity="center"
@@ -32,15 +32,17 @@
             android:layout_height="wrap_content"
             android:text="Email : nam dep trai"
             android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:layout_gravity="start"
+            android:textSize="25dp"/>
         <TextView
             android:id="@+id/tv_diaChi"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Địa chỉ: Địa chỉ"
+
             android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:textSize="25dp"/>
         <TextView
             android:id="@+id/tv_sdt"
             android:gravity="center"
@@ -48,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="Số điện thoại"
             android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:textSize="25dp"/>
     </LinearLayout>
 
 

@@ -14,15 +14,15 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imgReturn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
             android:src="@drawable/return_icon"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
             android:textSize="30dp"
             android:text="Sản phẩm yêu thích"/>
     </LinearLayout>
