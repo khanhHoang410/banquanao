@@ -1,6 +1,7 @@
 package com.example.duan1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class CartActivity extends AppCompatActivity {
         RecyclerView rclcart;
         CartAdapter adapter;
         TextView totalPriceTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +43,13 @@ public class CartActivity extends AppCompatActivity {
         rclcart = findViewById(R.id.recycler_view);
         totalPriceTextView = findViewById(R.id.total_price);
         rclcart.setLayoutManager(new LinearLayoutManager(this));
+
+
         // nhận dữ liệu từ intent
 
         ArrayList<SanPham> sanPhamList = (ArrayList<SanPham>) CartData.cartItems;
+        Log.d("CartActivity", "Received sanPhamList size: " + sanPhamList.size());
+        // tạo danh sách giỏ hàng
         List<GioHang> gioHangList= new ArrayList<>();
         // tạo danh sách giỏ hàng từ danhsachSanPhamd
         if (sanPhamList!=null){
@@ -58,8 +64,6 @@ public class CartActivity extends AppCompatActivity {
         Toast.makeText(this, "Không có sản phẩm nào trong giỏ hàng", Toast.LENGTH_SHORT).show();
         finish();
     }
-
-
         adapter  = new CartAdapter(this,gioHangList,totalPriceTextView);
         adapter.updateTotalPrice();
         rclcart.setAdapter(adapter);
@@ -67,5 +71,6 @@ public class CartActivity extends AppCompatActivity {
 
         img_return.setOnClickListener(v -> finish());
     }
+
 
 }

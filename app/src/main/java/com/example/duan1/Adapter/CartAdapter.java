@@ -3,6 +3,7 @@ package com.example.duan1.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import com.example.duan1.R;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    SanPham sanPham;
+
     private Context context;
     private List<GioHang> gioHangList;
     private GioHangDAO gioHangDAO;
@@ -47,12 +48,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        GioHang gioHang = gioHangList.get(position);
 
+        GioHang gioHang = gioHangList.get(position);
+        Log.d("CartAdapter", "gioHang: " + gioHang);
         if (gioHang != null) {
             // lấy mã sản phẩm từ giỏ hàng
             int maSanPham = gioHang.getMaSanPham();
             String maSanPhamString = String.valueOf(maSanPham);
+            Log.d("CartAdapter", "maSanPham: " + maSanPhamString);
             // lấy sản phẩm từ masanpham
             SanPham sanPham = sanPhamDAO.getID(maSanPhamString);
             if (sanPham != null) {
@@ -60,15 +63,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 //                holder.productImage.setImageResource(sanPham.getAnh());
                 Bitmap bitmap = getBitmapFromDrawable(sanPham.getAnh(), context);
                 if (bitmap != null) {
-
                     holder.productImage.setImageBitmap(bitmap);
                 }
+
                 holder.productName.setText(sanPham.getTenSanPham());
                 //holder.colorSize.setText(sanPham.getColor() + " | Size: " + sanPham.getSize()); // Thay thế bằng cách lấy màu sắc và kích thước từ sanPham
                 holder.price.setText("$" + sanPham.getGia()); // Hiển thị giá sản phẩm
                 holder.quantity.setText("1"); // Hiển thị số lượng mặc định là 1
-
-
 
                 // Xử lý tăng/giảm số lượng
                 holder.increaseButton.setOnClickListener(v -> {
@@ -103,7 +104,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             }
         } else {
             // Xử lý trường hợp gioHang là null
+            Log.d("CartAdapter", "gioHang là null");
         }
+        holder.imgXoa.setOnClickListener(v->{
+            if (gioHang!=null){
+                gioHangDAO.delete(gioHang.getMaGioHang());
+                gioHangList.remove(gioHang);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,gioHangList.size());
+                updateTotalPrice();
+            }
+
+        });
     }
 
 
@@ -113,7 +125,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
-        ImageView productImage, increaseButton, decreaseButton;
+        ImageView productImage, increaseButton, decreaseButton,imgXoa;
         TextView productName, colorSize, price;
         EditText quantity;
 
@@ -126,6 +138,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             quantity = itemView.findViewById(R.id.quantity);
             increaseButton = itemView.findViewById(R.id.increase_button);
             decreaseButton = itemView.findViewById(R.id.decrease_button);
+            imgXoa = itemView.findViewById(R.id.imgXoa);
         }
     }
 

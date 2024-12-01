@@ -94,10 +94,14 @@ public class SanPhamDAO {
         return getData(sql);
     }
 
-    public SanPham getID(String id){
+    public SanPham getID(String id) {
         String sql = "SELECT * FROM SanPham WHERE maSanPham = ?";
-        List<SanPham> list = getData(sql,id);
-        return list.get(0);
+        List<SanPham> list = getData(sql, id);
+        if (!list.isEmpty()) { // Kiểm traxem danh sách có trống hay không
+            return list.get(0);
+        } else {
+            return null; // Hoặc ném một ngoại lệ
+        }
     }
 
     public List<SanPham> search(String query) {

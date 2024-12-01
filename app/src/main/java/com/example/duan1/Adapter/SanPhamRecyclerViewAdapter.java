@@ -98,6 +98,8 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             intent.putExtra("gia", String.valueOf(sanPham.getGia()));
             intent.putExtra("anh", sanPham.getAnh());
             intent.putExtra("moTa", sanPham.getMoTa());
+            intent.putExtra("soLuong", sanPham.getSoLuong());
+            intent.putExtra("maSanPham", sanPham.getMaSanPham());
             context.startActivity(intent);
         });
         // Hiển thị trạng thái yêu thích
