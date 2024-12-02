@@ -40,20 +40,7 @@ public class GioHangDAO {
         return db.delete("GioHang", "maGioHang = ?", new String[]{String.valueOf(maGioHang)});
     }
 
-    public List<GioHang> getAll(){
-        List<GioHang> gioHangList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM GioHang", null);
-        while (cursor.moveToNext()) {
-            GioHang gioHang = new GioHang();
-            gioHang.setMaGioHang(cursor.getInt(cursor.getColumnIndexOrThrow("maGioHang")));
-            gioHang.setMaDonHang(cursor.getInt(cursor.getColumnIndexOrThrow("maDonHang")));
-            gioHang.setMaSanPham(cursor.getInt(cursor.getColumnIndexOrThrow("maSanPham")));
-            gioHang.setTongTien((float) cursor.getDouble(cursor.getColumnIndexOrThrow("tongTien")));
-            gioHangList.add(gioHang);
-        }
-        cursor.close();
-        return gioHangList;
-    }
+
 
     public GioHang getById(int maGioHang) {
         Cursor cursor = db.rawQuery("SELECT * FROM GioHang WHERE maGioHang = ?", new String[]{String.valueOf(maGioHang)});

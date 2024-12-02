@@ -20,13 +20,12 @@ public class DanhGiaDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-    public boolean insertDanhGia(int maSanPham, int maNguoiDung, String danhGia, float diem) {
+    public boolean insertDanhGia(int maSanPham, int maNguoiDung, String danhGia) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("maSanPham", maSanPham);
         values.put("maNguoiDung", maNguoiDung); // Thêm maNguoiDung
         values.put("danhGia", danhGia);
-        values.put("diem", diem); // Thêm diem
         long kq = db.insert("DanhGia", null, values);
         db.close();
         return kq != -1;

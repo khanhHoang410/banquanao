@@ -107,9 +107,11 @@ public class DbHelper extends SQLiteOpenHelper {
         String GioHang = "CREATE TABLE GioHang (\n" +
                 "    maGioHang INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    maDonHang INTEGER ,\n" +
+                "    maNguoiDung INTEGER ,\n" +
                 "    maSanPham INTEGER ,\n" +
                 "    tongTien DECIMAL(10, 2),\n" +
                 "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
 

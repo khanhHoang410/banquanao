@@ -26,6 +26,10 @@
             android:layout_gravity="start"
             android:textSize="25dp"/>
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"/>
+        <TextView
             android:id="@+id/tv_email"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -35,6 +39,10 @@
             android:layout_gravity="start"
             android:textSize="25dp"/>
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"/>
+        <TextView
             android:id="@+id/tv_diaChi"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -43,6 +51,10 @@
 
             android:textStyle="bold"
             android:textSize="25dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"/>
         <TextView
             android:id="@+id/tv_sdt"
             android:gravity="center"

@@ -86,14 +86,11 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
 
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
-            int maSanPham = sanPham.getMaSanPham();
-            SharedPreferences sharedPreferences = context.getSharedPreferences("layMaSanPham",Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("maSanPham",maSanPham);
-            editor.apply();
+
             Intent intent = new Intent(context, ChitietSanPham.class);
             Log.d("ChitietSanPham", "Tên sản phẩm: " + sanPham.getTenSanPham());
             Log.d("ChitietSanPham", "Mô tả sản phẩm: " + sanPham.getMoTa());
+            intent.putExtra("maSanPham",sanPham.getMaSanPham());
             intent.putExtra("tenSanPham", sanPham.getTenSanPham());
             intent.putExtra("gia", String.valueOf(sanPham.getGia()));
             intent.putExtra("anh", sanPham.getAnh());
@@ -161,10 +158,9 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         // Lấy resource ID từ tên file
         int resourceId = context.getResources().getIdentifier(fileName.replace(".webp", ""), "drawable", context.getPackageName());
         if (resourceId != 0) {
-            // Chuyển đổi resource ID thành Bitmap
             return BitmapFactory.decodeResource(context.getResources(), resourceId);
         }
-        return null; // Trả về null nếu không tìm thấy ảnh
+        return null;
     }
     public void setOnItemLongClickListener(View.OnLongClickListener listener) {
         this.onItemLongClickListener = listener;
