@@ -64,10 +64,6 @@ public class ChitietSanPham extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-
-
-
-
         listDanhGia.setAdapter(adapter);
 
 
