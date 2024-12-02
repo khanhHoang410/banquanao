@@ -14,9 +14,9 @@ import java.util.List;
 public class GioHangDAO {
 
     private SQLiteDatabase db;
-    private DbHelper dbHelper;
+
     public GioHangDAO(Context context) {
-        dbHelper = new DbHelper(context);
+        DbHelper dbHelper = new DbHelper(context);
         db= dbHelper.getWritableDatabase();
     }
 
@@ -24,7 +24,6 @@ public class GioHangDAO {
         ContentValues values = new ContentValues();
         values.put("maDonHang", gioHang.getMaDonHang());
         values.put("maSanPham", gioHang.getMaSanPham());
-        values.put("maNguoiDung", gioHang.getMaNguoiDung()); // Thêm maNguoiDung
         values.put("tongTien", gioHang.getTongTien());
         return db.insert("GioHang", null, values);
     }
@@ -33,32 +32,29 @@ public class GioHangDAO {
         ContentValues values = new ContentValues();
         values.put("maDonHang", gioHang.getMaDonHang());
         values.put("maSanPham", gioHang.getMaSanPham());
-        values.put("maNguoiDung", gioHang.getMaNguoiDung()); // Thêm maNguoiDung
         values.put("tongTien", gioHang.getTongTien());
         return db.update("GioHang", values, "maGioHang = ?", new String[]{String.valueOf(gioHang.getMaGioHang())});
     }
+
     public int delete(int maGioHang) {
         return db.delete("GioHang", "maGioHang = ?", new String[]{String.valueOf(maGioHang)});
     }
 
-    public List<GioHang> getAll(int userId) {
+    public List<GioHang> getAll(){
         List<GioHang> gioHangList = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM GioHang WHERE maNguoiDung = ?", new String[]{String.valueOf(userId)});
-        if (cursor.moveToFirst()) {
-            do {
-                GioHang gioHang = new GioHang();
-                gioHang.setMaGioHang(cursor.getInt(cursor.getColumnIndexOrThrow("maGioHang")));
-                gioHang.setMaDonHang(cursor.getInt(cursor.getColumnIndexOrThrow("maDonHang")));
-                gioHang.setMaSanPham(cursor.getInt(cursor.getColumnIndexOrThrow("maSanPham")));
-                gioHang.setMaNguoiDung(cursor.getInt(cursor.getColumnIndexOrThrow("maNguoiDung")));
-                gioHang.setTongTien(cursor.getDouble(cursor.getColumnIndexOrThrow("tongTien"))); // Sử dụng getDouble cho tongTien
-                gioHangList.add(gioHang);
-            } while (cursor.moveToNext());
+        Cursor cursor = db.rawQuery("SELECT * FROM GioHang", null);
+        while (cursor.moveToNext()) {
+            GioHang gioHang = new GioHang();
+            gioHang.setMaGioHang(cursor.getInt(cursor.getColumnIndexOrThrow("maGioHang")));
+            gioHang.setMaDonHang(cursor.getInt(cursor.getColumnIndexOrThrow("maDonHang")));
+            gioHang.setMaSanPham(cursor.getInt(cursor.getColumnIndexOrThrow("maSanPham")));
+            gioHang.setTongTien((float) cursor.getDouble(cursor.getColumnIndexOrThrow("tongTien")));
+            gioHangList.add(gioHang);
         }
         cursor.close();
         return gioHangList;
     }
+
     public GioHang getById(int maGioHang) {
         Cursor cursor = db.rawQuery("SELECT * FROM GioHang WHERE maGioHang = ?", new String[]{String.valueOf(maGioHang)});
         if (cursor.moveToFirst()) {
@@ -66,7 +62,6 @@ public class GioHangDAO {
             gioHang.setMaGioHang(cursor.getInt(cursor.getColumnIndexOrThrow("maGioHang")));
             gioHang.setMaDonHang(cursor.getInt(cursor.getColumnIndexOrThrow("maDonHang")));
             gioHang.setMaSanPham(cursor.getInt(cursor.getColumnIndexOrThrow("maSanPham")));
-            gioHang.setMaNguoiDung(cursor.getInt(cursor.getColumnIndexOrThrow("maNguoiDung"))); // Lấy maNguoiDung
             gioHang.setTongTien((float) cursor.getDouble(cursor.getColumnIndexOrThrow("tongTien")));
             cursor.close();
             return gioHang;
@@ -74,5 +69,4 @@ public class GioHangDAO {
         cursor.close();
         return null;
     }
-
 }

@@ -36,18 +36,12 @@ import java.util.List;
 public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
-    private int userId;
+
     private List<SanPham> list;
     public OnYeuThichChangeListener listener;
     private static View.OnLongClickListener onItemLongClickListener;
     public interface OnYeuThichChangeListener {
         void onYeuThichChange(SanPham sanPham);
-    }
-    public SanPhamRecyclerViewAdapter(Context context, List<SanPham> list,OnYeuThichChangeListener listener,int userId) {
-        this.context = context;
-        this.list = list;
-        this.listener = listener;
-        this.userId = userId;
     }
     public SanPhamRecyclerViewAdapter(Context context, List<SanPham> list,OnYeuThichChangeListener listener) {
         this.context = context;
@@ -93,7 +87,6 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         // xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v->{
             int maSanPham = sanPham.getMaSanPham();
-            Log.d("ChitietSanPham", "Mã sản phẩm: " + maSanPham);
             SharedPreferences sharedPreferences = context.getSharedPreferences("layMaSanPham",Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("maSanPham",maSanPham);
@@ -107,7 +100,6 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
             intent.putExtra("moTa", sanPham.getMoTa());
             intent.putExtra("soLuong", sanPham.getSoLuong());
             intent.putExtra("maSanPham", sanPham.getMaSanPham());
-            intent.putExtra("userId", userId);
             context.startActivity(intent);
         });
         // Hiển thị trạng thái yêu thích

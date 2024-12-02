@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Shipped">
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Giao hàng"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
+
+    <!-- Order Info -->
+
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/tvSdt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number: 0999999999" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: admin" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/tvDiaChi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address: Hẻm 53 Ngô Gia Tự, Thành phố Buôn Ma Thuột"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/tvGia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Price: $178.125" />
+
+    <TextView
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Đang giao hàng" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+    <!-- Product Info -->
+    <ListView
+        android:id="@+id/lvGiaoHang"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:text="Bạn chưa có đơn hàng nào"
+        android:gravity="center"
+        android:visibility="gone" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnReturn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#E91E63"
+            android:text="Return " />
+
+        <Button
+            android:id="@+id/btnComplete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#2196F3"
+            android:text="Complete your order" />
+    </LinearLayout>
+
+
+</LinearLayout>

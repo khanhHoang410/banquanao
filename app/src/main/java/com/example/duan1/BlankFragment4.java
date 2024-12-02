@@ -107,5 +107,11 @@ public class BlankFragment4 extends Fragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.layoutshipeed).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Shipped.class));
+            }
+        });
     }
 }
