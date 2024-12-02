@@ -24,18 +24,21 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
+    private int userId;
     private Context context;
-    private List<GioHang> gioHangList;
+    List<GioHang> gioHangList;
     private GioHangDAO gioHangDAO;
     private SanPhamDAO sanPhamDAO;
     private TextView totalPriceTextView; // TextView để hiển thị tổng tiền
-
-    public CartAdapter(Context context, List<GioHang> gioHangList, TextView totalPriceTextView) {
+    private int currentQuantity = 1;
+    public CartAdapter(Context context, List<GioHang> gioHangList, TextView totalPriceTextView,int userId) {
         this.context = context;
         this.gioHangList = gioHangList;
         this.totalPriceTextView = totalPriceTextView;
+        this.userId = userId;
         gioHangDAO = new GioHangDAO(context);
         sanPhamDAO = new SanPhamDAO(context);
+
     }
 
     @NonNull
@@ -48,16 +51,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-
         GioHang gioHang = gioHangList.get(position);
-        Log.d("CartAdapter", "gioHang: " + gioHang);
+        Log.d("CartAdapter", "gioHang1: " + gioHang);
         if (gioHang != null) {
             // lấy mã sản phẩm từ giỏ hàng
             int maSanPham = gioHang.getMaSanPham();
-            String maSanPhamString = String.valueOf(maSanPham);
-            Log.d("CartAdapter", "maSanPham: " + maSanPhamString);
+            Log.d("CartAdapter", "maSanPham int: " + maSanPham);
+//            String maSanPhamString = String.valueOf(maSanPham);
+//            Log.d("CartAdapter", "maSanPham: " + maSanPhamString);
             // lấy sản phẩm từ masanpham
-            SanPham sanPham = sanPhamDAO.getID(maSanPhamString);
+            SanPham sanPham = sanPhamDAO.getID(maSanPham);
             if (sanPham != null) {
                 // Hiển thị dữ liệu sản phẩm
 //                holder.productImage.setImageResource(sanPham.getAnh());
@@ -69,33 +72,42 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 holder.productName.setText(sanPham.getTenSanPham());
                 //holder.colorSize.setText(sanPham.getColor() + " | Size: " + sanPham.getSize()); // Thay thế bằng cách lấy màu sắc và kích thước từ sanPham
                 holder.price.setText("$" + sanPham.getGia()); // Hiển thị giá sản phẩm
-                holder.quantity.setText("1"); // Hiển thị số lượng mặc định là 1
+//                holder.quantity.setText(String.valueOf(sanPham.getSoLuong())); // Hiển thị số lượng mặc định là 1
+//                holder.quantity.setTag(sanPham.getSoLuong()); // Lưu trữ số lượng sản phẩm hiện tại vào tag
+//                holder.quantity.setText(String.valueOf(sanPham.getSoLuong())); // Hiển thị số lượng sản phẩm hiện tại
+                holder.quantity.setText(String.valueOf(currentQuantity));
 
-                // Xử lý tăng/giảm số lượng
+
                 holder.increaseButton.setOnClickListener(v -> {
-                    int quantity = Integer.parseInt(holder.quantity.getText().toString()) + 1;
-                    holder.quantity.setText(String.valueOf(quantity));
+                    currentQuantity++; // Tăng số lượng sản phẩm hiện tại
+                    holder.quantity.setText(String.valueOf(currentQuantity));
 
+                    sanPham.setSoLuong(sanPham.getSoLuong()+1);
+                    sanPhamDAO.update(sanPham);
                     // Cập nhật tổng tiền trong GioHang
-                    gioHang.setTongTien(sanPham.getGia() * quantity);
+                    gioHang.setTongTien(sanPham.getGia() * currentQuantity);
                     gioHangDAO.update(gioHang);
 
                     // Cập nhật tổng tiền
                     updateTotalPrice();
+                    notifyItemChanged(position);
                 });
 
                 holder.decreaseButton.setOnClickListener(v -> {
-                    int quantity = Integer.parseInt(holder.quantity.getText().toString());
-                    if (quantity > 1) {
-                        quantity--;
-                        holder.quantity.setText(String.valueOf(quantity));
+                   if (currentQuantity > 1) {
+                        currentQuantity--;
+                        holder.quantity.setText(String.valueOf(currentQuantity));
 
                         // Cập nhật tổng tiền trong GioHang
-                        gioHang.setTongTien(sanPham.getGia() * quantity);
+                        sanPham.setSoLuong(currentQuantity);
+                        sanPhamDAO.update(sanPham);
+
+                        gioHang.setTongTien(sanPham.getGia() * currentQuantity);
                         gioHangDAO.update(gioHang);
 
                         // Cập nhật tổng tiền
                         updateTotalPrice();
+                        notifyItemChanged(position);
                     }
                 });
 
@@ -160,4 +172,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
         return null; // Trả về null nếu không tìm thấy ảnh
     }
+    public void updateData(List<GioHang> newGioHangList) {
+
+        this.gioHangList = newGioHangList;
+        notifyDataSetChanged();
+    }
+
 }

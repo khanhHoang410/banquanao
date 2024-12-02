@@ -7,6 +7,7 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 
 import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
 import com.example.duan1.Dao.SanPhamDAO;
+import com.example.duan1.Models.MyViewModel;
 import com.example.duan1.Models.SanPham;
 
 import java.util.ArrayList;
@@ -26,8 +28,10 @@ import java.util.List;
 
 public class BlankFragment extends Fragment {
     SanPhamRecyclerViewAdapter sanphamAdapter;
+    private MyViewModel viewModel;
     private OnYeuThichChangeListener listener;
     SanPham sanPham;
+    private int userId;
     List<SanPham> yeuthichList = new ArrayList<>();
     List<SanPham> list;
     SanPhamDAO sanPhamDAO;
@@ -55,11 +59,13 @@ public class BlankFragment extends Fragment {
         recycler_view_tshirts = view.findViewById(R.id.recycler_view_tshirts);
         handler.post(runnable); // Bắt đầu slideshow
 
+        viewModel = new ViewModelProvider(requireActivity()).get(MyViewModel.class);
+        userId = viewModel.getUserId();
         recycler_view_tshirts.setLayoutManager(new LinearLayoutManager(getContext()));
         sanPhamDAO = new SanPhamDAO(getContext());
         list = sanPhamDAO.getAll();
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list,this::updateYeuThichList); // Dùng RecyclerView.Adapter
+        sanphamAdapter = new SanPhamRecyclerViewAdapter(getContext(), list,this::updateYeuThichList,userId); // Dùng RecyclerView.Adapter
         recycler_view_tshirts.setAdapter(sanphamAdapter);
         recycler_view_tshirts.setLayoutManager(layoutManager);
         sanphamAdapter.updateData(list);

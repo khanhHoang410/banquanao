@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 15;
+    private static final int DB_VERSION= 18;
 
     // Bảng danh mục
 
@@ -105,12 +105,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
         String GioHang = "CREATE TABLE GioHang (\n" +
-                "    maGioHang INTEGER  PRIMARY KEY autoincrement,\n" +
-                "    maDonHang INTEGER ,\n" +
-                "    maSanPham INTEGER ,\n" +
+                "    maGioHang INTEGER PRIMARY KEY autoincrement,\n" +
+                "    maDonHang INTEGER,\n" +
+                "    maSanPham INTEGER,\n" +
+                "    maNguoiDung INTEGER,\n" + // Thêm cột maNguoiDung
                 "    tongTien DECIMAL(10, 2),\n" +
                 "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
-                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" + // Khóa ngoại mới
                 ");";
 
 

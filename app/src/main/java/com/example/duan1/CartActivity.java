@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1.Adapter.CartAdapter;
+import com.example.duan1.Dao.GioHangDAO;
 import com.example.duan1.Database.CartData;
 import com.example.duan1.Models.GioHang;
 import com.example.duan1.Models.SanPham;
@@ -24,10 +25,13 @@ import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
-        ImageView img_return;
-        RecyclerView rclcart;
-        CartAdapter adapter;
-        TextView totalPriceTextView;
+    ImageView img_return;
+    RecyclerView rclcart;
+    CartAdapter adapter;
+    TextView totalPriceTextView;
+    GioHangDAO gioHangDAO;
+    GioHang gioHang;
+    List<GioHang> gioHangList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,38 +43,73 @@ public class CartActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        gioHangDAO = new GioHangDAO(this);
         img_return = findViewById(R.id.img_return);
         rclcart = findViewById(R.id.recycler_view);
         totalPriceTextView = findViewById(R.id.total_price);
         rclcart.setLayoutManager(new LinearLayoutManager(this));
 
-
+        int userId = getIntent().getIntExtra("userId", -1);
+        Log.d("CartActivity", "userId: " + userId);
         // nhận dữ liệu từ intent
-
-        ArrayList<SanPham> sanPhamList = (ArrayList<SanPham>) CartData.cartItems;
-        Log.d("CartActivity", "Received sanPhamList size: " + sanPhamList.size());
-        // tạo danh sách giỏ hàng
-        List<GioHang> gioHangList= new ArrayList<>();
-        // tạo danh sách giỏ hàng từ danhsachSanPhamd
-        if (sanPhamList!=null){
-            for (SanPham sanPham : sanPhamList){
-                GioHang gioHang = new GioHang();
-                gioHang.setMaDonHang(1);
-                gioHang.setMaSanPham(sanPham.getMaSanPham());
-                gioHang.setTongTien(sanPham.getGia());
-                gioHangList.add(gioHang);
-            }
+        gioHangList = gioHangDAO.getAll(userId);
+        Log.d("CartActivity", "Gio hang list: " + gioHangList.size());
+        if (gioHangList.isEmpty()) {
+            Toast.makeText(this, "Không có sản phẩm nào trong giỏ hàng", Toast.LENGTH_SHORT).show();
+//            ArrayList<SanPham> sanPhamList = (ArrayList<SanPham>) CartData.cartItems;
+//            Log.d("CartActivity", "Received sanPhamList size: " + sanPhamList.size());
+//            if (sanPhamList!=null && !sanPhamList.isEmpty()){
+//                for (SanPham sanPham : sanPhamList){
+//                    GioHang gioHang = new GioHang();
+//                    gioHang.setMaDonHang(1);
+//                    gioHang.setMaSanPham(sanPham.getMaSanPham());
+//                    gioHang.setTongTien(sanPham.getGia());
+//                    gioHangList.add(gioHang);
+//                    gioHangDAO.insert(gioHang);
+//                }
         } else {
-        Toast.makeText(this, "Không có sản phẩm nào trong giỏ hàng", Toast.LENGTH_SHORT).show();
-        finish();
-    }
-        adapter  = new CartAdapter(this,gioHangList,totalPriceTextView);
-        adapter.updateTotalPrice();
-        rclcart.setAdapter(adapter);
+            adapter = new CartAdapter(this, gioHangList, totalPriceTextView, userId);
+            adapter.updateTotalPrice();
+            rclcart.setAdapter(adapter);
+
+            img_return.setOnClickListener(v -> finish());
+
+
+        }
+//    public void updateCart(GioHang gioHang) {
+//        gioHangList.add(gioHang);
+//        adapter.notifyDataSetChanged();
+//        adapter.updateTotalPrice(); // Cập nhật tổng tiền
+//    }
+
+
+//        adapter  = new CartAdapter(this,gioHangList,totalPriceTextView,userId);
+//        adapter.updateTotalPrice();
+//        rclcart.setAdapter(adapter);
 
 
         img_return.setOnClickListener(v -> finish());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cập nhật lại gioHangList khi Activity được hiển thị lại
+        int userId = getIntent().getIntExtra("userId", -1);
+        Log.d("CartActivity", "userId: " + userId);
+        gioHangList = gioHangDAO.getAll(userId);
+        if (adapter != null) {
+            adapter.updateData(gioHangList); // Cập nhật dữ liệu cho adapter
+            adapter.notifyDataSetChanged(); // Thông báo cho adapter cập nhật giao diện
+            adapter.updateTotalPrice(); // Cập nhật tổng tiền
+        }
+
     }
 
 
 }
+    
+//}

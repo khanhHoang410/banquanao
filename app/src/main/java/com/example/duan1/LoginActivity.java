@@ -3,6 +3,7 @@ package com.example.duan1;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         // Ánh xạ view
         edEmail = findViewById(R.id.edEmail);
         edPassword = findViewById(R.id.edPassWord);
@@ -67,8 +69,12 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putInt("maNguoiDung", maNguoiDung); // Lưu mã người dùng
                     editor.putString("email", email);
                     editor.apply();
+                    int userId = getCurrentUserId(); // lấy id người dùng hiện tại ngay sau khi lưu
+                    Log.d("userId", "userId: " + userId);
+
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("userId",userId); // thêm
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Email hoặc mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
@@ -116,5 +122,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+    public int getCurrentUserId(){
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        return sharedPreferences.getInt("maNguoiDung", -1);
     }
 }

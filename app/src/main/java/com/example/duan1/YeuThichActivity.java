@@ -49,7 +49,7 @@ public class YeuThichActivity extends AppCompatActivity {
         }
 
         rclYeuthich = findViewById(R.id.rclYeuthich);
-        SanPhamRecyclerViewAdapter sanPhamAdapter = new SanPhamRecyclerViewAdapter(this, yeuthichList,null);
+        SanPhamRecyclerViewAdapter sanPhamAdapter = new SanPhamRecyclerViewAdapter(this, yeuthichList,null,-1);
         sanPhamAdapter.updateData(yeuthichList);
         rclYeuthich.setLayoutManager(new GridLayoutManager(this, 2)); // Số 2 là số cột
         rclYeuthich.setAdapter(sanPhamAdapter);

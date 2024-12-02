@@ -18,8 +18,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.duan1.Adapter.SanPhamRecyclerViewAdapter;
+import com.example.duan1.Models.MyViewModel;
 import com.example.duan1.Models.SanPham;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
     List<SanPham> yeuthichList = new ArrayList<>();
     SanPhamRecyclerViewAdapter adapter;
     ImageView searchIcon;
-
+    private int userId;
+    private MyViewModel viewModel;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,12 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
+
+        userId = getIntent().getIntExtra("userId", -1);
+        viewModel.setUserId(userId);
+        Log.d("MainActivity", "userId: " + userId);
+
 
         // Khởi tạo searchIcon
         searchIcon = findViewById(R.id.icon_search);
@@ -73,7 +82,7 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
             } else {
                 yeuthichList.remove(sanPham);
             }
-        });
+        },userId);
         imgYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +95,9 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
         imgGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CartActivity.class));
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                intent.putExtra("userId",userId);
+                startActivity(intent);
             }
         });
 
