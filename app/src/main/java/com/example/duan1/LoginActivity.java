@@ -128,3 +128,4 @@ public class LoginActivity extends AppCompatActivity {
         return sharedPreferences.getInt("maNguoiDung", -1);
     }
 }
+

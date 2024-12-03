@@ -68,31 +68,58 @@ public class QuanLySanPhamActivity extends AppCompatActivity {
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,new IntentFilter("sanpham_added"));
 
+        BroadcastReceiver broadcastReceiverUpdate = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                updateSanPhamList();
+            }
+        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiverUpdate, new IntentFilter("sanpham_updated"));
         adapter.setOnItemLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
                 int position = rcl.getChildAdapterPosition(v);
                 if (position != RecyclerView.NO_POSITION) {
+                    SanPham sanPham = list.get(position); // Lấy sản phẩm tại vị trí được click
+
                     new AlertDialog.Builder(QuanLySanPhamActivity.this)
-                            .setTitle("Xác nhận xóa")
-                            .setMessage("Bạn có muốn xóa sản phẩm này không?")
-                            .setPositiveButton("Có", (dialog, which) -> {
-                                SanPham sanPham = list.get(position);
-                                sanPhamDAO.delete(sanPham.getMaSanPham());
-                                list.remove(position);
-                                adapter.notifyItemRemoved(position);
-                                adapter.notifyItemRangeChanged(position, list.size());
+                            .setTitle("Tùy chọn")
+                            .setItems(new String[]{"Sửa", "Xóa"}, (dialog, which) -> {
+                                switch (which) {
+                                    case 0: // Sửa
+                                        Intent intent = new Intent(QuanLySanPhamActivity.this, SuaSanPhamActivity.class);
+                                        intent.putExtra("sanPham", sanPham); // Truyền sản phẩm cần sửa sang activity SuaSanPhamActivity
+                                        startActivity(intent);
+                                        break;
+                                    case 1: // Xóa
+                                        new AlertDialog.Builder(QuanLySanPhamActivity.this)
+                                                .setTitle("Xác nhận xóa")
+                                                .setMessage("Bạn có muốn xóa sản phẩm này không?")
+                                                .setPositiveButton("Có", (dialog1, which1) -> {
+                                                    sanPhamDAO.delete(sanPham.getMaSanPham());
+                                                    list.remove(position);
+                                                    adapter.notifyItemRemoved(position);
+                                                    adapter.notifyItemRangeChanged(position, list.size());
+                                                })
+                                                .setNegativeButton("Không", null)
+                                                .show();
+                                        break;
+                                }
                             })
-                            .setNegativeButton("Không", null)
                             .show();
                     return true;
                 }
-                    return false;
-
+                return false;
             }
         });
 
+    }
+    private void updateSanPhamList() {
+
+        list = sanPhamDAO.getAll();
+        adapter.updateData(list);
+        adapter.notifyDataSetChanged();
     }
 
 }

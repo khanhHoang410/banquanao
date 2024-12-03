@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_Name = "FaciwayDB";
-    private static final int DB_VERSION= 15;
+    private static final int DB_VERSION= 18;
 
     // Bảng danh mục
 
@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String DanhMuc = "CREATE TABLE DanhMuc (\n" +
-                "    maDanhMuc INTEGER PRIMARY KEY autoincrement,\n" + 
+                "    maDanhMuc INTEGER PRIMARY KEY autoincrement,\n" +
                 "    tenDanhMuc VARCHAR(255)\n" +
                 ");";
 
@@ -105,12 +105,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
                 ");";
         String GioHang = "CREATE TABLE GioHang (\n" +
-                "    maGioHang INTEGER  PRIMARY KEY autoincrement,\n" +
-                "    maDonHang INTEGER ,\n" +
-                "    maSanPham INTEGER ,\n" +
+                "    maGioHang INTEGER PRIMARY KEY autoincrement,\n" +
+                "    maDonHang INTEGER,\n" +
+                "    maSanPham INTEGER,\n" +
+                "    maNguoiDung INTEGER,\n" + // Thêm cột maNguoiDung
                 "    tongTien DECIMAL(10, 2),\n" +
                 "    FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),\n" +
-                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)\n" +
+                "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" + // Khóa ngoại mới
                 ");";
 
 
@@ -149,10 +151,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 "(2, 3, 1, 29.99, NULL),\n" +
                 "(2, 4, 3, 49.99, NULL),\n" +
                 "(3, 5, 4, 29.99, NULL);");
-    db.execSQL("INSERT INTO DonHang (maNguoiDung, ngayDat, trangThai, tongTien) VALUES\n" +
-            "(1, '2024-11-01', 'Hoàn tất', 3599.93),\n" +
-            "(2, '2024-11-02', 'Đang xử lý', 149.97),\n" +
-            "(1, '2024-11-03', 'Đã giao', 119.96);");
+        db.execSQL("INSERT INTO DonHang (maNguoiDung, ngayDat, trangThai, tongTien) VALUES\n" +
+                "(1, '2024-11-01', 'Hoàn tất', 3599.93),\n" +
+                "(2, '2024-11-02', 'Đang xử lý', 149.97),\n" +
+                "(1, '2024-11-03', 'Đã giao', 119.96);");
     }
 
 
@@ -174,3 +176,4 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 }
+

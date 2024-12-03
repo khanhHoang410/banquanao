@@ -94,7 +94,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 });
 
                 holder.decreaseButton.setOnClickListener(v -> {
-                   if (currentQuantity > 1) {
+                    if (currentQuantity > 1) {
                         currentQuantity--;
                         holder.quantity.setText(String.valueOf(currentQuantity));
 

@@ -36,6 +36,7 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.firebase.database
     implementation libs.volley
+    implementation libs.filament.android
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

@@ -21,7 +21,7 @@ public class GioHang implements Serializable {
     public GioHang() {
     }
 
-    
+
     public int getMaGioHang() {
         return maGioHang;
     }
@@ -30,7 +30,7 @@ public class GioHang implements Serializable {
         this.maGioHang = maGioHang;
     }
 
-  
+
     public int getMaDonHang() {
         return maDonHang;
     }
@@ -39,7 +39,7 @@ public class GioHang implements Serializable {
         this.maDonHang = maDonHang;
     }
 
-   
+
     public int getMaSanPham() {
         return maSanPham;
     }
@@ -48,7 +48,7 @@ public class GioHang implements Serializable {
         this.maSanPham = maSanPham;
     }
 
-   
+
     public int getMaNguoiDung() {
         return maNguoiDung;
     }
@@ -57,7 +57,7 @@ public class GioHang implements Serializable {
         this.maNguoiDung = maNguoiDung;
     }
 
-   
+
     public double getTongTien() {
         return tongTien;
     }

@@ -50,7 +50,7 @@ public class SanPhamDAO {
         values.put("maDanhMuc", obj.getMaDanhMuc());
         values.put("soLuong", obj.getSoLuong());
         values.put("anh",obj.getAnh());
-        values.put("isYeuThich", obj.getYeuThich());
+//        values.put("isYeuThich", obj.getYeuThich() ?1:0);
 
         // Chuyển Bitmap sang byte[] và lưu vào ContentValues
 //        if (obj.getAnh() != null) {
@@ -120,3 +120,4 @@ public class SanPhamDAO {
     }
 
 }
+
