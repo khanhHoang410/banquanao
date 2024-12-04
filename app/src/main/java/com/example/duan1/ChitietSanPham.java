@@ -129,6 +129,7 @@ public class ChitietSanPham extends AppCompatActivity {
                 String anh = imgChitietSanpham.getDrawable().toString();
                 int masanpham = getIntent().getIntExtra("maSanPham",-1);
 
+
                 // tạo một sản phẩm mới
                 SanPham sanPham = new SanPham();
                 sanPham.setTenSanPham(tensp);
@@ -138,38 +139,48 @@ public class ChitietSanPham extends AppCompatActivity {
 
                 int userId = getIntent().getIntExtra("userId", -1);
                 Log.d("mã người dùng", "userId: " + userId);
-                GioHang gioHang = new GioHang();
-                gioHang.setMaNguoiDung(userId);
-                gioHang.setMaSanPham(masanpham);
-                Log.d("mã sản phẩm", "masanpham: " + masanpham);
-                gioHang.setTongTien(giasp);
-                gioHang.setMaNguoiDung(userId);
+                GioHang existingGioHang = gioHangDAO.getGioHangByMaSanPhamAndMaNguoiDung(masanpham, userId);
+                if (existingGioHang!=null){
+                    // sản phẩm đã tồn tại cập nhât tổng tiền
+                    float newTotalPrice = (float) (existingGioHang.getTongTien() + giasp);
+                    existingGioHang.setTongTien(newTotalPrice);
+                    gioHangDAO.update(existingGioHang);
+                    Toast.makeText(ChitietSanPham.this, "Đã cập nhật số lượng sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                }else {
+                    GioHang gioHang = new GioHang();
+                    gioHang.setMaNguoiDung(userId);
+                    gioHang.setMaSanPham(masanpham);
+                    Log.d("mã sản phẩm", "masanpham: " + masanpham);
+                    gioHang.setTongTien(giasp);
+                    gioHang.setMaNguoiDung(userId);
 
-                // thêm sản phẩm  vào array
+                    // thêm sản phẩm  vào array
 //                List<SanPham> sanPhamList = new ArrayList<>();
 //                sanPhamList.add(sanPham);
 //                CartData.cartItems.add(sanPham);
 //                // thêm vào giỏ hàng
-                long result = gioHangDAO.insert(gioHang);
+                    long result = gioHangDAO.insert(gioHang);
 
-                if (result>0){
-                    Toast.makeText(ChitietSanPham.this, "đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                    Log.d("CartActivity", "CartData.cartItems size: " + CartData.cartItems.size());
-                    Intent intent = new Intent(ChitietSanPham.this, CartActivity.class);
-                    intent.putExtra("gioHang", gioHang);
-                    intent.putExtra("userId", userId);
+                    if (result>0){
+                        Toast.makeText(ChitietSanPham.this, "đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        Log.d("CartActivity", "CartData.cartItems size: " + CartData.cartItems.size());
+                        Intent intent = new Intent(ChitietSanPham.this, CartActivity.class);
+                        intent.putExtra("gioHang", gioHang);
+                        intent.putExtra("userId", userId);
 
-                    // Truyền userId
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(ChitietSanPham.this, "Thêm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
+                        // Truyền userId
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(ChitietSanPham.this, "Thêm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 // truyền array sang cart actitity
 
 //                intent.putExtra("gioHang", gioHang);
 //                intent.putExtra("sanPhamList", (ArrayList<SanPham>) sanPhamList); // Không cần thiết// Khởi chạy CartActivity mà không chuyển màn hình
 //
-
+                
             }
         });
 

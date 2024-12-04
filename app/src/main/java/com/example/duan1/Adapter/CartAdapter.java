@@ -38,7 +38,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         this.userId = userId;
         gioHangDAO = new GioHangDAO(context);
         sanPhamDAO = new SanPhamDAO(context);
-
     }
 
     @NonNull
@@ -77,7 +76,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 //                holder.quantity.setText(String.valueOf(sanPham.getSoLuong())); // Hiển thị số lượng sản phẩm hiện tại
                 holder.quantity.setText(String.valueOf(currentQuantity));
 
-
+                int quantity = (int) (gioHang.getTongTien() / sanPham.getGia());
+                holder.quantity.setText(String.valueOf(quantity));
                 holder.increaseButton.setOnClickListener(v -> {
                     currentQuantity++; // Tăng số lượng sản phẩm hiện tại
                     holder.quantity.setText(String.valueOf(currentQuantity));

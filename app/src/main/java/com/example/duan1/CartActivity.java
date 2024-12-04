@@ -1,7 +1,9 @@
 package com.example.duan1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
     GioHangDAO gioHangDAO;
     GioHang gioHang;
     List<GioHang> gioHangList;
+    Button checkout_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +46,13 @@ public class CartActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        checkout_button = findViewById(R.id.checkout_button);
         gioHangDAO = new GioHangDAO(this);
         img_return = findViewById(R.id.img_return);
         rclcart = findViewById(R.id.recycler_view);
         totalPriceTextView = findViewById(R.id.total_price);
         rclcart.setLayoutManager(new LinearLayoutManager(this));
+
 
         int userId = getIntent().getIntExtra("userId", -1);
         Log.d("CartActivity", "userId: " + userId);
@@ -90,7 +94,28 @@ public class CartActivity extends AppCompatActivity {
 
 
         img_return.setOnClickListener(v -> finish());
+        checkout_button.setOnClickListener(v->{
+            int maNguoiDung = getIntent().getIntExtra("userId", -1);
+            double totalPrice = gioHangDAO.calculateTotalPrice(maNguoiDung);
+            GioHang gioHangTong = new GioHang();
+            gioHangTong.setMaNguoiDung(maNguoiDung);
+            gioHangTong.setTongTien(totalPrice);
 
+            long resultGioHang = gioHangDAO.insert(gioHangTong);
+
+            if (resultGioHang>0){
+                int maGioHang = (int) resultGioHang;
+                Intent intent = new Intent(CartActivity.this, Nhapthongtinvadiachi.class);
+                intent.putExtra("maGioHang", maGioHang);
+                intent.putExtra("totalPrice", totalPrice);
+                intent.putExtra("userId", maNguoiDung);
+                startActivity(intent);
+            }else {
+                Toast.makeText(this, "Lỗi khi tạo giỏ hàng tổng", Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
 
     }
 

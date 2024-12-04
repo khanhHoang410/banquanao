@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.duan1'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.duan1"
@@ -37,6 +37,7 @@ dependencies {
     implementation libs.firebase.database
     implementation libs.volley
     implementation libs.filament.android
+    implementation libs.media3.common
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

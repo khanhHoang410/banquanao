@@ -45,6 +45,7 @@ public class QuanLySanPhamActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         rcl = findViewById(R.id.rclqlsanpham);
         sanPhamDAO = new SanPhamDAO(this);
         list = sanPhamDAO.getAll();
@@ -57,7 +58,6 @@ public class QuanLySanPhamActivity extends AppCompatActivity {
         fltthem.setOnClickListener(v -> {
             startActivity(new Intent(this, ThemSanPhamActivity.class));
         });
-
 
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override

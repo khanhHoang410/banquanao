@@ -20,6 +20,7 @@ public class GioHangDAO {
         db= dbHelper.getWritableDatabase();
     }
 
+
     public long insert(GioHang gioHang) {
         ContentValues values = new ContentValues();
         values.put("maDonHang", gioHang.getMaDonHang());
@@ -73,6 +74,33 @@ public class GioHangDAO {
         }
         cursor.close();
         return null;
+    }
+    public GioHang getGioHangByMaSanPhamAndMaNguoiDung(int maSanPham, int maNguoiDung) {
+        String query = "SELECT * FROM GioHang WHERE maSanPham = ? AND maNguoiDung = ?";
+        Cursor cursor = db.rawQuery(query,new String[]{String.valueOf(maSanPham), String.valueOf(maNguoiDung)});
+
+        if (cursor.moveToFirst()) {
+            GioHang gioHang = new GioHang();
+            gioHang.setMaGioHang(cursor.getInt(cursor.getColumnIndexOrThrow("maGioHang")));
+            gioHang.setMaDonHang(cursor.getInt(cursor.getColumnIndexOrThrow("maDonHang")));
+            gioHang.setMaSanPham(cursor.getInt(cursor.getColumnIndexOrThrow("maSanPham")));
+            gioHang.setMaNguoiDung(cursor.getInt(cursor.getColumnIndexOrThrow("maNguoiDung")));
+            gioHang.setTongTien(cursor.getDouble(cursor.getColumnIndexOrThrow("tongTien")));
+            cursor.close();
+            return gioHang;
+        }
+
+        cursor.close();
+        return null;
+    }
+    public double calculateTotalPrice(int maNguoiDung) {
+        double totalPrice = 0;
+
+        List<GioHang> gioHangList = getAll(maNguoiDung);
+
+        for (GioHang gioHang : gioHangList) {
+            totalPrice += gioHang.getTongTien();}
+        return totalPrice;
     }
 
 }

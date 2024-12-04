@@ -101,11 +101,34 @@ public class ThemSanPhamActivity extends AppCompatActivity {
 
                 // Lấy các thông tin khác của sản phẩm
                 String tenSanPham = etTenSanPham.getText().toString();
-                float giaSanPham = Float.parseFloat(etGiaSanPham.getText().toString());
+                String giaSanPhamStr= etGiaSanPham.getText().toString();
                 String moTaSanPham = etMoTaSanPham.getText().toString();
-                int soLuongSanPham = Integer.parseInt(etSoLuongSanPham.getText().toString());
+                String soLuongSanPhamStr = etSoLuongSanPham.getText().toString();
 
-                // Lấy tên file từ Uri
+                if (tenSanPham.isEmpty()) {
+                    etTenSanPham.setError("Tên sản phẩm không được để trống");
+                    return;
+                }
+                if (giaSanPhamStr.isEmpty() || !giaSanPhamStr.matches("\\d+(\\.\\d+)?")) {
+                    etGiaSanPham.setError("Giá sản phẩm phải là số dương");
+                    return;
+                }
+                if (soLuongSanPhamStr.isEmpty() || !soLuongSanPhamStr.matches("\\d+")) {
+                    etSoLuongSanPham.setError("Số lượng sản phẩm phải là số nguyên dương");
+                    return;
+                }
+                if (moTaSanPham.isEmpty()) {
+                    etMoTaSanPham.setError("Mô tả sản phẩm không được để trống");
+                    return;
+                }
+                if (imageUri == null) {
+                    Toast.makeText(this, "Vui lòng chọn hình ảnh sản phẩm", Toast.LENGTH_SHORT).show();
+                    return;}
+
+
+                float giaSanPham = Float.parseFloat(giaSanPhamStr);
+                int soLuongSanPham = Integer.parseInt(soLuongSanPhamStr);
+
                 String fileName = getFileNameFromUri(imageUri);
 
 
