@@ -32,13 +32,13 @@
             android:textSize="14sp" />
 
         <!-- Trạng thái đơn hàng -->
-        <TextView
-            android:id="@+id/tvTrangThai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trạng thái: Đang xử lý"
-            android:textColor="#008000"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvTrangThai"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Trạng thái: Đang xử lý"-->
+<!--            android:textColor="#008000"-->
+<!--            android:textSize="14sp" />-->
 
         <!-- Tổng tiền -->
         <TextView

@@ -25,6 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    tenDanhMuc VARCHAR(255)\n" +
                 ");";
 
+
         String SanPham = "CREATE TABLE SanPham (\n" +
                 "    maSanPham INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    tenSanPham VARCHAR(255),\n" +
@@ -36,6 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    isYeuThich INTEGER DEFAULT 0,\n" +
                 "    FOREIGN KEY (maDanhMuc) REFERENCES DanhMuc(maDanhMuc)\n" +
                 ");";
+
         String KichThuoc = "CREATE TABLE KichThuoc (\n" +
                 "    maKichThuoc INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    tenKichThuoc VARCHAR(50)\n" +

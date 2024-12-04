@@ -43,7 +43,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String ngayDatFormatted = dateFormat.format(donHang.getNgayDat());
         holder.tvNgayDat.setText("Ngày đặt: " + ngayDatFormatted);
-        holder.tvTrangThai.setText("Trạng thái: " + donHang.getTrangThai());
+//        holder.tvTrangThai.setText("Trạng thái: " + donHang.getTrangThai());
         holder.tvTongTien.setText("Tổng tiền: " + donHang.getTongTien() + " VND");
         holder.tvSoDienThoai.setText("Số điện thoại: " + donHang.getPhoneNumber());
         holder.tvDiaChi.setText("Địa chỉ: " + donHang.getDiaChi());
@@ -90,7 +90,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
             super(itemView);
             tvTenKhachHang = itemView.findViewById(R.id.tvTenKhachHang);
             tvNgayDat = itemView.findViewById(R.id.tvNgayDat);
-            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
+//            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
             tvTongTien = itemView.findViewById(R.id.tvTongTien);
             tvSoDienThoai = itemView.findViewById(R.id.tvSoDienThoai);
             tvDiaChi = itemView.findViewById(R.id.tvDiaChi);
