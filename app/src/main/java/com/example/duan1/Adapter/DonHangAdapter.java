@@ -51,8 +51,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
             @Override
             public boolean onLongClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xóa dữ liệu");
-                builder.setMessage("Bạn có chắc muốn xóa không ?");
+                builder.setTitle("Hủy đơn hàng");
+                builder.setMessage("Bạn có chắc hủy đơn hàng không ?");
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
