@@ -51,9 +51,10 @@ public class Xacnhanthongtindiachi extends AppCompatActivity {
         });
         btn_continue.setOnClickListener(v -> {
             Toast.makeText(Xacnhanthongtindiachi.this, "Đơn hàng của bạn đã được xử lý", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Xacnhanthongtindiachi.this, DonhangActivity.class);
-            intent.putExtra("maDonHang", maDonHang);
-            startActivity(intent);
+//            Intent intent = new Intent(Xacnhanthongtindiachi.this, DonhangActivity.class);
+//            intent.putExtra("maDonHang", maDonHang);
+//            startActivity(intent);
+            startActivity(new Intent(Xacnhanthongtindiachi.this,MainActivity.class));
             SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("maNguoidung", maNguoidung);

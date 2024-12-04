@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
             String password = edPassWord.getText().toString().trim();
             String tennguoidung = edTenNguoiDung.getText().toString().trim();
             String confirmPassword = edConfirmPassword.getText().toString().trim();
-            int sdt = Integer.parseInt(edSdthoai.getText().toString().trim());
+            String sdt = edSdthoai.getText().toString().trim();
             String diachi = edDiaChi.getText().toString().trim();
             if (validateInput(email, password, confirmPassword)) {
                 boolean isRegistered = nguoiDungDAO.register(tennguoidung, email, password, sdt, diachi);
@@ -72,7 +72,26 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+        edSdthoai.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Không cần thực hiện gì ở đây
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Kiểm tra nếu người dùng đã xóa hết nội dung
+                if (s.length() == 0) {
+                    edSdthoai.setText("+84");
+                    edSdthoai.setSelection(edSdthoai.getText().length()); // Đặt con trỏ ở cuối
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Không cần thực hiện gì ở đây
+            }
+        });
 
     }
 

@@ -1,12 +1,15 @@
 package com.example.duan1.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan1.Dao.DonHangDAO;
 import com.example.duan1.Models.DonHang;
 import com.example.duan1.R;
 
@@ -44,6 +47,35 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         holder.tvTongTien.setText("Tổng tiền: " + donHang.getTongTien() + " VND");
         holder.tvSoDienThoai.setText("Số điện thoại: " + donHang.getPhoneNumber());
         holder.tvDiaChi.setText("Địa chỉ: " + donHang.getDiaChi());
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Xóa dữ liệu");
+                builder.setMessage("Bạn có chắc muốn xóa không ?");
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DonHangDAO donHangDAO = new DonHangDAO(context);
+                        donHangDAO.delete(donHang.getMaDonHang());
+                        donHangList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, donHangList.size()); // Cập nhật lại vị trí
+                    }
+                });
+
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
     }
 
     @Override

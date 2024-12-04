@@ -1,6 +1,7 @@
 package com.example.duan1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.example.duan1.Dao.GioHangDAO;
 import com.example.duan1.Models.DonHang;
 import com.example.duan1.Models.GioHang;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -60,19 +62,22 @@ public class Nhapthongtinvadiachi extends AppCompatActivity {
                 String phoneNumber = etPhoneNumber.getText().toString().trim();
 
                 int maGioHang = getIntent().getIntExtra("maGioHang", -1);
-                int maNguoiDung = getIntent().getIntExtra("maNguoiDung", -1);
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                int id = sharedPreferences.getInt("maNguoiDung", -1);
                 GioHangDAO gioHangDAO = new GioHangDAO(this);
-                List<GioHang> gioHangList = gioHangDAO.getAll(maNguoiDung);
-
+                List<GioHang> gioHangList = gioHangDAO.getAll(id);
+                Date currentDate = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = dateFormat.format(currentDate);
                 // tạo đối tượng đơn hàng mới
                 DonHang donHang = new DonHang();
-                donHang.setMaNguoiDung(maNguoiDung);
+                donHang.setMaNguoiDung(id);
                 donHang.setTen(firstName);
                 donHang.setDiaChi(address);
                 donHang.setPhoneNumber(phoneNumber);
                 donHang.setTongTien((float) totalPrice);
                 donHang.setMaGioHang(maGioHang);
-                donHang.setNgayDat(new Date());
+                donHang.setNgayDat(currentDate);
                 DonHangDAO donHangDAO = new DonHangDAO(this);
                 long result = donHangDAO.insert(donHang);
 

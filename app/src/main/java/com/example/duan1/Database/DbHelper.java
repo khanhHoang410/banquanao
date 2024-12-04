@@ -12,9 +12,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Bảng danh mục
 
+
     public DbHelper( Context context){
         super(context, DB_Name,null,DB_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -59,8 +61,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maKichThuoc) REFERENCES KichThuoc(maKichThuoc)\n" +
                 ");";
-
-
         String NguoiDung = "CREATE TABLE NguoiDung (\n" +
                 "    maNguoiDung INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    tenNguoiDung VARCHAR(255),\n" +
@@ -70,21 +70,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    sdt INTEGER ,\n" +
                 "    role INTEGER \n" +
                 ");";
-
         String DonHang = "CREATE TABLE DonHang (\n" +
                 "    maDonHang INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    maNguoiDung INTEGER ,\n" +
                 "    ngayDat DATE,\n" +
                 "    trangThai VARCHAR(50),\n" +
                 "    tongTien DECIMAL(10, 2),\n" +
-                "    diaChi TEXT,\n" +
-                "    phoneNumber TEXT,\n" +
-                "    ten TEXT,\n" +
-                "    maGioHang INTEGER,\n" + // Thêm cột maGioHang
-                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung),\n" +
-                "    FOREIGN KEY (maGioHang) REFERENCES GioHang(maGioHang)\n" + // Thêm khóa ngoại
+                "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
                 ");";
-
         String DanhGia = "CREATE TABLE DanhGia (\n" +
                 "    maDanhGia INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    maSanPham INTEGER ,\n" +
@@ -94,7 +87,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham),\n" +
                 "    FOREIGN KEY (maNguoiDung) REFERENCES NguoiDung(maNguoiDung)\n" +
                 ");";
-
         String YeuThich = "CREATE TABLE YeuThich (\n" +
                 "    maYeuThich INTEGER  PRIMARY KEY autoincrement,\n" +
                 "    maNguoiDung INTEGER ,\n" +
@@ -159,7 +151,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 "(2, 3, 1, 29.99, NULL),\n" +
                 "(2, 4, 3, 49.99, NULL),\n" +
                 "(3, 5, 4, 29.99, NULL);");
-
+        db.execSQL("INSERT INTO DonHang (maNguoiDung, ngayDat, trangThai, tongTien) VALUES\n" +
+                "(1, '2024-11-01', 'Hoàn tất', 3599.93),\n" +
+                "(2, '2024-11-02', 'Đang xử lý', 149.97),\n" +
+                "(1, '2024-11-03', 'Đã giao', 119.96);");
     }
 
 

@@ -113,5 +113,17 @@ public class BlankFragment4 extends Fragment {
                 startActivity(new Intent(getContext(), Shipped.class));
             }
         });
+        view.findViewById(R.id.layoutThongKe).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ThongKeActivity.class));
+            }
+        });
+        view.findViewById(R.id.layoutdonhanh).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), DonhangActivity.class));
+            }
+        });
     }
 }

@@ -38,7 +38,7 @@ public class NguoiDungDAO {
         }
         return maNguoiDung; // Trả về mã người dùng hoặc -1 nếu không tìm thấy
     }
-    public boolean register(String tennguoidung,String email, String password , int sdt,String diachi) {
+    public boolean register(String tennguoidung,String email, String password , String sdt,String diachi) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tenNguoiDung", tennguoidung);

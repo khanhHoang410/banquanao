@@ -216,5 +216,3 @@ public class ChitietSanPham extends AppCompatActivity {
         return null; // Trả về null nếu không tìm thấy ảnh
     }
 }
-
-

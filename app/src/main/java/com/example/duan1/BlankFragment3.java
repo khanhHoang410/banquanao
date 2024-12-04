@@ -1,5 +1,7 @@
 package com.example.duan1;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,13 +30,13 @@ public class BlankFragment3 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank3, container, false);
-
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        int id = sharedPreferences.getInt("maNguoiDung", -1);
         int userId = getArguments().getInt("userId", -1);
         Log.d("BlankFragment3", "userId: " + userId);
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        int userId2 = sharedPreferences.getInt("maNguoidung", -1);
+
         DonHangDAO donHangDAO = new DonHangDAO(requireContext());
-        List<DonHang> donHangList = donHangDAO.getByUserId(userId2);
+        List<DonHang> donHangList = donHangDAO.getByUserId(id);
         Log.d("TAG", "fragment3: " + donHangList.size());
             recycler_view3 = view.findViewById(R.id.recycler_view3);
             LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());

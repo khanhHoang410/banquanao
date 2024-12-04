@@ -19,11 +19,13 @@ import kotlin.Suppress;
 
 public class SanPhamDAO {
     private SQLiteDatabase db;
+    private DbHelper dbHelper;
 
     public SanPhamDAO(Context context) {
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
+
 
     public long insert(SanPham obj){
         ContentValues values = new ContentValues();

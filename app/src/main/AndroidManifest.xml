@@ -25,10 +25,16 @@
             android:name=".Nhapthongtinvadiachi"
             android:exported="false" />
         <activity
+            android:name=".ThongKeActivity"
+            android:exported="false" />
+        <activity
             android:name=".SuaSanPhamActivity"
             android:exported="false" />
         <activity
             android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Shipped"
             android:exported="false" />
         <activity
             android:name=".ResetPasswordActivity"
