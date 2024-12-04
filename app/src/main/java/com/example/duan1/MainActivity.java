@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity  implements BlankFragment.On
                     fragment = new BlankFragment2();
                 } else if (menuItem.getItemId() == R.id.health) {
                     fragment = new BlankFragment3();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("userId", userId); // Gửi userId cho BlankFragment3
+                    Log.d("MainActivity", "userId gui sang fragment3: " + userId);
+                    fragment.setArguments(bundle);
                 } else if (menuItem.getItemId() == R.id.social) {
                     fragment = new BlankFragment4();
                 }

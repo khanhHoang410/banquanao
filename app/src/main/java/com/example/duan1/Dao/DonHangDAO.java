@@ -106,7 +106,7 @@ public class DonHangDAO {
     }
     public List<DonHang> getByUserId(int userId) {
         List<DonHang> donHangList = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM DonHang WHERE maNguoiDung = ?", new String[]{String.valueOf(userId)});
         if (cursor.moveToFirst()) {
             do {

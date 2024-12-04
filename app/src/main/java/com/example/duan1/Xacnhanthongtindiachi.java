@@ -1,6 +1,8 @@
 package com.example.duan1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,7 +39,7 @@ public class Xacnhanthongtindiachi extends AppCompatActivity {
 
         DonHangDAO donHangDAO =new DonHangDAO(this);
         DonHang donHang = donHangDAO.getById(maDonHang);
-
+        int maNguoidung = donHang.getMaNguoiDung();
         String diaChi = donHang.getDiaChi();
         float tongTien = donHang.getTongTien();
         tv_total_value.setText("$"+tongTien);
@@ -52,6 +54,10 @@ public class Xacnhanthongtindiachi extends AppCompatActivity {
             Intent intent = new Intent(Xacnhanthongtindiachi.this, DonhangActivity.class);
             intent.putExtra("maDonHang", maDonHang);
             startActivity(intent);
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("maNguoidung", maNguoidung);
+            editor.apply();
         });
     }
 }

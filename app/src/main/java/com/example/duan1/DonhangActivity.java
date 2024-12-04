@@ -36,5 +36,6 @@ public class DonhangActivity extends AppCompatActivity {
 
         DonHangAdapter donHangAdapter = new DonHangAdapter(this, donHangList);
         rvDonHang.setAdapter(donHangAdapter);
+
     }
 }
