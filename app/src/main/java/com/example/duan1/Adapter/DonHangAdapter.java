@@ -2,6 +2,7 @@ package com.example.duan1.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,22 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         holder.tvTongTien.setText("Tổng tiền: " + donHang.getTongTien() + " VND");
         holder.tvSoDienThoai.setText("Số điện thoại: " + donHang.getPhoneNumber());
         holder.tvDiaChi.setText("Địa chỉ: " + donHang.getDiaChi());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int maDonHang = donHang.getMaDonHang();
+                int maGioHang = donHang.getMaGioHang();
+                // Mở Activity mới và truyền maDonHang, maGioHang
+//                Intent intent = new Intent(context, ChiTietDonHangActivity.class);
+//                intent.putExtra("maDonHang", maDonHang);
+//                intent.putExtra("maGioHang", maGioHang);
+//                context.startActivity(intent);
+            }
+
+
+        });
+
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

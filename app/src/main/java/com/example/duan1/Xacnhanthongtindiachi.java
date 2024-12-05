@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duan1.Dao.DonHangDAO;
+import com.example.duan1.Dao.GioHangDAO;
 import com.example.duan1.Models.DonHang;
 
 public class Xacnhanthongtindiachi extends AppCompatActivity {
@@ -54,6 +55,13 @@ public class Xacnhanthongtindiachi extends AppCompatActivity {
 //            Intent intent = new Intent(Xacnhanthongtindiachi.this, DonhangActivity.class);
 //            intent.putExtra("maDonHang", maDonHang);
 //            startActivity(intent);
+            GioHangDAO gioHangDAO = new GioHangDAO(this);
+            int deletedRows = gioHangDAO.deleteByUserId(maNguoidung);
+            if (deletedRows > 0) {
+                Toast.makeText(this, "Đã xóa giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Lỗi khi xóa giỏ hàng", Toast.LENGTH_SHORT).show();
+            }
             startActivity(new Intent(Xacnhanthongtindiachi.this,MainActivity.class));
             SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();

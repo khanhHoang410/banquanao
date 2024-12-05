@@ -103,4 +103,7 @@ public class GioHangDAO {
         return totalPrice;
     }
 
+    public int deleteByUserId(int maNguoiDung) {
+        return db.delete("GioHang", "maNguoiDung = ?", new String[]{String.valueOf(maNguoiDung)});
+    }
 }

@@ -121,5 +121,6 @@ public class SanPhamDAO {
         return getData(sql, String.valueOf(maDanhMuc));
     }
 
+
 }
 

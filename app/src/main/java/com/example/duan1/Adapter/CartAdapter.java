@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan1.CartActivity;
 import com.example.duan1.Dao.GioHangDAO;
 import com.example.duan1.Dao.SanPhamDAO;
 import com.example.duan1.Models.GioHang;
@@ -31,6 +32,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private SanPhamDAO sanPhamDAO;
     private TextView totalPriceTextView; // TextView để hiển thị tổng tiền
     private int currentQuantity = 1;
+    private CartAdapterListener listener;
+    private int positionToRemove = -1;
+
+    public void setCartAdapterListener(CartAdapterListener listener) {
+        this.listener = listener;
+    }
+    public interface CartAdapterListener {
+        void onCartDataChanged();
+    }
     public CartAdapter(Context context, List<GioHang> gioHangList, TextView totalPriceTextView,int userId) {
         this.context = context;
         this.gioHangList = gioHangList;
@@ -79,7 +89,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 int quantity = (int) (gioHang.getTongTien() / sanPham.getGia());
                 holder.quantity.setText(String.valueOf(quantity));
                 holder.increaseButton.setOnClickListener(v -> {
-                    currentQuantity++; // Tăng số lượng sản phẩm hiện tại
+                    currentQuantity++;
                     holder.quantity.setText(String.valueOf(currentQuantity));
 
                     sanPham.setSoLuong(sanPham.getSoLuong()+1);
@@ -92,6 +102,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     updateTotalPrice();
                     notifyItemChanged(position);
                 });
+                holder.increaseButton.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.increaseButton.setEnabled(true);
+                    }
+                }, 500);
 
                 holder.decreaseButton.setOnClickListener(v -> {
                     if (currentQuantity > 1) {
@@ -110,6 +126,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                         notifyItemChanged(position);
                     }
                 });
+                holder.decreaseButton.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.increaseButton.setEnabled(true);
+                    }
+                }, 500);
+
 
             } else {
                 // Xử lý trường hợp không tìm thấy sản phẩm
@@ -118,15 +141,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             // Xử lý trường hợp gioHang là null
             Log.d("CartAdapter", "gioHang là null");
         }
-        holder.imgXoa.setOnClickListener(v->{
-            if (gioHang!=null){
+        holder.imgXoa.setOnClickListener(v -> {
+            if (gioHang != null) {
+//                positionToRemove = holder.getAdapterPosition();
+//                gioHangDAO.delete(gioHang.getMaGioHang());
+//                gioHangList.remove(positionToRemove);
+//                notifyItemRemoved(positionToRemove);
+//                notifyItemRangeChanged(positionToRemove, gioHangList.size() - positionToRemove);
+//                updateTotalPrice();
+//                if (listener != null) {
+//                    listener.onCartDataChanged();
+//                }
                 gioHangDAO.delete(gioHang.getMaGioHang());
-                gioHangList.remove(gioHang);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position,gioHangList.size());
+                gioHangList = gioHangDAO.getAll(userId);
+                notifyDataSetChanged();
                 updateTotalPrice();
+                if (listener != null) {
+                    listener.onCartDataChanged();
+                }
             }
-
         });
     }
 
@@ -151,9 +184,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             increaseButton = itemView.findViewById(R.id.increase_button);
             decreaseButton = itemView.findViewById(R.id.decrease_button);
             imgXoa = itemView.findViewById(R.id.imgXoa);
+
         }
     }
-
 
     // Phương thức để cập nhật tổng tiền
     public void updateTotalPrice() {
@@ -170,10 +203,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             // Chuyển đổi resource ID thành Bitmap
             return BitmapFactory.decodeResource(context.getResources(), resourceId);
         }
-        return null; // Trả về null nếu không tìm thấy ảnh
+        return null;
     }
     public void updateData(List<GioHang> newGioHangList) {
-
         this.gioHangList = newGioHangList;
         notifyDataSetChanged();
     }

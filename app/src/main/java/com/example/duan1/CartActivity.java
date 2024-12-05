@@ -25,7 +25,7 @@ import com.example.duan1.Models.SanPham;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity  {
 
     ImageView img_return;
     RecyclerView rclcart;
@@ -35,6 +35,7 @@ public class CartActivity extends AppCompatActivity {
     GioHang gioHang;
     List<GioHang> gioHangList;
     Button checkout_button;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +53,17 @@ public class CartActivity extends AppCompatActivity {
         rclcart = findViewById(R.id.recycler_view);
         totalPriceTextView = findViewById(R.id.total_price);
         rclcart.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new CartAdapter(this, gioHangList, totalPriceTextView, userId);
 
 
         int userId = getIntent().getIntExtra("userId", -1);
+
         Log.d("CartActivity", "userId: " + userId);
         // nhận dữ liệu từ intent
         gioHangList = gioHangDAO.getAll(userId);
         Log.d("CartActivity", "Gio hang list: " + gioHangList.size());
         if (gioHangList.isEmpty()) {
+            checkout_button.setEnabled(false);
             Toast.makeText(this, "Không có sản phẩm nào trong giỏ hàng", Toast.LENGTH_SHORT).show();
 //            ArrayList<SanPham> sanPhamList = (ArrayList<SanPham>) CartData.cartItems;
 //            Log.d("CartActivity", "Received sanPhamList size: " + sanPhamList.size());
@@ -73,6 +77,7 @@ public class CartActivity extends AppCompatActivity {
 //                    gioHangDAO.insert(gioHang);
 //                }
         } else {
+            checkout_button.setEnabled(true);
             adapter = new CartAdapter(this, gioHangList, totalPriceTextView, userId);
             adapter.updateTotalPrice();
             rclcart.setAdapter(adapter);
@@ -95,6 +100,7 @@ public class CartActivity extends AppCompatActivity {
 
         img_return.setOnClickListener(v -> finish());
         checkout_button.setOnClickListener(v->{
+
             int maNguoiDung = getIntent().getIntExtra("userId", -1);
             double totalPrice = gioHangDAO.calculateTotalPrice(maNguoiDung);
             GioHang gioHangTong = new GioHang();
@@ -117,12 +123,14 @@ public class CartActivity extends AppCompatActivity {
 
         });
 
+
     }
+
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Cập nhật lại gioHangList khi Activity được hiển thị lại
         int userId = getIntent().getIntExtra("userId", -1);
         Log.d("CartActivity", "userId: " + userId);
         gioHangList = gioHangDAO.getAll(userId);
@@ -130,6 +138,12 @@ public class CartActivity extends AppCompatActivity {
             adapter.updateData(gioHangList); // Cập nhật dữ liệu cho adapter
             adapter.notifyDataSetChanged(); // Thông báo cho adapter cập nhật giao diện
             adapter.updateTotalPrice(); // Cập nhật tổng tiền
+        }
+        if (gioHangList.isEmpty()) {
+            checkout_button.setEnabled(false);
+            Toast.makeText(this, "Giỏ Hàng đang trống", Toast.LENGTH_SHORT).show();
+        } else {
+            checkout_button.setEnabled(true);
         }
 
     }

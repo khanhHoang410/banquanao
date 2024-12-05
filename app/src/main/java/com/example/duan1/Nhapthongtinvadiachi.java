@@ -15,10 +15,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.duan1.Dao.ChiTietDonHangDAO;
 import com.example.duan1.Dao.DonHangDAO;
 import com.example.duan1.Dao.GioHangDAO;
+import com.example.duan1.Dao.SanPhamDAO;
+import com.example.duan1.Models.ChiTietDonHang;
 import com.example.duan1.Models.DonHang;
 import com.example.duan1.Models.GioHang;
+import com.example.duan1.Models.SanPham;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +43,7 @@ public class Nhapthongtinvadiachi extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         tvOrderTotal = findViewById(R.id.tvOrderTotal);
         tvTotalAmount = findViewById(R.id.tvTotalAmount);
         tvReturnToCart = findViewById(R.id.tvReturnToCart);
@@ -48,6 +53,8 @@ public class Nhapthongtinvadiachi extends AppCompatActivity {
         etAddressLine1 = findViewById(R.id.etAddressLine1);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         etCity = findViewById(R.id.etCity);
+
+        SanPhamDAO sanPhamDAO = new SanPhamDAO(this);
         btnContinueToShipping = findViewById(R.id.btnContinueToShipping);
 
         double totalPrice = getIntent().getDoubleExtra("totalPrice", 0);
@@ -91,6 +98,27 @@ public class Nhapthongtinvadiachi extends AppCompatActivity {
                         gioHang.setMaDonHang(maDonHang);
                         gioHangDAO.update(gioHang);
                     }
+//                    ChiTietDonHangDAO chiTietDonHangDAO = new ChiTietDonHangDAO(this);
+//                    for (GioHang gioHang : gioHangList) {
+//                        SanPham sanPham = sanPhamDAO.getID(gioHang.getMaSanPham());
+//
+//                        if (sanPham != null) {
+//                            double gia = sanPham.getGia();
+//                            int soLuong = sanPham.getSoLuong();
+//
+//                            ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
+//                            chiTietDonHang.setMaDonHang(maDonHang);
+//                            chiTietDonHang.setMaSanPham(gioHang.getMaSanPham());
+//                            chiTietDonHang.setSoLuong(soLuong);
+//                            chiTietDonHang.setGia(gia);
+//                            chiTietDonHangDAO.insert(chiTietDonHang);
+//
+//
+//                        } else {
+//                            // Xử lý trường hợp không tìm thấy sản phẩm
+//                            Log.e("Nhapthongtinvadiachi", "Không tìm thấy sản phẩm có maSanPham: " + gioHang.getMaSanPham());
+//                        }
+//                    }
                     Toast.makeText(this, "insert vào đơn hàng thành công", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(this,Xacnhanthongtindiachi.class);
@@ -103,6 +131,7 @@ public class Nhapthongtinvadiachi extends AppCompatActivity {
         });
 
     }
+
     private boolean validateInput() {
         String email = etEmail.getText().toString().trim();
         String firstName = etFirstName.getText().toString().trim();

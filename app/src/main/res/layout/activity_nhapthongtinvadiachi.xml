@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Show order summary"
+                android:text="Giá Don Hang"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -179,11 +179,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@android:color/black"
+            android:background="@color/black_custom"
             android:text="CONTINUE TO SHIPPING METHOD"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            />
         <!-- Return to Cart -->
         <TextView
             android:id="@+id/tvReturnToCart"
