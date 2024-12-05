@@ -1,18 +1,20 @@
 package com.example.duan1;
 
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.duan1.Dao.DonHangDAO;
 import com.example.duan1.Dao.GioHangDAO;
 import com.example.duan1.Models.DonHang;
+
+
 
 import java.util.Date;
 
@@ -63,23 +67,45 @@ public class Xacnhanthongtindiachi extends AppCompatActivity {
         });
         btn_continue.setOnClickListener(v -> {
             Toast.makeText(Xacnhanthongtindiachi.this, "Đơn hàng của bạn đã được xử lý", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(Xacnhanthongtindiachi.this, DonhangActivity.class);
-//            intent.putExtra("maDonHang", maDonHang);
-//            startActivity(intent);
+
             GioHangDAO gioHangDAO = new GioHangDAO(this);
-            int deletedRows = gioHangDAO.deleteByUserId(maNguoidung);
-            if (deletedRows > 0) {
-                Toast.makeText(this, "Đã xóa giỏ hàng thành công", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Lỗi khi xóa giỏ hàng", Toast.LENGTH_SHORT).show();
+            gioHangDAO.beginTransaction();
+
+            try {
+                int deletedRows = gioHangDAO.deleteByUserId(maNguoidung);
+
+                if (deletedRows > 0) {
+                    Toast.makeText(this, "Đã xóa giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+                    gioHangDAO.setTransactionSuccessful();
+
+                    startActivity(new Intent(Xacnhanthongtindiachi.this, MainActivity.class));
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("userId", maNguoidung);
+                    editor.putInt("maNguoidung", maNguoidung);
+                    editor.apply();
+
+
+
+                    GuiThongBao();
+
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra("userId", maNguoidung);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(this, "Lỗi khi xóa giỏ hàng", Toast.LENGTH_SHORT).show();
+                    gioHangDAO.endTransaction();
+                    return;
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, "Lỗi khi xóa giỏ hàng: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                gioHangDAO.endTransaction();
+                return;
             }
-            startActivity(new Intent(Xacnhanthongtindiachi.this,MainActivity.class));
-            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("maNguoidung", maNguoidung);
-            editor.apply();
-            GuiThongBao();
-            finish();
+
+            gioHangDAO.endTransaction();
         });
     }
     void GuiThongBao (){

@@ -30,7 +30,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     List<GioHang> gioHangList;
     private GioHangDAO gioHangDAO;
     private SanPhamDAO sanPhamDAO;
-    private TextView totalPriceTextView; // TextView để hiển thị tổng tiền
+    private TextView totalPriceTextView;
     private int currentQuantity = 1;
     private CartAdapterListener listener;
     private int positionToRemove = -1;

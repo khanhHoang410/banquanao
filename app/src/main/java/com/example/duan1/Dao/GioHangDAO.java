@@ -19,6 +19,17 @@ public class GioHangDAO {
         dbHelper = new DbHelper(context);
         db= dbHelper.getWritableDatabase();
     }
+    public void beginTransaction() {
+        db.beginTransaction();
+    }
+
+    public void setTransactionSuccessful() {
+        db.setTransactionSuccessful();
+    }
+
+    public void endTransaction() {
+        db.endTransaction();
+    }
 
 
     public long insert(GioHang gioHang) {

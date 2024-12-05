@@ -37,6 +37,7 @@ public class CartActivity extends AppCompatActivity  {
     Button checkout_button;
     private int userId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class CartActivity extends AppCompatActivity  {
         adapter = new CartAdapter(this, gioHangList, totalPriceTextView, userId);
 
 
-        int userId = getIntent().getIntExtra("userId", -1);
+         this.userId = getIntent().getIntExtra("userId", -1);
 
         Log.d("CartActivity", "userId: " + userId);
         // nhận dữ liệu từ intent
