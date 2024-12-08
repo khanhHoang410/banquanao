@@ -50,7 +50,7 @@ public class ChitietSanPham extends AppCompatActivity {
     SanPhamRecyclerViewAdapter sanphamAdapter;
 
     DanhGiaDAO danhGiaDAO;
-    ImageView btnDanhGia;
+    ImageView btnDanhGia,imgBack;
     EditText edDanhGia;
 
 
@@ -67,10 +67,20 @@ public class ChitietSanPham extends AppCompatActivity {
         danhGiaDAO = new DanhGiaDAO(this);
         edDanhGia = findViewById(R.id.edDanhGia);
         btnDanhGia = findViewById(R.id.btnDanhGia);
-
+        imgBack = findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         int maNguoiDung = sharedPreferences.getInt("maNguoiDung", -1);
         int maSanpham = getIntent().getIntExtra("maSanPham",-1);
+//        SharedPreferences sharedPreferences1 = getSharedPreferences("MyPrefs2", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences1.edit();
+//        editor.putInt("maSanPham", maSanpham); // Replace `yourProductId` with the actual product ID
+//        editor.apply(); // Commit the changes
         ArrayList<DanhGia> list1 = danhGiaDAO.getAll(maSanpham);
         DanhGiaAdapter adapter = new DanhGiaAdapter(this,list1);
         listDanhGia.setAdapter(adapter);
@@ -129,7 +139,6 @@ public class ChitietSanPham extends AppCompatActivity {
                 String anh = imgChitietSanpham.getDrawable().toString();
                 int masanpham = getIntent().getIntExtra("maSanPham",-1);
 
-
                 // tạo một sản phẩm mới
                 SanPham sanPham = new SanPham();
                 sanPham.setTenSanPham(tensp);
@@ -154,11 +163,7 @@ public class ChitietSanPham extends AppCompatActivity {
                     gioHang.setTongTien(giasp);
                     gioHang.setMaNguoiDung(userId);
 
-                    // thêm sản phẩm  vào array
-//                List<SanPham> sanPhamList = new ArrayList<>();
-//                sanPhamList.add(sanPham);
-//                CartData.cartItems.add(sanPham);
-//                // thêm vào giỏ hàng
+
                     long result = gioHangDAO.insert(gioHang);
 
                     if (result>0){
@@ -167,7 +172,6 @@ public class ChitietSanPham extends AppCompatActivity {
                         Intent intent = new Intent(ChitietSanPham.this, CartActivity.class);
                         intent.putExtra("gioHang", gioHang);
                         intent.putExtra("userId", userId);
-
                         // Truyền userId
                         startActivity(intent);
                     }else {
@@ -175,12 +179,8 @@ public class ChitietSanPham extends AppCompatActivity {
                     }
                 }
 
-                // truyền array sang cart actitity
 
-//                intent.putExtra("gioHang", gioHang);
-//                intent.putExtra("sanPhamList", (ArrayList<SanPham>) sanPhamList); // Không cần thiết// Khởi chạy CartActivity mà không chuyển màn hình
-//
-                
+
             }
         });
 
